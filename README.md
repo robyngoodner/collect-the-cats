@@ -9,7 +9,7 @@ On each subsequent turn, player may do one of the following:
 - deploy paw cards from the player's hand in order to claim pathways between cats
 - choose new cat cards to collect more cats
 
-A winner is determined once one of the conditions has been met:
+A winner is determined once one of the following conditions has been met:
 - all of the cats have been claimed
 - all of the paw cards have been claimed and each player has played one final round
 
