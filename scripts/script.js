@@ -1,5 +1,19 @@
 /*
 NOTE: Work on MVP first!!!!!
+Your game must meet these requirements:
+
+- **HAVE ITS OWN REPO, under YOUR Github account!!!! NOT on Enterprise. YOUR PERSONAL GITHUB!! This way it can be a portfolio piece for you. Raise your hand if you understand this requirement as it is for your benefit!**
+- **Git 20+ commits.** Commit early, commit often. Tell a story with your commits. Give us a narrative. Paint us a lil picture of your process. Each message should give a clear idea what you changed and should also be appropriate for anyone to see - because we, and hiring managers, and also everyone else - can and will see them!
+- **Include [Wireframes](https://careerfoundry.com/en/blog/ux-design/what-is-a-wireframe-guide/) and [User Stories](https://www.notion.so/Planning-Design-UX-UI-Resources-929171f9da454a08a130df82d8579484) in the README**
+- Render a game in the browser
+- Include separate HTML / CSS / JavaScript files
+- Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
+- Use **JavaScript or jQuery** for **DOM manipulation**
+- Use **semantic markup** for HTML and CSS (adhere to best practices, clean, well organized code)
+- Be reasonably complex
+
+LAST PRIORITIES:
+- Animations
 
 Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the 
 player must collect. 
