@@ -14,6 +14,7 @@ Your game must meet these requirements:
 
 LAST PRIORITIES:
 - Animations
+- API
 
 Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the 
 player must collect. 
@@ -68,15 +69,16 @@ computerPawPrints {
     same setup as playerPawPrints
 }
 
+
 Functions:
-$playGame {
+$setUpGame {
     sets up game board
     sets scores to zero
     Puts all cards in places
     put
 }
 
-$instructionsPopUP {
+instructionsPopUP {
     Pops up insructions in alert window
     Play game button
 }
@@ -114,6 +116,44 @@ computerGetCatPaths() {
     same as player but with Math.random()
 }
 
+collectCatPaths() {
+    switch case
+    adds catPaths to appropriate player's catPaths object
+}
+
 API/API integration:
     cats assigned to specific numbers--all cat cards are numbered with corresponding positions on board
 */
+
+let playerScore = 0;
+let computerScore = 0;
+let playerCatPaths = [];
+let computerCatPaths = [];
+let playerPawPrints = {
+    red: 0,
+    blue: 0,
+    purple: 0,
+    green: 0,
+    yellow: 0,
+    pink: 0
+};
+let computerPawPrints = {
+    red: 0,
+    blue: 0,
+    purple: 0,
+    green: 0,
+    yellow: 0,
+    pink: 0
+};
+
+const setUpGame {
+
+    // sets up game board
+    // sets scores to zero
+    // Puts all cards in places
+    // put
+
+    computerScore = 0;
+    playerScore = 0;
+    
+}

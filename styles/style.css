@@ -1,0 +1,54 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+
+.info {
+    margin: 100px 50px 20px 30px;
+    display: flex;;
+    justify-content: space-between;
+    align-content: flex-end;
+}
+
+
+
+h1 {
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px;
+    background-color: aqua;
+    border: 2px solid;
+    border-radius: 4px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+h3 {
+    font-family: 'Orbitron', sans-serif;
+    /* position: absolute;
+    bottom: 0; */
+}
+
+/* font weights: 500, 800 
+font-family: 'Orbitron', sans-serif;
+font-family: 'Press Start 2P', cursive;
+*/
