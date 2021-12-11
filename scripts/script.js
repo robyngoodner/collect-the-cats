@@ -1,3 +1,7 @@
+
+// import "nes.css/css/nes.min.css";
+//https://nostalgic-css.github.io/NES.css/
+//https://animate.style/
 /*
 NOTE: Work on MVP first!!!!!
 Your game must meet these requirements:
@@ -126,6 +130,7 @@ API/API integration:
     cats assigned to specific numbers--all cat cards are numbered with corresponding positions on board
 */
 
+//initializing variables
 let playerScore = 0;
 let computerScore = 0;
 let playerCatPaths = [];
@@ -147,12 +152,8 @@ let computerPawPrints = {
     pink: 0
 };
 
+//reset game function
 const setUpGame = () => {
-
-    // sets up game board
-    // sets scores to zero
-    // Puts all cards in places
-    // put
 //set scores to 0
     computerScore = 0;
     $('#computerScore').text(`${computerScore}`)
@@ -184,6 +185,7 @@ const setUpGame = () => {
 
 };
 
+//reset game button
 $('#restart').on('click', () => {
     // window.confirm("Are you sure you'd like to restart?")
     if(confirm("Are you sure you'd like to restart your game?")) {
@@ -194,6 +196,7 @@ $('#restart').on('click', () => {
     }
 })
 
+//instructions popup
 $('#needHelp').on('click', () => {
     alert(`Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the player must collect. 
 
@@ -208,4 +211,15 @@ $('#needHelp').on('click', () => {
     
     The winner is determined based on a points system according to the distance between cats that the players are claiming.`)
 })
+
+const playerAddPawPrints = () => {
+    //adds pawprints to appropriate pawprints object
+    playerPawPrints.forEach((key, value) => {
+        if (clickedItem.id === key) {
+            value =+ 1;
+        }
+
+
+    })
+}
 

@@ -15,37 +15,64 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Press+Start+2P&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>Collect the CATS</h1>
+        <h1><i class="nes-octocat animate"></i>&nbsp;Collect the CATS&nbsp;<i class="nes-octocat animate"></i></h1>
         <div class="buttons">
-        <button id="needHelp">Need help?</button>
-        <button id="feedback">Report Feedback</button>
-        <button id="restart">Restart</button>
+        <button id="needHelp" class="nes-btn is-primary">Need help?</button>
+        <button id="feedback" class="nes-btn is-primary">Report Feedback</button>
+        <button id="restart" class="nes-btn is-primary">Restart</button>
         </div>
         <div class="cards">
             <div class="pawprints">
-                <h2>Pawprint cards</h2>
-                <button id="pawprint">Pick a pawprint card</button>
+                <h2>Pawprint<br>cards</h2>
+                <button><img id="pawprint" src="https://i.imgur.com/F2EQP8q.png"></button>
             </div>
+            <div class="info">
+                <div class="computerInfo" >
+                    <span class="nes-text is-success">Computer score: </span>
+                    <spane class="nes-text is-success" id="computerScore">0</span>
+                </div>
+                <div class="playerInfo" class="nes-text is-success">
+                    <span class="nes-text is-success">Player score: </span>
+                    <span class="nes-text is-success" id="playerScore">0</span>
+                </div>
+                </div>
             <div class="catpaths">
-                <h2>Cat-path cards</h2>
-                <button id="catpath">Pick a cat-path card</button>
+                <h2>Cat-path<br>cards</h2>
+                <button><img id="catpath" src="https://i.imgur.com/uC8GgcJ.png"></button>
             </div>
         </div>
-        <div class="info">
-        <div class="computerInfo">
-            <h3>Computer score: </h3>
-            <h3 id="computerScore">0</h3>
+        <div class="wrapper">
+            <div class="one"><img id="one" src="images/one.png"></div>
+            <div class="onea"><img id="onea" src="images/onea.png"></div>
+            <div class="two"><img id="two" src="images/two.png"></div>
+            <div class="three"><img id="three" src="images/three.png"></div>
+            <div class="threea"><img id="threea" src="images/threea.png"></div>
+            <div class="threeb"><img id="threeb" src="images/threeb.png"></div>
+            <div class="four"><img id="four" src="images/four.png"></div>
+            <div class="five"><img id="five" src="images/five.png"></div>
+            <div class="six"><img id="six" src="images/six.png"></div>
+            <div class="seven"><img id="seven" src="images/seven.png"></div>
+            <div class="eight"></div>
+            <div class="nine">nine</div>
+            <div class="ten">ten</div>
+            <div class="eleven">eleven</div>
+            <div class="twelve">twelve</div>
+            <div class="thirteen">thirteen</div>
+            <div class="fourteen">fourteen</div>
+            <div class="fifteen">fifteen</div>
+            <div class="sixteen">sixteen</div>
+            <div class="seventeen">seventeen</div>
+            <div class="eighteen">eighteen</div>
         </div>
-        <div class="playerInfo">
-            <h3>Player score: </h3>
-            <h3 id="playerScore">0</h3>
-        </div>
-        </div>
+       
         <script src="scripts/script.js" async defer></script>
     </body>
 </html>
