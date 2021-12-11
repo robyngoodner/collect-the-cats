@@ -15,6 +15,7 @@ Your game must meet these requirements:
 LAST PRIORITIES:
 - Animations
 - API
+- Report feedback form
 
 Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the 
 player must collect. 
@@ -146,14 +147,65 @@ let computerPawPrints = {
     pink: 0
 };
 
-const setUpGame {
+const setUpGame = () => {
 
     // sets up game board
     // sets scores to zero
     // Puts all cards in places
     // put
-
+//set scores to 0
     computerScore = 0;
+    $('#computerScore').text(`${computerScore}`)
     playerScore = 0;
+    $('#playerScore').text(`${playerScore}`);
+//empty pawPrints
+    playerPawPrints = {
+        red: 0,
+        blue: 0,
+        purple: 0,
+        green: 0,
+        yellow: 0,
+        pink: 0
+    };
+    computerPawPrints = {
+        red: 0,
+        blue: 0,
+        purple: 0,
+        green: 0,
+        yellow: 0,
+        pink: 0
+    };
+//empty catPaths
+    playerCatPaths = [];
+    computerCatPaths = [];
+//re-call API
+
+//set up new board
+
+};
+
+$('#restart').on('click', () => {
+    // window.confirm("Are you sure you'd like to restart?")
+    if(confirm("Are you sure you'd like to restart your game?")) {
+    setUpGame();
+    }
+    else {
+        return;
+    }
+})
+
+$('#needHelp').on('click', () => {
+    alert(`Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the player must collect. 
+
+    On each subsequent turn, player may do one of the following:
+    - choose three paw cards
+    - deploy paw cards from the player's hand in order to claim pathways between cats
+    - choose new cat cards to collect more cats
     
-}
+    A winner is determined once one of the following conditions has been met:
+    - all of the cats have been claimed
+    - all of the paw cards have been claimed and each player has played one final round
+    
+    The winner is determined based on a points system according to the distance between cats that the players are claiming.`)
+})
+
