@@ -136,8 +136,40 @@ collectCatPaths() {
     adds catPaths to appropriate player's catPaths object
 }
 
-API/API integration:
-    cats assigned to specific numbers--all cat cards are numbered with corresponding positions on board
+Winning pathways:
+catPath3 (black cat--> brown head):
+(1 && 1a && ((5 && ((10 && 11) || (15))) || (6 && ((11) || (10 && 15))) || (2 && ((7 && ((11) || (12 && 16 && 17))) || (3 && 3a && 3b && ((8) || (12) || (16)))) )))
+
+
+all available pathways:
+const $three = $("#three") + $("#threea") + $("#threeb")
+const $one = $("one") + $("#onea")
+const $two = 
+
+black cat to orange head:
+($one || $("#four") && $("#five"))
+black cat to white head:
+($("#nine") && $("#thirteen")) || $("#four")
+orange head to brown cat:
+$("#two") || ($("#six") && $("#seven"))
+orange head to grey head:
+(c && $("#seven")) || ($("#six")) || ($("#five") && $("#ten"))
+orange head to white head:
+$("#five")
+white head to brown head:
+$("#fifteen") || ($("#ten") && $("#eleven"))
+white head to gray head:
+$("#ten") || ($("#fifteen") && $("#eleven"))
+brown cat to orange cat:
+$three || $("#eight") }} ($("#seven") && $("#twelve")
+grey head to orange cat:
+$("#twelve") || $("#")
+
+
+
+
+
+
 */
 
 //initializing variables
