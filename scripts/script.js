@@ -18,8 +18,8 @@ Your game must meet these requirements:
 
 LAST PRIORITIES:
 - Animations
-- API
 - Report feedback form
+- look of overlapping computer cards
 
 Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the 
 player must collect. 
@@ -63,6 +63,7 @@ playerPoints = #
 computerPoints = #
 playerCatPaths = []
 computerCatPaths = []
+catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
 
 Objects:
 playerPawPrints {
@@ -90,6 +91,7 @@ instructionsPopUP {
 
 addPawPrints {
     adds pawprints to appropriate pawprints object
+        if computer has pawprints already. only display the back of one
 }
 
 checkPawPrints (player) {
@@ -105,20 +107,28 @@ playerGetPawPrints(){
     take pawprints off a click event
     add to correct playerPawPrints object
     animate pawprints to player pawprint area (bottom right)
+    jquery id=#pawprint
 }
 
 computerGetPawPrints(){
     same as player but with Math.random()
+    if computer has pawprints already. only display the back of one (display overlapping? fancy)
+    jquery id=#pawprint
 }
 
 playerGetCatPaths(){
     take catpaths off a click event
     add to playerCatPaths array
+    jquery id=#catpath
+    each catpath has 1 variable linked to a picture
+    using variable takes it out of the array
 }
 
 
 computerGetCatPaths() {
     same as player but with Math.random()
+    if computer has catpaths already, only display the back of one (display overlapping? fancy)
+    jquery id=#catpath
 }
 
 collectCatPaths() {
@@ -135,6 +145,7 @@ let playerScore = 0;
 let computerScore = 0;
 let playerCatPaths = [];
 let computerCatPaths = [];
+let catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
 let playerPawPrints = {
     red: 0,
     blue: 0,
@@ -176,11 +187,11 @@ const setUpGame = () => {
         yellow: 0,
         pink: 0
     };
-//empty catPaths
+//empty player and computer catPaths
     playerCatPaths = [];
     computerCatPaths = [];
-//re-call API
-
+//set up available catPaths
+    catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
 //set up new board
 
 };
