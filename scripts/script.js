@@ -65,16 +65,6 @@ playerCatPaths = []
 computerCatPaths = []
 catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
 
-Objects:
-playerPawPrints {
-    red: 3,
-    blue: 4,
-    etc
-}
-computerPawPrints {
-    same setup as playerPawPrints
-}
-
 
 Functions:
 
@@ -89,18 +79,8 @@ checkPawPrints (player) {
 }
 
 
-playerGetPawPrints(){
-    take pawprints off a click event
-    add to correct playerPawPrints object
-    animate pawprints to player pawprint area (bottom right)
-    jquery id=#pawprint
-}
 
-computerGetPawPrints(){
-    same as player but with Math.random()
-    if computer has pawprints already. only display the back of one (display overlapping? fancy)
-    jquery id=#pawprint
-}
+ 
 
 playerGetCatPaths(){
     take catpaths off a click event
@@ -186,13 +166,14 @@ let playerScore = 0;
 let computerScore = 0;
 let playerCatPaths = [];
 let computerCatPaths = [];
+let currentCatPath = $catPath1;
 let $catPath1 = $(`<img src="images/catpath1.png"></img>`);
 let $catPath2 = $(`<img src="images/catpath2.png"></img>`);
 let $catPath3 = $(`<img src="images/catpath3.png"></img>`);
 let $catPath4 = $(`<img src="images/catpath4.png"></img>`);
 let $catPath5 = $(`<img src="images/catpath5.png"></img>`);
 let $catPath6 = $(`<img src="images/catpath6.png"></img>`);
-let catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
+let availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
 let playerPawPrints = {
     orange: 0,
     brown: 0,
@@ -369,6 +350,35 @@ const computerAddPawPrints = () => {
         case 4: 
             computerPawPrints.brown = computerPawPrints.brown+ 1;
             $("#computerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${computerPawPrints.brown}`);
+            break;
+    }
+};
+
+const selectCatPath = () => {
+    switch (Math.fllor(Math.random() * 6)){
+        case 0:
+            currentCatPath = $catPath1;
+            availableCatPaths.splice(0,1);
+            break;
+        case 1:
+            currentCatPath = $catPath2;
+            availableCatPaths.splice(1,1);
+            break;
+        case 2:
+            currentCatPath = $catPath3;
+            availableCatPaths.splice(2,1);
+            break;
+        case 3:
+            currentCatPath = $catPath4;
+            availableCatPaths.splice(3,1);
+            break;
+        case 4:
+            currentCatPath = $catPath5;
+            availableCatPaths.splice(4,1);
+            break;
+        case 5:
+            currentCatPath = $catPath6;
+            availableCatPaths.splice(5,1);
             break;
     }
 }
