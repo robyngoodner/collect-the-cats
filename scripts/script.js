@@ -165,6 +165,7 @@ let computerScore = 0;
 let playerCatPaths = {};
 let computerCatPaths = {};
 let currentCatPath;
+let pawPrintCards = 100;
 let $catPath1 = `<img src="images/catpath1.png"></img>`;
 let $catPath2 = `<img src="images/catpath2.png"></img>`;
 let $catPath3 = `<img src="images/catpath3.png"></img>`;
@@ -242,10 +243,12 @@ const setUpGame = () => {
     computerPawPrints.black = 0;
     computerPawPrints.grey = 0;
     computerPawPrints.white = 0; 
-    
+//refill pawPrintCards stash
+    pawPrintCards = 100;
+    $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
 //empty player and computer catPaths
-    playerCatPaths = [];
-    computerCatPaths = [];
+    playerCatPaths = {};
+    computerCatPaths = {};
 //set up available catPaths
     catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
 //set up new board
@@ -309,31 +312,45 @@ const $computerPawPrints = $('.computerPawPrints');
 
 //adds Paw Print cards to player or computer stash
 const addPawPrint =  (player) => {
-    //random switch case
-    switch (Math.floor(Math.random() * 5)){
-        case 0: 
-            //adds paw card to player's pawPrints object
-            player.orange = player.orange+ 1;
-            //adjust player's HTML to reflect accurate number
-            player.orangeID.html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${player.orange}`);
-            break;
-        case 1: 
-            player.black = player.black+ 1;
-            player.blackID.html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${player.black}`);
-            break;
-        case 2: 
-            player.grey = player.grey+ 1;
-            player.greyID.html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${player.grey}`);
-            break;
-        case 3: 
-            player.white = player.white+ 1;
-            player.whiteID.html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${player.white}`);
-            break;
-        case 4: 
-            player.brown = player.brown+ 1;
-            player.brownID.html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${player.brown}`);
-            break;
+    //while there are pawprint cards left
+    if(pawPrintCards >=0 ){
+    //random switch case to select a random pawprint card
+        switch (Math.floor(Math.random() * 5)){
+            case 0: 
+                //adds paw card to player's pawPrints object
+                player.orange ++;
+                //adjust player's HTML to reflect accurate number
+                player.orangeID.html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${player.orange}`);
+                pawPrintCards--;
+                $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
+                break;
+            case 1: 
+                player.black ++;
+                player.blackID.html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${player.black}`);
+                pawPrintCards--;
+                $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
+                break;
+            case 2: 
+                player.grey ++;
+                player.greyID.html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${player.grey}`);
+                pawPrintCards--;
+                $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
+                break;
+            case 3: 
+                player.white ++;
+                player.whiteID.html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${player.white}`);
+                pawPrintCards--;
+                $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
+                break;
+            case 4: 
+                player.brown ++;
+                player.brownID.html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${player.brown}`);
+                pawPrintCards--;
+                $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
+                break;
+        }
     }
+    else(alert(`There are no more pawprint cards left! You can select one more cat-path before a winner is determined.`))
 };
 
 // collectCatPaths() {
@@ -403,13 +420,17 @@ $("#pawprint").on('click', () => {
     if (isEmpty(playerCatPaths)){
         alert(`Begin by picking a cat-path card!`)
     }
-    addPawPrint(playerPawPrints);
-    addPawPrint(playerPawPrints);
-    addPawPrint(playerPawPrints);
-    if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
-    //add three pawprint cards to computer array and status box, if computer doesn't have enough pawprints to pick a path
-    addPawPrint(computerPawPrints);
-    addPawPrint(computerPawPrints);
-    addPawPrint(computerPawPrints);
+    else if (pawPrintCards> 3){
+        addPawPrint(playerPawPrints);
+        addPawPrint(playerPawPrints);
+        addPawPrint(playerPawPrints);
+        if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
+        //add three pawprint cards to computer array and status box, if computer doesn't have enough pawprints to pick a path
+        addPawPrint(computerPawPrints);
+        addPawPrint(computerPawPrints);
+        addPawPrint(computerPawPrints);
 //add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
-}})
+        }
+    }
+    else (alert(`There are not enough pawprint cards for you to draw! You can select one more cat-path before a winner is determined.`))
+})
