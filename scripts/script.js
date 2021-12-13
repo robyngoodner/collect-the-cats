@@ -97,10 +97,7 @@ computerGetCatPaths() {
     jquery id=#catpath
 }
 
-collectCatPaths() {
-    switch case
-    adds catPaths to appropriate player's catPaths object
-}
+
 
 computer play:
 for loop that cycles through cat paths and winning options and randomly selects one
@@ -166,13 +163,13 @@ let playerScore = 0;
 let computerScore = 0;
 let playerCatPaths = [];
 let computerCatPaths = [];
-let currentCatPath = $catPath1;
-let $catPath1 = $(`<img src="images/catpath1.png"></img>`);
-let $catPath2 = $(`<img src="images/catpath2.png"></img>`);
-let $catPath3 = $(`<img src="images/catpath3.png"></img>`);
-let $catPath4 = $(`<img src="images/catpath4.png"></img>`);
-let $catPath5 = $(`<img src="images/catpath5.png"></img>`);
-let $catPath6 = $(`<img src="images/catpath6.png"></img>`);
+let currentCatPath;
+let $catPath1 = `<img src="images/catpath1.png"></img>`;
+let $catPath2 = `<img src="images/catpath2.png"></img>`;
+let $catPath3 = `<img src="images/catpath3.png"></img>`;
+let $catPath4 = `<img src="images/catpath4.png"></img>`;
+let $catPath5 = `<img src="images/catpath5.png"></img>`;
+let $catPath6 = `<img src="images/catpath6.png"></img>`;
 let availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
 let playerPawPrints = {
     orange: 0,
@@ -354,35 +351,80 @@ const computerAddPawPrints = () => {
     }
 };
 
+// const selectCatPath = () => {
+//     switch (Math.floor(Math.random() * 6)){
+//         case 0:
+//             currentCatPath = availableCatPaths[0];
+//             availableCatPaths.splice(0,1);
+//             break;
+//         case 1:
+//             currentCatPath = availableCatPaths[1];
+//             availableCatPaths.splice(1,1);
+//             break;
+//         case 2:
+//             currentCatPath = availableCatPaths[2];
+//             availableCatPaths.splice(2,1);
+//             break;
+//         case 3:
+//             currentCatPath = availableCatPaths[3];
+//             availableCatPaths.splice(3,1);
+//             break;
+//         case 4:
+//             currentCatPath = availableCatPaths[4];
+//             availableCatPaths.splice(4,1);
+//             break;
+//         case 5:
+//             currentCatPath = availableCatPaths[5];
+//             availableCatPaths.splice(5,1);
+//             break;
+//     }
+// }
+
+// collectCatPaths() {
+//     switch case
+//     adds catPaths to appropriate player's catPaths object
+// }
+//NOTE: FIX CAT PATHS. 3 AND 6 ARE THE SAME
 const selectCatPath = () => {
-    switch (Math.fllor(Math.random() * 6)){
-        case 0:
-            currentCatPath = $catPath1;
-            availableCatPaths.splice(0,1);
+    let randomNumber = Math.floor(Math.random() * (availableCatPaths.length));
+    for(i=0; i<availableCatPaths.length; i++) {
+        //selects random number
+        console.log(randomNumber);
+        //assigned catpath card to random number
+        if (i === randomNumber){
+            currentCatPath = availableCatPaths[i];
+            //removed catpath card from cat path array
+            availableCatPaths.splice(i,1);
             break;
-        case 1:
-            currentCatPath = $catPath2;
-            availableCatPaths.splice(1,1);
-            break;
-        case 2:
-            currentCatPath = $catPath3;
-            availableCatPaths.splice(2,1);
-            break;
-        case 3:
-            currentCatPath = $catPath4;
-            availableCatPaths.splice(3,1);
-            break;
-        case 4:
-            currentCatPath = $catPath5;
-            availableCatPaths.splice(4,1);
-            break;
-        case 5:
-            currentCatPath = $catPath6;
-            availableCatPaths.splice(5,1);
-            break;
+        }
     }
 }
+//upon click of catpath card
+$('#catpath').on('click', () => {
+    if (availableCatPaths.length != 0){
+    //runs random cat path selection function
+    console.log(`availableCatPaths before ${availableCatPaths}`);
+    selectCatPath();
+    console.log(`availableCatPaths after ${availableCatPaths}`);
+    //pushes selected cat path to player's cat path array
+    playerCatPaths.push(currentCatPath);
+    console.log(`playerCatPaths ${playerCatPaths}`)
 
+    //appends appropriate cat path image to game board
+    $('.playerCatPaths').append(`<li>${currentCatPath}</li>`);
+    //runs if computer cat path array is empty (if computer has no cat paths yet)
+    if (computerCatPaths.length === 0){
+        //runs random cat path selection function
+        selectCatPath();
+        //pushes selected cat path to computer's cat path array
+        computerCatPaths.push(currentCatPath);
+        console.log(`computer catpath ${computerCatPaths}`);
+        //appends appropriate cat path image to game board
+        $('.computerCatPaths').append(`<li>${currentCatPath}</li>`);
+    }
+}
+})
+//sometimes automatically adds computer cards right after player cards
 $("#pawprint").on('click', () => {
     //add three pawprint cards to player array and status box
     addPlayerPawPrint();
@@ -393,4 +435,5 @@ $("#pawprint").on('click', () => {
     computerAddPawPrints();
     computerAddPawPrints();
     computerAddPawPrints();
+//add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
 }})
