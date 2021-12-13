@@ -122,6 +122,9 @@ collectCatPaths() {
     adds catPaths to appropriate player's catPaths object
 }
 
+computer play:
+for loop that cycles through cat paths and winning options and randomly selects one
+
 Winning pathways:
 catPath3 (black cat--> brown head):
 (1 && 1a && ((5 && ((10 && 11) || (15))) || (6 && ((11) || (10 && 15))) || (2 && ((7 && ((11) || (12 && 16 && 17))) || (3 && 3a && 3b && ((8) || (12) || (16)))) )))
@@ -189,7 +192,7 @@ let $catPath3 = $(`<img src="images/catpath3.png"></img>`);
 let $catPath4 = $(`<img src="images/catpath4.png"></img>`);
 let $catPath5 = $(`<img src="images/catpath5.png"></img>`);
 let $catPath6 = $(`<img src="images/catpath6.png"></img>`);
-let catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
+let catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
 let playerPawPrints = {
     orange: 0,
     brown: 0,
@@ -302,42 +305,80 @@ $('#needHelp').on('click', () => {
 //     adds pawprints to appropriate pawprints object
 //         if computer has pawprints already. only display the back of one
 // }
-
 //declare paw variables as list items with images (to be appended to player/computer uls)
-const $orangePaw = $(`<li><img src='images/orangepaw.png'></li>`)
-const $blackPaw = $(`<li><img src='images/blackpaw.png'></li>`)
-const $greyPaw = $(`<li><img src='images/greypaw.png'></li>`)
-const $whitePaw = $(`<li><img src='images/whitepaw.png'></li>`)
-const $brownPaw = $(`<li><img src='images/brownpaw.png'></li>`)
 const $playerPawPrints = $('.playerPawPrints');
 const $computerPawPrints = $('.computerPawPrints');
 
-//adds Paw Print cards to stash of player called
-const addPawPrint = function (currentPlayerJQuery, currentPlayerPawPrints) {
+//adds Paw Print cards to player stash
+const addPlayerPawPrint = function () {
     //random switch case
     switch (Math.floor(Math.random() * 5)){
         case 0: 
-            //appends paw card image to correct player's box
-            $(currentPlayerJQuery).append($orangepaw);
-            //adds paw card to correct player's pawprint object
-            currentPlayerPawPrints[orange] =+ 1;
+            //adds paw card to player's pawPrints object
+            playerPawPrints.orange = playerPawPrints.orange+ 1;
+            //adjust player's HTML to reflect accurate number
+            $("#playerOrange").html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${playerPawPrints.orange}`);
             break;
         case 1: 
-            $(currentPlayerJQuery).append($blackpaw);
-            currentPlayerPawPrints[black] =+ 1;
+            playerPawPrints.black = playerPawPrints.black+ 1;
+            $("#playerBlack").html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${playerPawPrints.black}`);
             break;
         case 2: 
-            $(currentPlayerJQuery).append($greypaw);
-            currentPlayerPawPrints[grey] =+ 1;
+            playerPawPrints.grey = playerPawPrints.grey+ 1;
+            $("#playerGrey").html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${playerPawPrints.grey}`);
             break;
         case 3: 
-            $(currentPlayerJQuery).append($whitepaw);
-            currentPlayerPawPrints[white] =+ 1;
+            playerPawPrints.white = playerPawPrints.white+ 1;
+            $("#playerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${playerPawPrints.white}`);
             break;
         case 4: 
-            $(currentPlayerJQuery).append($brownpaw);
-            currentPlayerPawPrints[brown] =+ 1;
+            playerPawPrints.brown = playerPawPrints.brown+ 1;
+            $("#playerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${playerPawPrints.brown}`);
             break;
     }
 };
 
+const computerAddPawPrints = () => {
+    switch (Math.floor(Math.random() * 5)){
+        case 0: 
+            //adds paw card to player's pawPrints object
+            computerPawPrints.orange = computerPawPrints.orange+ 1;
+            //adjust player's HTML to reflect accurate number
+            $("#computerOrange").html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${computerPawPrints.orange}`);
+            break;
+        case 1: 
+            computerPawPrints.black = computerPawPrints.black+ 1;
+            $("#computerBlack").html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${computerPawPrints.black}`);
+            break;
+        case 2: 
+            computerPawPrints.grey = computerPawPrints.grey+ 1;
+            $("#computerGrey").html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${computerPawPrints.grey}`);
+            break;
+        case 3: 
+            computerPawPrints.white = computerPawPrints.white+ 1;
+            $("#computerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${computerPawPrints.white}`);
+            break;
+        case 4: 
+            computerPawPrints.brown = computerPawPrints.brown+ 1;
+            $("#computerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${computerPawPrints.brown}`);
+            break;
+    }
+}
+
+$("#pawprint").on('click', () => {
+    //add three pawprint cards to player array and status box
+    addPlayerPawPrint();
+    console.log(playerPawPrints);
+    addPlayerPawPrint();
+    console.log(playerPawPrints);
+    addPlayerPawPrint();
+    console.log(playerPawPrints);
+    if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
+    //add three pawprint cards to computer array and status box
+    computerAddPawPrints();
+    console.log(computerPawPrints);
+    computerAddPawPrints();
+    console.log(computerPawPrints);
+    computerAddPawPrints();
+    console.log(computerPawPrints);
+}})

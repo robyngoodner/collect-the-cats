@@ -31,7 +31,9 @@ body {
     display: block;
     margin: auto;
 }
-
+.pawPrintCards {
+    height: 8vh;
+}
 .catpaths {
     display: flex;
     flex-direction: column;
@@ -42,19 +44,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 #pawprint {
     height: 12vh;
-    /* justify-content: right; */
-    background-color: transparent;
-    display: block;
-    margin: auto;
 }
-/* .pawprints {
-    display:block;
-    margin-left: auto;
-} */
+
 .info {
     margin: 10px 50px 20px 30px;
     display: flex;
