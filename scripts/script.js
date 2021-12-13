@@ -77,22 +77,8 @@ computerPawPrints {
 
 
 Functions:
-$setUpGame {
-    sets up game board
-    sets scores to zero
-    Puts all cards in places
-    put
-}
 
-instructionsPopUP {
-    Pops up insructions in alert window
-    Play game button
-}
 
-addPawPrints {
-    adds pawprints to appropriate pawprints object
-        if computer has pawprints already. only display the back of one
-}
 
 checkPawPrints (player) {
     if playerPawprints contains the same number of that color paw print as required;
@@ -144,26 +130,46 @@ catPath3 (black cat--> brown head):
 all available pathways:
 const $three = $("#three") + $("#threea") + $("#threeb")
 const $one = $("one") + $("#onea")
-const $two = 
+const $two = $("#two")
+const $three = $("#three")
+const $four = $("#four")
+const $five = $("five")
+const $six = $("#six")
+const $seven = $("#seven")
+const $eight = $("#eight")
+const $nine = $("#nine")
+const $ten = $("#ten")
+const $eleven = $("#eleven")
+const $twelve = $("twelve")
+const $thirteen = $("#thirteen")
+const $fourteen = $("#fourteen")
+const $fifteen = $("#fifteen")
+const $sixteen = $("#sixteen")
+const $seventeen = $("#seventeen")
 
 black cat to orange head:
-($one || $("#four") && $("#five"))
+($one || ($four" && $five)
 black cat to white head:
-($("#nine") && $("#thirteen")) || $("#four")
+($nine && $thirteen) || $four
 orange head to brown cat:
-$("#two") || ($("#six") && $("#seven"))
+$two || ($six && $seven)
 orange head to grey head:
-(c && $("#seven")) || ($("#six")) || ($("#five") && $("#ten"))
+($two && $seven) || $six || ($five && $ten)
 orange head to white head:
-$("#five")
+$five
 white head to brown head:
-$("#fifteen") || ($("#ten") && $("#eleven"))
+$fifteen || ($ten && $eleven)
 white head to gray head:
-$("#ten") || ($("#fifteen") && $("#eleven"))
+$ten || ($fifteen && $eleven)
 brown cat to orange cat:
-$three || $("#eight") }} ($("#seven") && $("#twelve")
+$three || $eight || ($even && $twelve
 grey head to orange cat:
-$("#twelve") || $("#")
+$twelve || ($eleven && $seventeen && $sixteen) || ($seven && (eight || $three)
+grey head to black head:
+($eleven && $seventeen) || ($twelve && sixteen)
+brown head to grey head:
+$eleven || ($seventeen && $sixteen && $twelve)
+
 
 
 
@@ -177,31 +183,58 @@ let playerScore = 0;
 let computerScore = 0;
 let playerCatPaths = [];
 let computerCatPaths = [];
-let catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
+let $catPath1 = $(`<img src="images/catpath1.png"></img>`);
+let $catPath2 = $(`<img src="images/catpath2.png"></img>`);
+let $catPath3 = $(`<img src="images/catpath3.png"></img>`);
+let $catPath4 = $(`<img src="images/catpath4.png"></img>`);
+let $catPath5 = $(`<img src="images/catpath5.png"></img>`);
+let $catPath6 = $(`<img src="images/catpath6.png"></img>`);
+let catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
 let playerPawPrints = {
-    red: 0,
-    blue: 0,
-    purple: 0,
-    green: 0,
-    yellow: 0,
-    pink: 0
+    orange: 0,
+    brown: 0,
+    black: 0,
+    grey: 0,
+    white: 0
 };
 let computerPawPrints = {
-    red: 0,
-    blue: 0,
-    purple: 0,
-    green: 0,
-    yellow: 0,
-    pink: 0
+    orange: 0,
+    brown: 0,
+    black: 0,
+    grey: 0,
+    white: 0
 };
+const $three = $("#three") + $("#threea") + $("#threeb")
+const $one = $("one") + $("#onea")
+const $two = $("#two")
+const $four = $("#four")
+const $five = $("five")
+const $six = $("#six")
+const $seven = $("#seven")
+const $eight = $("#eight")
+const $nine = $("#nine")
+const $ten = $("#ten")
+const $eleven = $("#eleven")
+const $twelve = $("twelve")
+const $thirteen = $("#thirteen")
+const $fourteen = $("#fourteen")
+const $fifteen = $("#fifteen")
+const $sixteen = $("#sixteen")
+const $seventeen = $("#seventeen")
 
+// $setUpGame {
+//     sets up game board
+//     sets scores to zero
+//     Puts all cards in places
+//     put
+// }
 //reset game function
 const setUpGame = () => {
 //set scores to 0
     computerScore = 0;
-    $('#computerScore').text(`${computerScore}`)
+    $('#computerScore').html(`Computer score: <br>${computerScore}`)
     playerScore = 0;
-    $('#playerScore').text(`${playerScore}`);
+    $('#playerScore').html(`Player score: <br>${playerScore}`);
 //empty pawPrints
     playerPawPrints = {
         red: 0,
@@ -223,9 +256,16 @@ const setUpGame = () => {
     playerCatPaths = [];
     computerCatPaths = [];
 //set up available catPaths
-    catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
+    catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
 //set up new board
-
+//clear computer's catPath cards
+    $(".computerCatPaths").empty();
+//clear computer's pawPrint cards
+    $(".computerPawPrints").empty();
+//clear player's catPath cards
+    $(".playerCatPaths").empty();
+//clear player's pawprint cards
+    $(".playerPawPrints").empty();
 };
 
 //reset game button
@@ -238,7 +278,10 @@ $('#restart').on('click', () => {
         return;
     }
 })
-
+// instructionsPopUP {
+//     Pops up insructions in alert window
+//     Play game button
+// }
 //instructions popup
 $('#needHelp').on('click', () => {
     alert(`Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the player must collect. 
@@ -255,14 +298,32 @@ $('#needHelp').on('click', () => {
     The winner is determined based on a points system according to the distance between cats that the players are claiming.`)
 })
 
-const playerAddPawPrints = () => {
+
+
+// addPawPrints {
+//     adds pawprints to appropriate pawprints object
+//         if computer has pawprints already. only display the back of one
+// }
+
+//declare paw variables as list items with images (to be appended to player/computer uls)
+const $orangePaw = $(`<li><img src='images/orangepaw.png'></li>`)
+const $blackPaw = $(`<li><img src='images/blackpaw.png'></li>`)
+const $greyPaw = $(`<li><img src='images/greypaw.png'></li>`)
+const $whitePaw = $(`<li><img src='images/whitepaw.png'></li>`)
+const $brownPaw = $(`<li><img src='images/brownpaw.png'></li>`)
+// let currentPawPrint = function () {
+
+//     switch {
+//         case 0 : $orangepaw;
+
+//     }
+// }
+
+const addPawPrints = () => {
     //adds pawprints to appropriate pawprints object
     playerPawPrints.forEach((key, value) => {
         if (clickedItem.id === key) {
             value =+ 1;
         }
-
-
     })
-}
-
+};
