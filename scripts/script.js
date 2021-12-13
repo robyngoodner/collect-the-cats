@@ -185,23 +185,25 @@ let computerPawPrints = {
     grey: 0,
     white: 0
 };
-const $three = $("#three") + $("#threea") + $("#threeb")
-const $one = $("one") + $("#onea")
-const $two = $("#two")
-const $four = $("#four")
-const $five = $("five")
-const $six = $("#six")
-const $seven = $("#seven")
-const $eight = $("#eight")
-const $nine = $("#nine")
-const $ten = $("#ten")
-const $eleven = $("#eleven")
-const $twelve = $("twelve")
-const $thirteen = $("#thirteen")
-const $fourteen = $("#fourteen")
-const $fifteen = $("#fifteen")
-const $sixteen = $("#sixteen")
-const $seventeen = $("#seventeen")
+const $one = {$img1: $("#one")};
+const $two = {$img2: $("#two")};
+const $three = {$img3: $("#three")};
+const $threea = {$img3a: $("#threea")};
+const $threeb = {$img3b: $("#threeb")};
+const $four = {$img4: $("#four")};
+const $five = {$img5: $("five")};
+const $six = {$img6: $("#six")};
+const $seven = {$img7: $("#seven")};
+const $eight = {$img8: $("#eight")};
+const $nine = {$img9: $("#nine")};
+const $ten = {$img10: $("#ten")};
+const $eleven = {$img11: $("#eleven")};
+const $twelve = {$img12: $("twelve")};
+const $thirteen = {$img13: $("#thirteen")};
+const $fourteen = {$img14: $("#fourteen")};
+const $fifteen = {$img15: $("#fifteen")};
+const $sixteen = {$img16: $("#sixteen")};
+const $seventeen = {$img17: $("#seventeen")};
 
 // $setUpGame {
 //     sets up game board
