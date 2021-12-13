@@ -261,12 +261,20 @@ const setUpGame = () => {
 //set up new board
 //clear computer's catPath cards
     $(".computerCatPaths").empty();
-//clear computer's pawPrint cards
-    $(".computerPawPrints").empty();
-//clear player's catPath cards
+//clear player's pawPrint cards
     $(".playerCatPaths").empty();
-//clear player's pawprint cards
-    $(".playerPawPrints").empty();
+//load resetted numbers for player cat paths
+    $("#playerOrange").html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${playerPawPrints.orange}`);
+    $("#playerBlack").html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${playerPawPrints.black}`);
+    $("#playerGrey").html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${playerPawPrints.grey}`);
+    $("#playerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${playerPawPrints.white}`);
+    $("#playerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${playerPawPrints.brown}`);
+//load resetted numbers for computer cat paths
+    $("#computerOrange").html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${computerPawPrints.orange}`);
+    $("#computerBlack").html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${computerPawPrints.black}`);
+    $("#computerGrey").html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${computerPawPrints.grey}`);
+    $("#computerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${computerPawPrints.white}`);
+    $("#computerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${computerPawPrints.brown}`);
 };
 
 //reset game button
@@ -341,9 +349,9 @@ const addPlayerPawPrint = function () {
 const computerAddPawPrints = () => {
     switch (Math.floor(Math.random() * 5)){
         case 0: 
-            //adds paw card to player's pawPrints object
+            //adds paw card to computer's's pawPrints object
             computerPawPrints.orange = computerPawPrints.orange+ 1;
-            //adjust player's HTML to reflect accurate number
+            //adjust computer's HTML to reflect accurate number
             $("#computerOrange").html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${computerPawPrints.orange}`);
             break;
         case 1: 
@@ -368,17 +376,11 @@ const computerAddPawPrints = () => {
 $("#pawprint").on('click', () => {
     //add three pawprint cards to player array and status box
     addPlayerPawPrint();
-    console.log(playerPawPrints);
     addPlayerPawPrint();
-    console.log(playerPawPrints);
     addPlayerPawPrint();
-    console.log(playerPawPrints);
     if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
-    //add three pawprint cards to computer array and status box
+    //add three pawprint cards to computer array and status box, if computer doesn't have enough pawprints to pick a path
     computerAddPawPrints();
-    console.log(computerPawPrints);
     computerAddPawPrints();
-    console.log(computerPawPrints);
     computerAddPawPrints();
-    console.log(computerPawPrints);
 }})
