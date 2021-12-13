@@ -162,8 +162,8 @@ $eleven || ($seventeen && $sixteen && $twelve)
 let playerScore = 0;
 let computerScore = 0;
 //  NOTE: turn catpaths into objects. key is catpath, value is false until cat path has been acquired, then turns to true
-let playerCatPaths = [];
-let computerCatPaths = [];
+let playerCatPaths = {};
+let computerCatPaths = {};
 let currentCatPath;
 let $catPath1 = `<img src="images/catpath1.png"></img>`;
 let $catPath2 = `<img src="images/catpath2.png"></img>`;
@@ -363,17 +363,25 @@ $('#catpath').on('click', () => {
     selectCatPath();
     console.log(`availableCatPaths after ${availableCatPaths}`);
     //pushes selected cat path to player's cat path array
-    playerCatPaths.push(currentCatPath);
+    playerCatPaths.currentCatPath = true;
     console.log(`playerCatPaths ${playerCatPaths}`)
 
     //appends appropriate cat path image to game board
     $('.playerCatPaths').append(`<li>${currentCatPath}</li>`);
     //runs if computer cat path array is empty (if computer has no cat paths yet)
-    if (computerCatPaths.length === 0){
+    function isEmpty(o){
+        for (let i in o) {
+            if(o.hasOwnProperty(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+    if (isEmpty(computerCatPaths)){
         //runs random cat path selection function
         selectCatPath();
         //pushes selected cat path to computer's cat path array
-        computerCatPaths.push(currentCatPath);
+        computerCatPaths.currentCatPath = true;
         console.log(`computer catpath ${computerCatPaths}`);
         //appends appropriate cat path image to game board
         $('.computerCatPaths').append(`<li>${currentCatPath}</li>`);
@@ -383,6 +391,18 @@ $('#catpath').on('click', () => {
 //adds computer cards right after player cards if computer has fewer than four cards of each color
 $("#pawprint").on('click', () => {
     //add three pawprint cards to player array and status box
+    console.log(playerCatPaths)
+    function isEmpty(o){
+        for (let i in o) {
+            if(o.hasOwnProperty(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+    if (isEmpty(playerCatPaths)){
+        alert(`Begin by picking a cat-path card!`)
+    }
     addPawPrint(playerPawPrints);
     addPawPrint(playerPawPrints);
     addPawPrint(playerPawPrints);
