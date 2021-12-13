@@ -237,21 +237,19 @@ const setUpGame = () => {
     $('#playerScore').html(`Player score: <br>${playerScore}`);
 //empty pawPrints
     playerPawPrints = {
-        red: 0,
-        blue: 0,
-        purple: 0,
-        green: 0,
-        yellow: 0,
-        pink: 0
+        orange: 0,
+        brown: 0,
+        black: 0,
+        grey: 0,
+        white: 0
     };
     computerPawPrints = {
-        red: 0,
-        blue: 0,
-        purple: 0,
-        green: 0,
-        yellow: 0,
-        pink: 0
-    };
+        orange: 0,
+        brown: 0,
+        black: 0,
+        grey: 0,
+        white: 0
+    };  
 //empty player and computer catPaths
     playerCatPaths = [];
     computerCatPaths = [];
@@ -311,19 +309,35 @@ const $blackPaw = $(`<li><img src='images/blackpaw.png'></li>`)
 const $greyPaw = $(`<li><img src='images/greypaw.png'></li>`)
 const $whitePaw = $(`<li><img src='images/whitepaw.png'></li>`)
 const $brownPaw = $(`<li><img src='images/brownpaw.png'></li>`)
-// let currentPawPrint = function () {
+const $playerPawPrints = $('.playerPawPrints');
+const $computerPawPrints = $('.computerPawPrints');
 
-//     switch {
-//         case 0 : $orangepaw;
-
-//     }
-// }
-
-const addPawPrints = () => {
-    //adds pawprints to appropriate pawprints object
-    playerPawPrints.forEach((key, value) => {
-        if (clickedItem.id === key) {
-            value =+ 1;
-        }
-    })
+//adds Paw Print cards to stash of player called
+const addPawPrint = function (currentPlayerJQuery, currentPlayerPawPrints) {
+    //random switch case
+    switch (Math.floor(Math.random() * 5)){
+        case 0: 
+            //appends paw card image to correct player's box
+            $(currentPlayerJQuery).append($orangepaw);
+            //adds paw card to correct player's pawprint object
+            currentPlayerPawPrints[orange] =+ 1;
+            break;
+        case 1: 
+            $(currentPlayerJQuery).append($blackpaw);
+            currentPlayerPawPrints[black] =+ 1;
+            break;
+        case 2: 
+            $(currentPlayerJQuery).append($greypaw);
+            currentPlayerPawPrints[grey] =+ 1;
+            break;
+        case 3: 
+            $(currentPlayerJQuery).append($whitepaw);
+            currentPlayerPawPrints[white] =+ 1;
+            break;
+        case 4: 
+            $(currentPlayerJQuery).append($brownpaw);
+            currentPlayerPawPrints[brown] =+ 1;
+            break;
+    }
 };
+
