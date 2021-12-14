@@ -53,7 +53,7 @@ body {
 }
 
 .info {
-    margin: 10px 50px 20px 30px;
+    margin: 10px 10px 20px 10px;
     display: flex;
     justify-content: space-between;
     align-content: flex-end;

@@ -209,137 +209,156 @@ let computerPawPrints = {
 // const catPath5 = ["D", "B"];
 // const catPath6 = ["A", "H"];
 
-
-const $one = {
+const pawPrintPaths = {
+$one : {
     $img: $("#one"),
     node1: 1,
     node2: 2,
     pawsNeeded: 6,
-    color: "brown"
-};
-const $two = {
+    color: "brown",
+    clicked: false
+},
+$two : {
     $img: $("#two"),
     node1: 2,
     node2: 3,
     pawsNeeded: 6,
-    color: "grey"
-};
-const $three = {
+    color: "grey",
+    clicked: false
+},
+$three : {
     $img: $("#three"),
     node1: 3,
     node2: 4,
     pawsNeeded: 7,
-    color: "white"
-};
-const $threea = {
+    color: "white",
+    clicked: false
+},
+$threea : {
     $img: $("#threea"),
     node1: 3,
     node2: 4,
     pawsNeeded: 7,
-    color: "white"
-};
-const $threeb = {
+    color: "white",
+    clicked: false
+},
+$threeb : {
     $img: $("#threeb"),
     node1: 3,
     node2: 4,
     pawsNeeded: 7,
-    color: "white"
-};
-const $four = {
+    color: "white",
+    clicked: false
+},
+$four : {
     $img: $("#four"),
     node1: 1,
     node2: 5,
     pawsNeeded: 4,
-    color: 'orange'
-};
-const $five = {
+    color: 'orange',
+    clicked: false
+},
+$five : {
     $img: $("five"),
     node1: 2,
     node2: 5,
     pawsNeeded: 4,
-    color: "orange"
-};
-const $six = {
+    color: "orange",
+    clicked: false
+},
+$six : {
     $img: $("#six"),
     node1: 2,
     node2: 6,
     pawsNeeded: 6,
-    color: "black"
-};
-const $seven = {
+    color: "black",
+    clicked: false
+},
+$seven : {
     $img: $("#seven"),
     node1: 3,
     node2: 6,
     pawsNeeded: 2,
-    color: "brown"
-};
-const $eight = {
+    color: "brown",
+    clicked: false
+},
+$eight : {
     $img: $("#eight"),
     node1: 3,
     node2: 4,
     pawsNeeded: 5,
-    color: 'black'
-};
-const $nine = {
+    color: 'black',
+    clicked: false
+},
+$nine : {
     $img: $("#nine"),
     node1: 1,
     node2: 7,
     pawsNeeded: 4,
-    color: "white"
-};
-const $ten = {
+    color: "white",
+    clicked: false
+},
+$ten : {
     $img: $("#ten"),
     node1: 5,
     node2: 6,
     pawsNeeded: 6,
-    color: "brown"
-};
-const $eleven = {
+    color: "brown",
+    clicked: false
+},
+$eleven : {
     $img: $("#eleven"),
     node1: 6,
     node2: 8,
     pawsNeeded: 3,
-    color: "orange"
-};
-const $twelve = {
+    color: "orange",
+    clicked: false
+},
+$twelve : {
     $img: $("#twelve"),
     node1: 6,
     node2: 4,
     pawsNeeded: 6,
-    color: 'grey'
-};
-const $thirteen = {
+    color: 'grey',
+    clicked: false
+},
+$thirteen : {
     $img: $("#thirteen"),
     node1: 7,
     node2: 5,
     pawsNeeded: 5,
-    color: "black"
-};
-// const $fourteen = {
+    color: "black",
+    clicked: false
+},
+// $fourteen : {
 //     $img: $("#fourteen"),
 //     node1: 2,
-//     node2: 3};
-const $fifteen = {
+//     node2: 3},
+$fifteen : {
     $img: $("#fifteen"),
     node1: 5,
     node2: 8,
     pawsNeeded: 6,
-    color: "grey"
-};
-const $sixteen = {
+    color: "grey",
+    clicked: false
+},
+$sixteen : {
     $img: $("#sixteen"),
     node1: 4,
     node2: 9,
     pawsNeeded: 5,
-    color: "orange"
-};
-const $seventeen = {
+    color: "orange",
+    clicked: false
+},
+$seventeen : {
     $img: $("#seventeen"),
     node1: 8,
     node2: 9,
     pawsNeeded: 5,
-    color: "white"
+    color: "white",
+    clicked: false
 
+}
 };
 
 // $setUpGame {
@@ -393,9 +412,9 @@ const setUpGame = () => {
     $("#computerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${computerPawPrints.white}`);
     $("#computerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${computerPawPrints.brown}`);
 //set 'clicked' status for game board back to false
-    for(let key in clicked) {
-        if(clicked.hasOwnProperty(key)) {
-            clicked[key]= false;
+    for(let key in pawPrintPaths) {
+        if(pawPrintPaths.hasOwnProperty(key)) {
+            pawPrintPaths[key]["clicked"]= false;
         }
     };
 };
@@ -607,178 +626,191 @@ const checkPawPrints = (clickedObject) => {
     // console.log("paws required" + pawsRequired)
     // console.log("clicked color number" + playerPawPrints[clickedColor])
     if(playerPawPrints[clickedColor] >= pawsRequired) {
-        playerScore =+ pawsRequired;
+        playerScore = playerScore + pawsRequired;
         playerNodes.push(clickedObject.node1);
         playerNodes.push(clickedObject.node2);
         $('#playerScore').html(`Player score: <br>${playerScore}`);
         playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
         playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
+        console.log(playerNodes);
     }
     else {
         alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
     }
 };
 //click status of pathways
-let clicked = {
-    one: false,
-    two: false,
-    three: false,
-    four: false,
-    five: false,
-    six: false,
-    seven: false,
-    eight: false,
-    nine: false,
-    ten: false,
-    eleven: false,
-    twelve: false,
-    thirteen: false,
-    fifteen: false,
-    sixteen: false,
-    seventeen: false,
-}
+// let clicked = {
+//     one: false,
+//     two: false,
+//     three: false,
+//     four: false,
+//     five: false,
+//     six: false,
+//     seven: false,
+//     eight: false,
+//     nine: false,
+//     ten: false,
+//     eleven: false,
+//     twelve: false,
+//     thirteen: false,
+//     fifteen: false,
+//     sixteen: false,
+//     seventeen: false,
+// }
 
 //click events for all paths
-$one.$img.on("click", () => {
-    //checks if it has previously been clicked
-    if(clicked.one === false) {
-        //runs path claiming function
-        checkPawPrints($one);
-        //changes status to clicked
-        clicked.one = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
+// pawPrintPaths.$one.$img.on("click", () => {
+//     //checks if it has previously been clicked
+//     if(pawPrintPaths.$one.clicked === false) {
+//         //runs path claiming function
+//         checkPawPrints(pawPrintPaths.$one);
+//         //changes status to clicked
+//         pawPrintPaths.$one.clicked = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
 
-$two.$img.on("click", () => {
-    if(clicked.two === false) {
-        checkPawPrints($two);
-        clicked.two = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$three.$img.on("click", () => {
-    if(clicked.three === false) {
-        checkPawPrints($three);
-        clicked.three = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$threea.$img.on("click", () => {
-    if(clicked.three === false) {
-        checkPawPrints($threeb);
-        clicked.three = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$four.$img.on("click", () => {
-    if(clicked.four === false) {
-        checkPawPrints($four);
-        clicked.four = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$five.$img.on("click", () => {
-    if(clicked.five === false) {
-        checkPawPrints($five);
-        clicked.five = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$six.$img.on("click", () => {
-    if(clicked.six === false) {
-        checkPawPrints($six);
-        clicked.six = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$seven.$img.on("click", () => {
-    if(clicked.seven === false) {
-        checkPawPrints($seven);
-        clicked.seven = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$eight.$img.on("click", () => {
-    if(clicked.eight === false) {
-        checkPawPrints($eight);
-        clicked.eight = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$nine.$img.on("click", () => {
-    if(clicked.nine === false) {
-        checkPawPrints($nine);
-        clicked.nine = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$ten.$img.on("click", () => {
-    if(clicked.ten === false) {
-        checkPawPrints($ten);
-        clicked.ten = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$eleven.$img.on("click", () => {
-    if(clicked.eleven === false) {
-        checkPawPrints($eleven);
-        clicked.eleven = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$twelve.$img.on("click", () => {
-    if(clicked.twelve === false) {
-        checkPawPrints($twelve);
-        clicked.twelve = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$thirteen.$img.on("click", () => {
-    if(clicked.thirteen === false) {
-        checkPawPrints($thirteen);
-        clicked.thirteen = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$fifteen.$img.on("click", () => {
-    if(clicked.fifteen === false) {
-        checkPawPrints($fifteen);
-        clicked.fifteen = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$sixteen.$img.on("click", () => {
-    if(clicked.sixteen === false) {
-        checkPawPrints($sixteen);
-        clicked.sixteen = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
-$seventeen.$img.on("click", () => {
-    if(clicked.seventeen === false) {
-        checkPawPrints($seventeen);
-        clicked.seventeen = true;
-    }
-     else{
-        alert("This path has already been claimed! Please pick a different path");
-    }});
+for(let key in pawPrintPaths) {
+    pawPrintPaths[key]["$img"].on("click", () => {
+        if(pawPrintPaths[key]["clicked"] === false) {
+            checkPawPrints(pawPrintPaths[key]);
+            pawPrintPaths[key]["clicked"] = true;
+        }
+        else{
+            alert("This path has already been claimed! Please pick a different path");
+        }
+    })
+};
+
+// pawPrintPaths.$two.$img.on("click", () => {
+//     if(clicked.two === false) {
+//         checkPawPrints($two);
+//         clicked.two = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$three.$img.on("click", () => {
+//     if(clicked.three === false) {
+//         checkPawPrints($three);
+//         clicked.three = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$threea.$img.on("click", () => {
+//     if(clicked.three === false) {
+//         checkPawPrints($threeb);
+//         clicked.three = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$four.$img.on("click", () => {
+//     if(clicked.four === false) {
+//         checkPawPrints($four);
+//         clicked.four = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$five.$img.on("click", () => {
+//     if(clicked.five === false) {
+//         checkPawPrints($five);
+//         clicked.five = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$six.$img.on("click", () => {
+//     if(clicked.six === false) {
+//         checkPawPrints($six);
+//         clicked.six = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$seven.$img.on("click", () => {
+//     if(clicked.seven === false) {
+//         checkPawPrints($seven);
+//         clicked.seven = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$eight.$img.on("click", () => {
+//     if(clicked.eight === false) {
+//         checkPawPrints($eight);
+//         clicked.eight = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$nine.$img.on("click", () => {
+//     if(clicked.nine === false) {
+//         checkPawPrints($nine);
+//         clicked.nine = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$ten.$img.on("click", () => {
+//     if(clicked.ten === false) {
+//         checkPawPrints($ten);
+//         clicked.ten = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$eleven.$img.on("click", () => {
+//     if(clicked.eleven === false) {
+//         checkPawPrints($eleven);
+//         clicked.eleven = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$twelve.$img.on("click", () => {
+//     if(clicked.twelve === false) {
+//         checkPawPrints($twelve);
+//         clicked.twelve = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$thirteen.$img.on("click", () => {
+//     if(clicked.thirteen === false) {
+//         checkPawPrints($thirteen);
+//         clicked.thirteen = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// pawPrintPaths.$fifteen.$img.on("click", () => {
+//     if(clicked.fifteen === false) {
+//         checkPawPrints($fifteen);
+//         clicked.fifteen = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// $sixteen.$img.on("click", () => {
+//     if(clicked.sixteen === false) {
+//         checkPawPrints($sixteen);
+//         clicked.sixteen = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
+// $seventeen.$img.on("click", () => {
+//     if(clicked.seventeen === false) {
+//         checkPawPrints($seventeen);
+//         clicked.seventeen = true;
+//     }
+//      else{
+//         alert("This path has already been claimed! Please pick a different path");
+//     }});
 
 
 function Node(val){
@@ -886,7 +918,7 @@ const collateWinningCatPaths = (whoseCatPaths) => {
         // console.log(whoseCatPaths[i].node2)
         traverse(N[whoseCatPaths[i].node1], whoseCatPaths[i].node2);
     }
-    // console.log(validPaths);
+    console.log(validPaths);
  
 }
 
