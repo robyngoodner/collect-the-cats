@@ -19,6 +19,7 @@ Your game must meet these requirements:
 LAST PRIORITIES:
 - Animations
 - Report feedback form
+- hide computer cards
 - look of overlapping computer cards
 
 Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the 
@@ -91,11 +92,7 @@ playerGetCatPaths(){
 }
 
 
-computerGetCatPaths() {
-    same as player but with Math.random()
-    if computer has catpaths already, only display the back of one (display overlapping? fancy)
-    jquery id=#catpath
-}
+
 
 
 
@@ -166,12 +163,12 @@ let playerCatPaths = {};
 let computerCatPaths = {};
 let currentCatPath;
 let pawPrintCards = 100;
-let $catPath1 = `<img src="images/catpath1.png"></img>`;
-let $catPath2 = `<img src="images/catpath2.png"></img>`;
-let $catPath3 = `<img src="images/catpath3.png"></img>`;
-let $catPath4 = `<img src="images/catpath4.png"></img>`;
-let $catPath5 = `<img src="images/catpath5.png"></img>`;
-let $catPath6 = `<img src="images/catpath6.png"></img>`;
+let $catPath1 = `<img class="catPathCards" src="images/catpath1.png"></img>`;
+let $catPath2 = `<img class="catPathCards" src="images/catpath2.png"></img>`;
+let $catPath3 = `<img class="catPathCards" src="images/catpath3.png"></img>`;
+let $catPath4 = `<img class="catPathCards" src="images/catpath4.png"></img>`;
+let $catPath5 = `<img class="catPathCards" src="images/catpath5.png"></img>`;
+let $catPath6 = `<img class="catPathCards" src="images/catpath6.png"></img>`;
 let availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
 let playerPawPrints = {
     orange: 0,
@@ -197,6 +194,14 @@ let computerPawPrints = {
     white: 0,
     whiteID: $("#computerWhite")
 };
+
+const catPath1 = ["I", "C"];
+const catPath2 = ["E", "I"];
+const catPath3 = ["A", "F"];
+const catPath4 = ["B", "G"];
+const catPath5 = ["D", "B"];
+const catPath6 = ["A", "H"];
+
 
 const $one = {$img1: $("#one")};
 const $two = {$img2: $("#two")};
@@ -357,7 +362,6 @@ const addPawPrint =  (player) => {
 //     switch case
 //     adds catPaths to appropriate player's catPaths object
 // }
-//NOTE: FIX CAT PATHS. 3 AND 6 ARE THE SAME
 const selectCatPath = () => {
     let randomNumber = Math.floor(Math.random() * (availableCatPaths.length));
     for(i=0; i<availableCatPaths.length; i++) {
@@ -434,3 +438,97 @@ $("#pawprint").on('click', () => {
     }
     else (alert(`There are not enough pawprint cards for you to draw! You can select one more cat-path before a winner is determined.`))
 })
+
+
+
+function Node(val){
+    this.val = val;
+    this.childs = [];
+}
+Node.prototype.add = function(N) {
+    this.childs.push(N)
+}
+let N = [];
+for(i=1; i<=9; i++) {
+    N[i] = new Node (i);
+}
+
+function generateGraph() {
+    const N = [];
+    for(i=1; i<=9; i++){
+        N[i] = new Node(i);
+    }
+    N[1].add(N[2]);
+    N[1].add(N[5]);
+    N[1].add(N[7]);
+    N[2].add(N[1]);
+    N[2].add(N[3]);
+    N[2].add(N[4]);
+    N[2].add(N[6]);
+    N[3].add(N[2]);
+    N[3].add(N[4]);
+    N[3].add(N[4]);
+    N[3].add(N[6]);
+    N[4].add(N[3]);
+    N[4].add(N[3]);
+    N[4].add(N[7]);
+    N[4].add(N[9]);
+    N[5].add(N[1]);
+    N[5].add(N[2]);
+    N[5].add(N[6]);
+    N[5].add(N[7]);
+    N[5].add(N[8]);
+    N[6].add(N[2]);
+    N[6].add(N[3]);
+    N[6].add(N[4]);
+    N[6].add(N[5]);
+    N[6].add(N[8]);
+    N[7].add(N[1]);
+    N[7].add(N[5]);
+    N[8].add(N[5]);
+    N[8].add(N[6]);
+    N[8].add(N[9]);
+    N[9].add(N[4]);
+    N[9].add(N[8]);
+    return N;
+}
+
+N = generateGraph();
+let RootNode = N[1];
+
+function clone(A) {
+    return JSON.parse(JSON.stringify(A));
+}
+// console.log(N[1]);
+const validPaths = [];
+path = [];
+function traverse(node, destination, path) {
+    if(node === undefined){
+        node = RootNode;
+    }
+    if(path === undefined){
+        path = [];
+    }
+    // if(destination === undefined){
+    //     destination = 9;
+    // }
+    // console.log(path)
+    path.push(node.val);
+    //console.log("Current Path", path);
+    if(node.val === destination){
+        //console.log("Found Valid", path);
+        validPaths.push(clone(path));
+        return;
+    }
+    console.log(node.childs);
+    node.childs.forEach(x => {
+        if(path.indexOf(x.val) === -1){
+            let newPath = clone(path);
+            traverse(x, destination, newPath);
+        }
+    });
+}
+//to get winning conditions, call traverse(N[*], destination) with * being starting node number and destination being the second node number. Call twice, swapping the nodes
+traverse(N[3], 7);
+console.log(validPaths);
+
