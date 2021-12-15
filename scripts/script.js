@@ -82,8 +82,8 @@ for loop that cycles through cat paths and winning options and randomly selects 
 let playerScore = 0;
 let computerScore = 0;
 //arrays that contain drawn CatPaths
-let playerCatPaths = [[],[],[],[],[],[]];
-let computerCatPaths = [[],[],[],[],[],[]];
+let playerCatPaths = [];
+let computerCatPaths = [];
 //arrays that contain claimed catPaths
 let playerNodes = [];
 let computerNodes = [];
@@ -95,15 +95,15 @@ let pawPrintCards = 100;
 let $catPath1 = {node1: 9,
                 node2: 3,
                 img: `<img class="catPathCards" src="images/catpath1.png"></img>`,
-                arrInd = 0};
+                arrInd : 0};
 let $catPath2 = {node1: 5,
     node2: 9,
     img: `<img class="catPathCards" src="images/catpath2.png"></img>`,
-    arrInd = 1};
+    arrInd : 1};
 let $catPath3 = {node1: 1,
     node2: 6,
     img: `<img class="catPathCards" src="images/catpath3.png"></img>`,
-    arrInd = 2};
+    arrInd : 2};
 let $catPath4 = {node1: 2,
     node2: 7,
     img: `<img class="catPathCards" src="images/catpath4.png"></img>`,
@@ -219,14 +219,14 @@ $seven : {
     color: "brown",
     clicked: false
 },
-$eight : {
-    $img: $("#eight"),
-    node1: 3,
-    node2: 4,
-    pawsNeeded: 5,
-    color: 'black',
-    clicked: false
-},
+// $eight : {
+//     $img: $("#eight"),
+//     node1: 3,
+//     node2: 4,
+//     pawsNeeded: 5,
+//     color: 'black',
+//     clicked: false
+// },
 $nine : {
     $img: $("#nine"),
     node1: 1,
@@ -327,8 +327,8 @@ const setUpGame = () => {
     pawPrintCards = 100;
     $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
 //empty player and computer catPaths
-    playerCatPaths = [[],[],[],[],[],[]];
-    computerCatPaths = [[],[],[],[],[],[]];
+    playerCatPaths = [];
+    computerCatPaths = [];
 //set up available catPaths
     catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
 //set up new board
@@ -354,6 +354,7 @@ const setUpGame = () => {
             pawPrintPaths[key]["clicked"]= false;
         }
     };
+    validPaths.length=0;
 };
 
 //reset game button
@@ -692,6 +693,7 @@ function traverse(node, destination, path) {
 //parameter takes individual's catPaths array
 let playerPathOptions=[];
 let computerPathOptions=[]
+//grab potential winning combination for each of the catpaths in a player's catPath object
 const collateWinningCatPaths = (whoseCatPaths) => {
  
     // console.log(whoseCatPaths)
@@ -707,14 +709,22 @@ const collateWinningCatPaths = (whoseCatPaths) => {
    //check contents of validPaths against player's paths array
 
 const logPlayerWinningCatPaths = () => {
+//run winning combos function with player's cat paths
     collateWinningCatPaths(playerCatPaths);
+    //push potential player winning paths to the playerPathOptions array
     playerPathOptions.push(validPaths);
-    console.log(playerPathOptions);
+    //empty validPaths array
+    // validPaths.length=0;
+    // console.log(playerPathOptions);
 }
 const logComputerWinningCatPaths = () => {
+    //run winning combos function with computer's path's arrays
     collateWinningCatPaths(computerCatPaths);
+    //push potential computer winning paths to the computerPathOptions array
     computerPathOptions.push(validPaths);
-    console.log(computerPathOptions)
+    //empty validPaths array
+    // validPaths.length=0;
+    // console.log(computerPathOptions)
 }
 
 
@@ -727,62 +737,61 @@ const logComputerWinningCatPaths = () => {
 //check if array contains first and last node--delete those if they exist. 
 //Run a loop twice deleting a value if if matches a winning array. The array should be empty under winning conditions
 //second loop written with i--?
-// const checkPlayerWinningPaths = () => {
-//     logPlayerWinningCatPaths();
-//     logComputerWinningCatPaths();
-//     let playerNodesUnique = [...new Set(playerNodes)];
-//     console.log(playerNodesUnique);
-//     // console.log(playerPathOptions[0].length);
-//     const arrayMatch = (arr, target) => {
-//         target.every(v => arr.includes(v))
-//     }
-//     const checkArrayMatch = () => {
-//         for(i=0; i<playerPathOptions[0].length; i++){
-//         console.log(playerPathOptions[0][i]);
-//         arrayMatch(playerPathOptions[0][i], playerNodesUnique);
-//         arrayMatch(playerNodesUnique, playerPathOptions[0][i]);
-//         }
-//     }
-//     console.log(checkArrayMatch());
-//         // const checkArrayMatch =() => {
-//         //     playerPathOptions[0][i]
-//         // }
-//         // for(j=0; playerNodesUnique.length; i++){
-//         //     console.log("at least the for statement is working");
-//         //     if(playerPathOptions[0][i] != playerNodesUnique[j]){
-//         //         console.log(playerNodesUnique);
-//         //         break;
-//         //     }
-//         //     else {console.log("You did it! You won that cat path")}
-//         // }
 
-//         // if(playerPathOptions[0][i].every(elem => playerNodesUnique.includes(elem)))
-//         // console.log("well done")    
-//         // return true}
-// } 
+
+
+//compare playerPaths to player potential winning paths, assign points based on whether player achieved all paths picked
 const checkPlayerWinningPaths = () => {
     logPlayerWinningCatPaths();
-    logComputerWinningCatPaths();
     let playerNodesUnique = [...new Set(playerNodes)];
-    // console.log(playerNodesUnique);
-    playerNodesUnique.sort();
-    // console.log(playerCatPaths);
-    // console.log(playerPathOptions[0].length);
-    const checkArrayMatch = () => {
-        // console.log("checkArrayMatch function is running")
-        for(i=0; i<playerPathOptions[0].length; i++){
-            // console.log("the for loop is running")
-        playerPathOptions[0][i].sort();
-        if(playerPathOptions[0][i][i] === playerNodesUnique[i]){
-            //if the array has an exact match
-            console.log("true");
-            return;
+    let hasAllElems = true;
+    for(i=0; i<playerPathOptions[0].length; i++){
+        if(playerPathOptions[0][i].every(elem => playerNodesUnique.includes(elem))){
+            playerScore = playerScore + 20;
+            $('#playerScore').html(`Player score: <br>${playerScore}`);
+            hasAllElems = true;
+            break;
         }
-        else console.log("false");
+        else {
+            hasAllElems = false;
         }
     }
-    checkArrayMatch();
+    if (hasAllElems === false){
+        playerScore = playerScore - 20;
+        $('#playerScore').html(`Player score: <br>${playerScore}`);
+    }
 }
-$("#feedback").on('click', () => {checkPlayerWinningPaths()});
+
+const checkComputerWinningPaths = () => {
+    // logPlayerWinningCatPaths();
+    logComputerWinningCatPaths();
+    let computerNodesUnique = [...new Set(computerNodes)];
+    // console.log(playerNodesUnique);
+    // playerNodesUnique.sort();
+    // console.log(computerNodesUnique);
+    // console.log(playerCatPaths);
+    // console.log(playerPathOptions[0].length);
+    // console.log(computerPathOptions[0]);
+    let hasAllElems = true;
+    for(i=0; i<computerPathOptions[0].length; i++){
+        // console.log(playerPathOptions[0][1].every(elem => playerNodesUnique.includes(elem)));
+        if(computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))){
+            computerScore = computerScore + 20;
+            $('#computerScore').html(`Computer score: <br>${computerScore}`);
+            hasAllElems = true;
+            // console.log("OMFG we did it!");
+            break;
+        }
+        else {
+            hasAllElems = false;
+        }
+    }
+    if (hasAllElems === false){
+        computerScore = computerScore - 20;
+        $('#computerScore').html(`Computer score: <br>${computerScore}`);
+    }
+}
+$("#feedback").on('click', () => {checkPlayerWinningPaths();
+checkComputerWinningPaths()});
 // $("#feedback").on('click', () => {logPlayerWinningCatPaths();
 //     console.log(playerPathOptions[0].length)});
