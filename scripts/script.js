@@ -742,13 +742,20 @@ const logComputerWinningCatPaths = () => {
 
 //compare playerPaths to player potential winning paths, assign points based on whether player achieved all paths picked
 const checkPlayerWinningPaths = () => {
+    //collate winning cat paths, put in array for use
     logPlayerWinningCatPaths();
+    //remove duplicates
     let playerNodesUnique = [...new Set(playerNodes)];
     let hasAllElems = true;
+    //compare player array to potential winning arrays
     for(i=0; i<playerPathOptions[0].length; i++){
+        //if player array includes all the values in one of potential winning arrays...
         if(playerPathOptions[0][i].every(elem => playerNodesUnique.includes(elem))){
+            //add 20 points to player score
             playerScore = playerScore + 20;
+            //update player score on gameboard
             $('#playerScore').html(`Player score: <br>${playerScore}`);
+            //prevent score reduction
             hasAllElems = true;
             break;
         }
@@ -756,30 +763,24 @@ const checkPlayerWinningPaths = () => {
             hasAllElems = false;
         }
     }
+    //if player did not succeed at all cat paths...
     if (hasAllElems === false){
+        //reduce score by 20 points
         playerScore = playerScore - 20;
+        //update player score on gameboard
         $('#playerScore').html(`Player score: <br>${playerScore}`);
     }
 }
-
+//same as playerWinningPaths
 const checkComputerWinningPaths = () => {
-    // logPlayerWinningCatPaths();
     logComputerWinningCatPaths();
     let computerNodesUnique = [...new Set(computerNodes)];
-    // console.log(playerNodesUnique);
-    // playerNodesUnique.sort();
-    // console.log(computerNodesUnique);
-    // console.log(playerCatPaths);
-    // console.log(playerPathOptions[0].length);
-    // console.log(computerPathOptions[0]);
     let hasAllElems = true;
     for(i=0; i<computerPathOptions[0].length; i++){
-        // console.log(playerPathOptions[0][1].every(elem => playerNodesUnique.includes(elem)));
         if(computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))){
             computerScore = computerScore + 20;
             $('#computerScore').html(`Computer score: <br>${computerScore}`);
             hasAllElems = true;
-            // console.log("OMFG we did it!");
             break;
         }
         else {
