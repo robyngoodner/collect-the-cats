@@ -67,25 +67,6 @@ computerCatPaths = []
 catPaths = [catPath1, catPath2, catPath3, catPath4, catPath5, catPath6]
 
 
-Functions:
-
-
-
-
-
-
-
- 
-
-playerGetCatPaths(){
-    take catpaths off a click event
-    add to playerCatPaths array
-    jquery id=#catpath
-    each catpath has 1 variable linked to a picture
-    using variable takes it out of the array
-}
-
-
 
 
 
@@ -93,90 +74,50 @@ playerGetCatPaths(){
 computer play:
 for loop that cycles through cat paths and winning options and randomly selects one
 
-Winning pathways:
-catPath3 (black cat--> brown head):
-(1 && 1a && ((5 && ((10 && 11) || (15))) || (6 && ((11) || (10 && 15))) || (2 && ((7 && ((11) || (12 && 16 && 17))) || (3 && 3a && 3b && ((8) || (12) || (16)))) )))
-
-
-all available pathways:
-const $three = $("#three") + $("#threea") + $("#threeb")
-const $one = $("one") + $("#onea")
-const $two = $("#two")
-const $three = $("#three")
-const $four = $("#four")
-const $five = $("five")
-const $six = $("#six")
-const $seven = $("#seven")
-const $eight = $("#eight")
-const $nine = $("#nine")
-const $ten = $("#ten")
-const $eleven = $("#eleven")
-const $twelve = $("twelve")
-const $thirteen = $("#thirteen")
-const $fourteen = $("#fourteen")
-const $fifteen = $("#fifteen")
-const $sixteen = $("#sixteen")
-const $seventeen = $("#seventeen")
-
-black cat to orange head:
-($one || ($four" && $five)
-black cat to white head:
-($nine && $thirteen) || $four
-orange head to brown cat:
-$two || ($six && $seven)
-orange head to grey head:
-($two && $seven) || $six || ($five && $ten)
-orange head to white head:
-$five
-white head to brown head:
-$fifteen || ($ten && $eleven)
-white head to gray head:
-$ten || ($fifteen && $eleven)
-brown cat to orange cat:
-$three || $eight || ($even && $twelve
-grey head to orange cat:
-$twelve || ($eleven && $seventeen && $sixteen) || ($seven && (eight || $three)
-grey head to black head:
-($eleven && $seventeen) || ($twelve && sixteen)
-brown head to grey head:
-$eleven || ($seventeen && $sixteen && $twelve)
-
-
-
-
-
-
 
 */
 
 //initializing variables
+//scores
 let playerScore = 0;
 let computerScore = 0;
-let playerCatPaths = [];
-let computerCatPaths = [];
+//arrays that contain drawn CatPaths
+let playerCatPaths = [[],[],[],[],[],[]];
+let computerCatPaths = [[],[],[],[],[],[]];
+//arrays that contain claimed catPaths
 let playerNodes = [];
 let computerNodes = [];
+//maybe not used rn?
 let currentCatPath;
+//starting number of pawPrint cards
 let pawPrintCards = 100;
+//catPath objects that contain starting and ending nodes and images of cards
 let $catPath1 = {node1: 9,
                 node2: 3,
-                img: `<img class="catPathCards" src="images/catpath1.png"></img>`};
+                img: `<img class="catPathCards" src="images/catpath1.png"></img>`,
+                arrInd = 0};
 let $catPath2 = {node1: 5,
     node2: 9,
-    img: `<img class="catPathCards" src="images/catpath2.png"></img>`};
+    img: `<img class="catPathCards" src="images/catpath2.png"></img>`,
+    arrInd = 1};
 let $catPath3 = {node1: 1,
     node2: 6,
-    img: `<img class="catPathCards" src="images/catpath3.png"></img>`};
+    img: `<img class="catPathCards" src="images/catpath3.png"></img>`,
+    arrInd = 2};
 let $catPath4 = {node1: 2,
     node2: 7,
-    img: `<img class="catPathCards" src="images/catpath4.png"></img>`};
+    img: `<img class="catPathCards" src="images/catpath4.png"></img>`,
+    arrInd: 3}
 let $catPath5 = {node1: 4,
     node2: 2,
-    img: `<img class="catPathCards" src="images/catpath5.png"></img>`};
+    img: `<img class="catPathCards" src="images/catpath5.png"></img>`,
+    arrInd: 4};
 let $catPath6 = {node1: 1,
     node2: 8,
-    img: `<img class="catPathCards" src="images/catpath6.png"></img>`};
-let availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
+    img: `<img class="catPathCards" src="images/catpath6.png"></img>`,
+    arrInd: 5};
+
+    //player collected pawPrint cards, number and image
 let playerPawPrints = {
     orange: 0,
     orangeID: $("#playerOrange"),
@@ -189,6 +130,7 @@ let playerPawPrints = {
     white: 0,
     whiteID: $("#playerWhite")
 };
+//computer collected pawPrint cards, number and image
 let computerPawPrints = {
     orange: 0,
     orangeID: $("#computerOrange"),
@@ -202,13 +144,8 @@ let computerPawPrints = {
     whiteID: $("#computerWhite")
 };
 
-// const catPath1 = ["I", "C"];
-// const catPath2 = ["E", "I"];
-// const catPath3 = ["A", "F"];
-// const catPath4 = ["B", "G"];
-// const catPath5 = ["D", "B"];
-// const catPath6 = ["A", "H"];
-
+//object representing all info about pawPrint pathways: 
+//jQuery image, start node, end node, number of points/pawprint cards needed, color of pawprint cards needed, whether or not it's been claimed
 const pawPrintPaths = {
 $one : {
     $img: $("#one"),
@@ -259,7 +196,7 @@ $four : {
     clicked: false
 },
 $five : {
-    $img: $("five"),
+    $img: $("#five"),
     node1: 2,
     node2: 5,
     pawsNeeded: 4,
@@ -390,8 +327,8 @@ const setUpGame = () => {
     pawPrintCards = 100;
     $('#pawprintsRemaining').html(`Pawprint<br>cards left: ${pawPrintCards}`);
 //empty player and computer catPaths
-    playerCatPaths = [];
-    computerCatPaths = [];
+    playerCatPaths = [[],[],[],[],[],[]];
+    computerCatPaths = [[],[],[],[],[],[]];
 //set up available catPaths
     catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
 //set up new board
@@ -509,6 +446,7 @@ const addPawPrint =  (player) => {
 // let $catPath1 = {node1: 9,
 //     node2: 3,
 //     img: `<img class="catPathCards" src="images/catpath1.png"></img>`};
+let availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
 const selectCatPath = () => {
     let randomNumber = Math.floor(Math.random() * (availableCatPaths.length));
     for(i=0; i<availableCatPaths.length; i++) {
@@ -556,7 +494,7 @@ $('#catpath').on('click', () => {
     }
 }
 })
-
+//click that gives player pawprint cards
 //adds computer cards right after player cards if computer has fewer than four cards of each color
 $("#pawprint").on('click', () => {
     //add three pawprint cards to player array and status box
@@ -581,6 +519,7 @@ $("#pawprint").on('click', () => {
         addPawPrint(computerPawPrints);
         addPawPrint(computerPawPrints);
         addPawPrint(computerPawPrints);
+        alert("Your turn!");
 //add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
         }
     }
@@ -598,65 +537,31 @@ $("#pawprint").on('click', () => {
 // $one.$img.on("click", () => {
 //     console.log("testing")
 // });
-//create pawprint values for each pawprint section
-// const $one = {
-//     $img: $("#one"),
-//     node1: 1,
-//     node2: 2,
-//     pawsNeeded: 6,
-//     color: "brown"
-// };
-// let playerPawPrints = {
-//     orange: 0,
-//     orangeID: $("#playerOrange"),
-//     brown: 0,
-//     brownID: $("#playerBrown"),
-//     black: 0,
-//     blackID: $("#playerBlack"),
-//     grey: 0,
-//     greyID: $("#playerGrey"),
-//     white: 0,
-//     whiteID: $("#playerWhite")
-// };
 
+//Checks if player has enough pawprint cards to claim a pathway--collects the pathway if so
 const checkPawPrints = (clickedObject) => {
     let clickedColor = clickedObject.color;
-    // console.log(clickedColor)
     let pawsRequired = clickedObject.pawsNeeded;
-    // console.log("paws required" + pawsRequired)
-    // console.log("clicked color number" + playerPawPrints[clickedColor])
     if(playerPawPrints[clickedColor] >= pawsRequired) {
+        //add pawsRequired score value to player's score
         playerScore = playerScore + pawsRequired;
+        //send pawPrintPath's first node to player's collected Nodes
         playerNodes.push(clickedObject.node1);
+        //send pawPrintPath's second node to player's collected Nodes
         playerNodes.push(clickedObject.node2);
+        //update player score display
         $('#playerScore').html(`Player score: <br>${playerScore}`);
+        //remove cards used from player's collection
         playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
+        //update player card collection display
         playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
-        console.log(playerNodes);
+        //indicate path has been claimed and cannot be claimed again
+        clickedObject["clicked"] = true;
     }
     else {
         alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
     }
 };
-//click status of pathways
-// let clicked = {
-//     one: false,
-//     two: false,
-//     three: false,
-//     four: false,
-//     five: false,
-//     six: false,
-//     seven: false,
-//     eight: false,
-//     nine: false,
-//     ten: false,
-//     eleven: false,
-//     twelve: false,
-//     thirteen: false,
-//     fifteen: false,
-//     sixteen: false,
-//     seventeen: false,
-// }
 
 //click events for all paths
 // pawPrintPaths.$one.$img.on("click", () => {
@@ -670,147 +575,23 @@ const checkPawPrints = (clickedObject) => {
 //      else{
 //         alert("This path has already been claimed! Please pick a different path");
 //     }});
-
+//click event for all pathways
 for(let key in pawPrintPaths) {
+    //upon clicking the pathway image
     pawPrintPaths[key]["$img"].on("click", () => {
+        //check if pathway has already been claimed
         if(pawPrintPaths[key]["clicked"] === false) {
+            //runs function to trade cards for pathway
             checkPawPrints(pawPrintPaths[key]);
-            pawPrintPaths[key]["clicked"] = true;
+
         }
+        //if pathway has already been claimed
         else{
+            //alert that pathway has already been claimed
             alert("This path has already been claimed! Please pick a different path");
         }
     })
 };
-
-// pawPrintPaths.$two.$img.on("click", () => {
-//     if(clicked.two === false) {
-//         checkPawPrints($two);
-//         clicked.two = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$three.$img.on("click", () => {
-//     if(clicked.three === false) {
-//         checkPawPrints($three);
-//         clicked.three = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$threea.$img.on("click", () => {
-//     if(clicked.three === false) {
-//         checkPawPrints($threeb);
-//         clicked.three = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$four.$img.on("click", () => {
-//     if(clicked.four === false) {
-//         checkPawPrints($four);
-//         clicked.four = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$five.$img.on("click", () => {
-//     if(clicked.five === false) {
-//         checkPawPrints($five);
-//         clicked.five = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$six.$img.on("click", () => {
-//     if(clicked.six === false) {
-//         checkPawPrints($six);
-//         clicked.six = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$seven.$img.on("click", () => {
-//     if(clicked.seven === false) {
-//         checkPawPrints($seven);
-//         clicked.seven = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$eight.$img.on("click", () => {
-//     if(clicked.eight === false) {
-//         checkPawPrints($eight);
-//         clicked.eight = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$nine.$img.on("click", () => {
-//     if(clicked.nine === false) {
-//         checkPawPrints($nine);
-//         clicked.nine = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$ten.$img.on("click", () => {
-//     if(clicked.ten === false) {
-//         checkPawPrints($ten);
-//         clicked.ten = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$eleven.$img.on("click", () => {
-//     if(clicked.eleven === false) {
-//         checkPawPrints($eleven);
-//         clicked.eleven = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$twelve.$img.on("click", () => {
-//     if(clicked.twelve === false) {
-//         checkPawPrints($twelve);
-//         clicked.twelve = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$thirteen.$img.on("click", () => {
-//     if(clicked.thirteen === false) {
-//         checkPawPrints($thirteen);
-//         clicked.thirteen = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// pawPrintPaths.$fifteen.$img.on("click", () => {
-//     if(clicked.fifteen === false) {
-//         checkPawPrints($fifteen);
-//         clicked.fifteen = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// $sixteen.$img.on("click", () => {
-//     if(clicked.sixteen === false) {
-//         checkPawPrints($sixteen);
-//         clicked.sixteen = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-// $seventeen.$img.on("click", () => {
-//     if(clicked.seventeen === false) {
-//         checkPawPrints($seventeen);
-//         clicked.seventeen = true;
-//     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
 
 
 function Node(val){
@@ -912,13 +693,14 @@ function traverse(node, destination, path) {
 let playerPathOptions=[];
 let computerPathOptions=[]
 const collateWinningCatPaths = (whoseCatPaths) => {
+ 
     // console.log(whoseCatPaths)
     for(i=0; i<whoseCatPaths.length; i++) {
         // console.log(whoseCatPaths[i].node1)
         // console.log(whoseCatPaths[i].node2)
         traverse(N[whoseCatPaths[i].node1], whoseCatPaths[i].node2);
     }
-    console.log(validPaths);
+    // console.log(validPaths);
  
 }
 
@@ -934,7 +716,7 @@ const logComputerWinningCatPaths = () => {
     computerPathOptions.push(validPaths);
     console.log(computerPathOptions)
 }
-$("#feedback").on('click', () => {logPlayerWinningCatPaths(), logComputerWinningCatPaths()});
+
 
 //winning paths are logged by node: 5 --> 1
 //have to put in an array, somehow get in the right order, and delete the extras
@@ -945,3 +727,62 @@ $("#feedback").on('click', () => {logPlayerWinningCatPaths(), logComputerWinning
 //check if array contains first and last node--delete those if they exist. 
 //Run a loop twice deleting a value if if matches a winning array. The array should be empty under winning conditions
 //second loop written with i--?
+// const checkPlayerWinningPaths = () => {
+//     logPlayerWinningCatPaths();
+//     logComputerWinningCatPaths();
+//     let playerNodesUnique = [...new Set(playerNodes)];
+//     console.log(playerNodesUnique);
+//     // console.log(playerPathOptions[0].length);
+//     const arrayMatch = (arr, target) => {
+//         target.every(v => arr.includes(v))
+//     }
+//     const checkArrayMatch = () => {
+//         for(i=0; i<playerPathOptions[0].length; i++){
+//         console.log(playerPathOptions[0][i]);
+//         arrayMatch(playerPathOptions[0][i], playerNodesUnique);
+//         arrayMatch(playerNodesUnique, playerPathOptions[0][i]);
+//         }
+//     }
+//     console.log(checkArrayMatch());
+//         // const checkArrayMatch =() => {
+//         //     playerPathOptions[0][i]
+//         // }
+//         // for(j=0; playerNodesUnique.length; i++){
+//         //     console.log("at least the for statement is working");
+//         //     if(playerPathOptions[0][i] != playerNodesUnique[j]){
+//         //         console.log(playerNodesUnique);
+//         //         break;
+//         //     }
+//         //     else {console.log("You did it! You won that cat path")}
+//         // }
+
+//         // if(playerPathOptions[0][i].every(elem => playerNodesUnique.includes(elem)))
+//         // console.log("well done")    
+//         // return true}
+// } 
+const checkPlayerWinningPaths = () => {
+    logPlayerWinningCatPaths();
+    logComputerWinningCatPaths();
+    let playerNodesUnique = [...new Set(playerNodes)];
+    // console.log(playerNodesUnique);
+    playerNodesUnique.sort();
+    // console.log(playerCatPaths);
+    // console.log(playerPathOptions[0].length);
+    const checkArrayMatch = () => {
+        // console.log("checkArrayMatch function is running")
+        for(i=0; i<playerPathOptions[0].length; i++){
+            // console.log("the for loop is running")
+        playerPathOptions[0][i].sort();
+        if(playerPathOptions[0][i][i] === playerNodesUnique[i]){
+            //if the array has an exact match
+            console.log("true");
+            return;
+        }
+        else console.log("false");
+        }
+    }
+    checkArrayMatch();
+}
+$("#feedback").on('click', () => {checkPlayerWinningPaths()});
+// $("#feedback").on('click', () => {logPlayerWinningCatPaths();
+//     console.log(playerPathOptions[0].length)});
