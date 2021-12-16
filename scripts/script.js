@@ -771,9 +771,30 @@ const logComputerWinningCatPaths = () => {
 //compare computerPathOptions[0] nodes to pawPrintPaths nodes. If a pawPrint path has two of the nodes from that array, 
 //and the computer has the correct number of the correct color of pawprint cards, claim that path.
 const computerPlay = () => {
-    // if(computerPawPrints)
     //load computer's potential winning arrays
     logComputerWinningCatPaths();
+    //eliminate potential doubles from computer nodes
+    let computerNodesUnique = [...new Set(computerNodes)];
+    let hasAllElems = true;
+    //check if current cat paths are completed
+    for(i=0; i<computerPathOptions[0].length; i++){
+        //if the current cat paths are completed, select a new cat path
+        if(computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))){
+           selectCatPath();
+       //pushes selected cat path to computer's cat path array
+           computerCatPaths.push(currentCatPath);
+       // console.log(`computer catpath ${computerCatPaths}`);
+       //appends appropriate cat path image to game board
+           $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
+            hasAllElems = true;
+            break;
+        }
+        else {
+            hasAllElems = false;
+        }
+    }
+    if (hasAllElems === false){
+    // if(computerPawPrints)
     let computerPotentialPaths = [];
     //if a potential winning array does not contain the nodes the computer has already acquired, 
     //delete it from the computer's potential winning array
@@ -795,27 +816,16 @@ const computerPlay = () => {
     //loop over pawPrintPaths
     console.log('at least computerPLay function is working');
     for(let key in pawPrintPaths){
-        // console.log('for loop on line 766 is running')
-        // console.log(computerPathOptions[0]);
         //loop over computer potential winning options
         for(i=0; i<computerPathOptions[0].length; i++){
-            // console.log('for loop on line 769 is running');
             //if the required node to collect a pawPrintPath matches a node of the computer path options...
-            // console.log(pawPrintPaths[key].node1);
-            // console.log(computerPathOptions[0][i])
             for(k=0; k<computerPathOptions[0][i].length; k++){
-                // console.log(computerPathOptions[0][i][k])
                 if(pawPrintPaths[key].node1 === computerPathOptions[0][i][k]){
-                    // console.log(pawPrintPaths[key].node1)
-                    // console.log(computerPathOptions[0][i][k]);
                     //loop again over the computer path options
                     for(j=0; j<computerPathOptions[0][i].length; j++){
                         //if the second required node to collect a pawPrintPath matches a node of the computer path options
                         if (pawPrintPaths[key].node2 === computerPathOptions[0][i][j]){
-                            // console.log(pawPrintPaths[key].node2)
                             //if the computer has enough pawPrints of the right color to claim that path...
-                            console.log("pawPrint cards needed" + pawPrintPaths[key].pawsNeeded)
-                            console.log("pawPrint cards computer has: " + computerPawPrints[pawPrintPaths[key]["color"]])
                             computerPathOptions[0][i].forEach( function () {
                                 checkComputerPawPrints(pawPrintPaths[key])
                             })
@@ -826,10 +836,54 @@ const computerPlay = () => {
         }
     }
     //if computer did not claim a cat path, computer draws three pawPrint cards
+    
     addPawPrint(computerPawPrints);
     addPawPrint(computerPawPrints);
     addPawPrint(computerPawPrints);
 }
+}
+
+
+
+
+    //  let computerNodesUnique = [...new Set(computerNodes)];
+    //  let hasAllElems = true;
+    //  for(i=0; i<computerPathOptions[0].length; i++){
+    //      if(computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))){
+    //         selectCatPath();
+    //     //pushes selected cat path to computer's cat path array
+    //         computerCatPaths.push(currentCatPath);
+    //     // console.log(`computer catpath ${computerCatPaths}`);
+    //     //appends appropriate cat path image to game board
+    //         $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
+    //          hasAllElems = true;
+    //          break;
+    //      }
+    //      else {
+    //          hasAllElems = false;
+    //      }
+    //  }
+    //  if (hasAllElems === false){
+//         computerScore = computerScore - 20;
+//         $('#computerScore').html(`Computer score: <br>${computerScore}`);
+//     }
+// }
+
+// const selectCatPath = () => {
+//     let randomNumber = Math.floor(Math.random() * (availableCatPaths.length));
+//     for(i=0; i<availableCatPaths.length; i++) {
+//         //selects random number
+//         // console.log(randomNumber);
+//         //assigned catpath card to random number
+//         if (i === randomNumber){
+//             currentCatPath = availableCatPaths[i];
+//             //removed catpath card from cat path array
+//             availableCatPaths.splice(i,1);
+//             break;
+//         }
+//     }
+// }
+
 
 $("#feedback").on('click', () => {announceWinner()});
 
