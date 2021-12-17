@@ -20,86 +20,100 @@
   />
     </head>
     <body>
+        <div id="container">
+            <div class="message">
+                <h1><i class="nes-octocat animate"></i>&nbsp;Collect the CATS&nbsp;<i class="nes-octocat animate"></i></h1>
+            <button class="yes">Play Instructions</button>
+            <button class="no">I've got this</button>
+        </div>
+        </div>
+        <!-- <div id="instructions">
+            <div class="message">
+                <h1><i class="nes-octocat animate"></i>&nbsp;Collect the CATS&nbsp;<i class="nes-octocat animate"></i></h1>
+            <button class="play">Play!</button>
+        </div>
+        </div> -->
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1 id="title"><i class="nes-octocat animate"></i>&nbsp;Collect the CATS&nbsp;<i class="nes-octocat animate"></i></h1>
-        <div class="buttons">
-        <button id="needHelp" class="nes-btn is-primary">Need help?</button>
-        <button id="feedback" class="nes-btn is-primary">Report Feedback</button>
-        <button id="restart" class="nes-btn is-primary">Restart</button>
-        </div>
-        <div class="cards">
-            <div class="pawprints">
-                <h2>Pawprint<br>cards:</h2>
-                <button><img id="pawprint" src="images/pawprint.png"></button>
-                <h3 id="pawprintsRemaining">200 remaining</h2>
+        <div id="game">
+            <h1 id="title"><i class="nes-octocat animate"></i>&nbsp;Collect the CATS&nbsp;<i class="nes-octocat animate"></i></h1>
+            <div class="buttons">
+            <button id="needHelp" class="nes-btn is-primary">Need help?</button>
+            <button id="feedback" class="nes-btn is-primary">Report Feedback</button>
+            <button id="restart" class="nes-btn is-primary">Restart</button>
             </div>
-            <div class="info">
-                <div class="computerInfo" class="nes-container with-title is-centered">
-                    <div class="title">
-                        <h4 class="computerScore">Computer</h4>
-                        <h4 class="computerScore">score:</h4>
-                        <h4 id="computerScore">0</h4>
+            <div class="cards">
+                <div class="pawprints">
+                    <h2>Pawprint<br>cards:</h2>
+                    <button><img id="pawprint" src="images/pawprint.png"></button>
+                    <h3 id="pawprintsRemaining">200 remaining</h2>
+                </div>
+                <div class="info">
+                    <div class="computerInfo" class="nes-container with-title is-centered">
+                        <div class="title">
+                            <h4 class="computerScore">Computer</h4>
+                            <h4 class="computerScore">score:</h4>
+                            <h4 id="computerScore">0</h4>
+                        </div>
+                        <p><ul class="computerCatPaths">
+                        </ul>
+                        <ul class="computerPawPrints">
+                            <li id="computerOrange"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
+                            <li id="computerBlack"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
+                            <li id="computerGrey"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
+                            <li id="computerWhite"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
+                            <li id="computerBrown" ><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
+                        </ul></p>
                     </div>
-                    <p><ul class="computerCatPaths">
-                    </ul>
-                    <ul class="computerPawPrints">
-                        <li id="computerOrange"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
-                        <li id="computerBlack"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
-                        <li id="computerGrey"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
-                        <li id="computerWhite"><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
-                        <li id="computerBrown" ><img class="pawPrintCards" src='images/computerpaw.png'> : 0</li>
-                    </ul></p>
-                </div>
-                <div class="playerInfo" class="nes-container with-title is-centered">
-                    <div class="title">
-                        <h4 class="playerScore">Player</h4>
-                        <h4 class="playerScore">score:</h4>
-                        <h4 id="playerScore">0</h4>
+                    <div class="playerInfo" class="nes-container with-title is-centered">
+                        <div class="title">
+                            <h4 class="playerScore">Player</h4>
+                            <h4 class="playerScore">score:</h4>
+                            <h4 id="playerScore">0</h4>
+                        </div>
+                        <p><ul class="playerCatPaths">
+                        </ul>
+                        <ul class="playerPawPrints">
+                            <li id="playerOrange"><img class="pawPrintCards" src='images/orangepaw.png'> : 0</li>
+                            <li id="playerBlack"><img class="pawPrintCards" src='images/blackpaw.png'> : 0</li>
+                            <li id="playerGrey"><img class="pawPrintCards" src='images/greypaw.png'> : 0</li>
+                            <li id="playerWhite"><img class="pawPrintCards" src='images/whitepaw.png'> : 0</li>
+                            <li id="playerBrown"><img class="pawPrintCards" src='images/brownpaw.png'> : 0</li>
+                        </ul></p>
                     </div>
-                    <p><ul class="playerCatPaths">
-                    </ul>
-                    <ul class="playerPawPrints">
-                        <li id="playerOrange"><img class="pawPrintCards" src='images/orangepaw.png'> : 0</li>
-                        <li id="playerBlack"><img class="pawPrintCards" src='images/blackpaw.png'> : 0</li>
-                        <li id="playerGrey"><img class="pawPrintCards" src='images/greypaw.png'> : 0</li>
-                        <li id="playerWhite"><img class="pawPrintCards" src='images/whitepaw.png'> : 0</li>
-                        <li id="playerBrown"><img class="pawPrintCards" src='images/brownpaw.png'> : 0</li>
-                    </ul></p>
+                    </div>
+                <div class="catpaths">
+                    <h2>Cat-path<br>cards</h2>
+                    <button><img id="catpath" src="images/catpath.png"></button>
                 </div>
+            </div>
+            <div class="gameboard">
+                <div class="wrapper">
+                    <div class="one"><img id="one" src="images/one.png"></div>
+                    <div class="onea"><img id="onea" src="images/onea.png"></div>
+                    <div class="two"><img id="two" src="images/two.png"></div>
+                    <div class="three"><img id="three" src="images/three.png"></div>
+                    <div class="threea"><img id="threea" src="images/threea.png"></div>
+                    <!-- <div class="threeb"><img id="threeb" src="images/threeb.png"></div> -->
+                    <div class="four"><img id="four" src="images/four.png"></div>
+                    <div class="five"><img id="five" src="images/five.png"></div>
+                    <div class="six"><img id="six" src="images/six.png"></div>
+                    <div class="seven"><img id="seven" src="images/seven.png"></div>
+                    <div class="eight"><img id="eight" src="images/eight.png"></div>
+                    <div class="nine"><img id="nine" src="images/nine.png"></div>
+                    <div class="ten"><img id="ten" src="images/ten.png"></div>
+                    <div class="eleven"><img id="eleven" src="images/eleven.png"></div>
+                    <!-- <div class="twelve"><img id="twelve" src="images/twelve.png"></div> -->
+                    <div class="thirteen"><img id="thirteen" src="images/thirteen.png"></div>
+                    <!-- <div class="fourteen"><img id="fourteen" src="images/fourteen.png"></div> -->
+                    <div class="fifteen"><img id="fifteen" src="images/fifteen.png"></div>
+                    <div class="sixteen"><img id="sixteen" src="images/sixteen.png"></div>
+                    <div class="seventeen"><img id="seventeen" src="images/seventeen.png"></div>
+                    <div class="eighteen"></div>
                 </div>
-            <div class="catpaths">
-                <h2>Cat-path<br>cards</h2>
-                <button><img id="catpath" src="images/catpath.png"></button>
             </div>
         </div>
-    <div class="gameboard">
-        <div class="wrapper">
-            <div class="one"><img id="one" src="images/one.png"></div>
-            <div class="onea"><img id="onea" src="images/onea.png"></div>
-            <div class="two"><img id="two" src="images/two.png"></div>
-            <div class="three"><img id="three" src="images/three.png"></div>
-            <div class="threea"><img id="threea" src="images/threea.png"></div>
-            <!-- <div class="threeb"><img id="threeb" src="images/threeb.png"></div> -->
-            <div class="four"><img id="four" src="images/four.png"></div>
-            <div class="five"><img id="five" src="images/five.png"></div>
-            <div class="six"><img id="six" src="images/six.png"></div>
-            <div class="seven"><img id="seven" src="images/seven.png"></div>
-            <div class="eight"><img id="eight" src="images/eight.png"></div>
-            <div class="nine"><img id="nine" src="images/nine.png"></div>
-            <div class="ten"><img id="ten" src="images/ten.png"></div>
-            <div class="eleven"><img id="eleven" src="images/eleven.png"></div>
-            <!-- <div class="twelve"><img id="twelve" src="images/twelve.png"></div> -->
-            <div class="thirteen"><img id="thirteen" src="images/thirteen.png"></div>
-            <!-- <div class="fourteen"><img id="fourteen" src="images/fourteen.png"></div> -->
-            <div class="fifteen"><img id="fifteen" src="images/fifteen.png"></div>
-            <div class="sixteen"><img id="sixteen" src="images/sixteen.png"></div>
-            <div class="seventeen"><img id="seventeen" src="images/seventeen.png"></div>
-            <div class="eighteen"></div>
-        </div>
-    </div>
-       
         <script src="scripts/script.js" async defer></script>
     </body>
 </html>

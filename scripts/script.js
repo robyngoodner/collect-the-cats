@@ -83,6 +83,66 @@ etc
 
 */
 //Alert window:
+(function openingMessage (msg, gfg) {
+    const confirmBox = $("#container");
+    //trace message to container
+    confirmBox.find(".message").text(msg);
+    //call function
+    confirmBox.find(".yes").unbind().click(function() {
+        confirmBox.show();
+    });
+    confirmBox.find(".yes").click(gfg);
+    confirmBox.show();
+
+    confirmBox.find(".no").unbind().click(function()
+    {
+        confirmBox.hide();
+    });
+    confirmBox.find(".no").click(gfg);
+    confirmBox.show();
+})();
+
+$(".yes").on("click", function () {
+    $(".message").html(`<p>Player will draw 1 card from the cat-path collection. This card will establish the first set of cats that the player must collect.</p><p>On each subsequent turn, player may do one of the following:</p><p><ul><li>- draw three pawprint cards</li><li>- deploy pawprint cards from the player's hand in order to claim pathways between cats</li><li>- draw new cat-path cards to collect more cats</li></ul></p><p>A winner is determined once one of the following conditions has been met:</p><ul><li>- all of the cats have been claimed</li><li>- all of the pawprint cards have been claimed and each player has played one final round</li></ul><p>The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.</p><br><button class="no">I've got this</button>`);
+    (function openingMessage (msg, gfg) {
+        const confirmBox = $("#container");
+        //trace message to container
+        confirmBox.find(".message").text(msg);
+        //call function
+        confirmBox.find(".yes").unbind().click(function() {
+            confirmBox.show();
+        });
+        confirmBox.find(".yes").click(gfg);
+        confirmBox.show();
+    
+        confirmBox.find(".no").unbind().click(function()
+        {
+            confirmBox.hide();
+        });
+        confirmBox.find(".no").click(gfg);
+        confirmBox.show();
+    })();
+});
+// $(".yes").on("click", function(msg, gfg) {
+//     const confirmBox = $("#instructions");
+//     //trace message to container
+//     confirmBox.find(".message").text(msg);
+//     //call function
+//     confirmBox.find(".play").unbind().click(function() {
+//         confirmBox.hide();
+//     });
+//     confirmBox.find(".play").click(gfg);
+//     confirmBox.show();
+
+//     // confirmBox.find(".no").unbind().click(function()
+//     // {
+//     //     confirmBox.hide();
+//     // });
+//     // confirmBox.find(".no").click(gfg);
+//     // confirmBox.show();
+// // })
+
+// })
 
 //initializing variables
 //scores
