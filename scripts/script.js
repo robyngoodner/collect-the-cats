@@ -154,12 +154,22 @@ let computerPawPrints = {
 //jQuery image, start node, end node, number of points/pawprint cards needed, color of pawprint cards needed, whether or not it's been claimed
 const pawPrintPaths = {
 $one : {
-    $img: $("#one"),
+    $img: $(".one"),
     node1: 1,
     node2: 2,
     pawsNeeded: 6,
     color: "brown",
-    clicked: false
+    clicked: false,
+    player: 'onePlayer'
+},
+$onea : {
+    $img: $("#onea"),
+    node1: 1,
+    node2: 2,
+    pawsNeeded: 6,
+    color: "brown",
+    clicked: false,
+    player: 'oneaPlayer'
 },
 $two : {
     $img: $("#two"),
@@ -167,7 +177,8 @@ $two : {
     node2: 3,
     pawsNeeded: 6,
     color: "grey",
-    clicked: false
+    clicked: false,
+    player: 'twoPlayer'
 },
 $three : {
     $img: $("#three"),
@@ -175,7 +186,8 @@ $three : {
     node2: 4,
     pawsNeeded: 7,
     color: "white",
-    clicked: false
+    clicked: false,
+    player: 'threePlayer'
 },
 $threea : {
     $img: $("#threea"),
@@ -183,23 +195,25 @@ $threea : {
     node2: 4,
     pawsNeeded: 7,
     color: "white",
-    clicked: false
+    clicked: false,
+    player: 'threeaPlayer'
 },
-$threeb : {
-    $img: $("#threeb"),
-    node1: 3,
-    node2: 4,
-    pawsNeeded: 7,
-    color: "white",
-    clicked: false
-},
+// $threeb : {
+//     $img: $("#threeb"),
+//     node1: 3,
+//     node2: 4,
+//     pawsNeeded: 7,
+//     color: "white",
+//     clicked: false
+// },
 $four : {
     $img: $("#four"),
     node1: 1,
     node2: 5,
     pawsNeeded: 4,
     color: 'orange',
-    clicked: false
+    clicked: false,
+    player: 'fourPlayer'
 },
 $five : {
     $img: $("#five"),
@@ -207,7 +221,8 @@ $five : {
     node2: 5,
     pawsNeeded: 4,
     color: "orange",
-    clicked: false
+    clicked: false,
+    player: 'fivePlayer'
 },
 $six : {
     $img: $("#six"),
@@ -215,7 +230,8 @@ $six : {
     node2: 6,
     pawsNeeded: 6,
     color: "black",
-    clicked: false
+    clicked: false,
+    player: 'sixPlayer'
 },
 $seven : {
     $img: $("#seven"),
@@ -223,23 +239,26 @@ $seven : {
     node2: 6,
     pawsNeeded: 2,
     color: "brown",
-    clicked: false
+    clicked: false,
+    player: 'sevenPlayer'
 },
-// $eight : {
-//     $img: $("#eight"),
-//     node1: 3,
-//     node2: 4,
-//     pawsNeeded: 5,
-//     color: 'black',
-//     clicked: false
-// },
+$eight : {
+    $img: $("#eight"),
+    node1: 3,
+    node2: 4,
+    pawsNeeded: 5,
+    color: 'black',
+    clicked: false,
+    player: 'eightPlayer'
+},
 $nine : {
     $img: $("#nine"),
     node1: 1,
     node2: 7,
     pawsNeeded: 4,
     color: "white",
-    clicked: false
+    clicked: false,
+    player: 'ninePlayer'
 },
 $ten : {
     $img: $("#ten"),
@@ -247,7 +266,8 @@ $ten : {
     node2: 6,
     pawsNeeded: 6,
     color: "brown",
-    clicked: false
+    clicked: false,
+    player: 'tenPlayer'
 },
 $eleven : {
     $img: $("#eleven"),
@@ -255,23 +275,25 @@ $eleven : {
     node2: 8,
     pawsNeeded: 3,
     color: "orange",
-    clicked: false
+    clicked: false,
+    player: 'elevenPlayer'
 },
-$twelve : {
-    $img: $("#twelve"),
-    node1: 6,
-    node2: 4,
-    pawsNeeded: 6,
-    color: 'grey',
-    clicked: false
-},
+// $twelve : {
+//     $img: $("#twelve"),
+//     node1: 6,
+//     node2: 4,
+//     pawsNeeded: 6,
+//     color: 'grey',
+//     clicked: false
+// },
 $thirteen : {
     $img: $("#thirteen"),
     node1: 7,
     node2: 5,
     pawsNeeded: 5,
     color: "black",
-    clicked: false
+    clicked: false,
+    player: 'thirteenPlayer'
 },
 // $fourteen : {
 //     $img: $("#fourteen"),
@@ -283,7 +305,8 @@ $fifteen : {
     node2: 8,
     pawsNeeded: 6,
     color: "grey",
-    clicked: false
+    clicked: false,
+    player: 'fifteenPlayer'
 },
 $sixteen : {
     $img: $("#sixteen"),
@@ -291,7 +314,8 @@ $sixteen : {
     node2: 9,
     pawsNeeded: 5,
     color: "orange",
-    clicked: false
+    clicked: false,
+    player: 'sixteenPlayer'
 },
 $seventeen : {
     $img: $("#seventeen"),
@@ -299,7 +323,8 @@ $seventeen : {
     node2: 9,
     pawsNeeded: 5,
     color: "white",
-    clicked: false
+    clicked: false,
+    player: 'seventeenPlayer'
 
 }
 };
@@ -565,6 +590,9 @@ const checkPawPrints = (clickedObject) => {
         playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
         //indicate path has been claimed and cannot be claimed again
         clickedObject["clicked"] = true;
+        console.log(clickedObject.$img)
+        console.log(clickedObject.player)
+        clickedObject.$img.html(`<img src="images/${clickedObject.player}.png"></img>`)
         //runs computer AI
         computerPlay();
     }
