@@ -82,6 +82,7 @@ etc
 
 
 */
+//Alert window:
 
 //initializing variables
 //scores
@@ -366,9 +367,9 @@ $seventeen : {
 const setUpGame = () => {
 //set scores to 0
     computerScore = 0;
-    $('#computerScore').html(`Computer score: <br>${computerScore}`)
+    $('#computerScore').html(`${computerScore}`)
     playerScore = 0;
-    $('#playerScore').html(`Player score: <br>${playerScore}`);
+    $('#playerScore').html(`${playerScore}`);
 //empty player pawPrints
     playerPawPrints.orange = 0;
     playerPawPrints.brown = 0;
@@ -431,18 +432,18 @@ $('#restart').on('click', () => {
 // }
 //instructions popup
 $('#needHelp').on('click', () => {
-    alert(`Player will choose 1 card out of the cat-path collection. That card will establish the first set of cats that the player must collect. 
+    alert(`Player will choose 1 card out of the cat-path collection. This card will establish the first set of cats that the player must collect. 
 
     On each subsequent turn, player may do one of the following:
-    - choose three paw cards
-    - deploy paw cards from the player's hand in order to claim pathways between cats
-    - choose new cat cards to collect more cats
+    - draw three pawprint cards
+    - deploy pawprint cards from the player's hand in order to claim pathways between cats
+    - draw new cat cards to collect more cats
     
     A winner is determined once one of the following conditions has been met:
     - all of the cats have been claimed
-    - all of the paw cards have been claimed and each player has played one final round
+    - all of the pawprint cards have been claimed and each player has played one final round
     
-    The winner is determined based on a points system according to the distance between cats that the players are claiming.`)
+    The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.`)
 })
 
 
@@ -621,7 +622,7 @@ const checkPawPrints = (clickedObject) => {
         //send pawPrintPath's second node to player's collected Nodes
         playerNodes.push(clickedObject.node2);
         //update player score display
-        $('#playerScore').html(`Player score: <br>${playerScore}`);
+        $('#playerScore').html(`${playerScore}`);
         //remove cards used from player's collection
         playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
         //update player card collection display
@@ -652,11 +653,11 @@ const checkComputerPawPrints = (clickedObject) => {
         //send pawPrintPath's second node to computer's collected Nodes
         computerNodes.push(clickedObject.node2);
         //update computer score display
-        $('#computerScore').html(`Computer score: <br>${computerScore}`);
+        $('#computerScore').html(`${computerScore}`);
         //remove cards used from computer's collection
         computerPawPrints[clickedColor] =computerPawPrints[clickedColor]- pawsRequired;
         //update computer card collection display
-        computerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${computerPawPrints[clickedColor]}`);
+        computerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints[clickedColor]}`);
         //indicate path has been claimed and cannot be claimed again
         clickedObject["clicked"] = true;
         //changes pawpath image to computer claimed
@@ -1028,7 +1029,7 @@ const checkPlayerWinningPaths = () => {
             //add 20 points to player score
             playerScore = playerScore + 20;
             //update player score on gameboard
-            $('#playerScore').html(`Player score: <br>${playerScore}`);
+            $('#playerScore').html(`${playerScore}`);
             //prevent score reduction
             hasAllElems = true;
             break;
@@ -1042,7 +1043,7 @@ const checkPlayerWinningPaths = () => {
         //reduce score by 20 points
         playerScore = playerScore - 20;
         //update player score on gameboard
-        $('#playerScore').html(`Player score: <br>${playerScore}`);
+        $('#playerScore').html(`${playerScore}`);
     }
 }
 //same as playerWinningPaths
@@ -1052,7 +1053,7 @@ const checkComputerWinningPaths = () => {
     for(i=0; i<computerPathOptions[0].length; i++){
         if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
             computerScore = computerScore + 20;
-            $('#computerScore').html(`Computer score: <br>${computerScore}`);
+            $('#computerScore').html(`${computerScore}`);
             hasAllElems = true;
             break;
         }

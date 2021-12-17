@@ -2,18 +2,18 @@
 A board game that requires you to collect cards in order to collect a chosen assortment of cats
 
 # Play instruction:
-Player will choose 2 cards out of the cat collection. These two cards will establish the first set of cats that the player must collect. 
+Player will choose 1 card out of the cat-path collection. This card will establish the first set of cats that the player must collect. 
 
-On each subsequent turn, player may do one of the following:
-- choose three paw cards
-- deploy paw cards from the player's hand in order to claim pathways between cats
-- choose new cat cards to collect more cats
-
-A winner is determined once one of the following conditions has been met:
-- all of the cats have been claimed
-- all of the paw cards have been claimed and each player has played one final round
-
-The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points.
+    On each subsequent turn, player may do one of the following:
+    - draw three pawprint cards
+    - deploy pawprint cards from the player's hand in order to claim pathways between cats
+    - draw new cat cards to collect more cats
+    
+    A winner is determined once one of the following conditions has been met:
+    - all of the cats have been claimed
+    - all of the pawprint cards have been claimed and each player has played one final round
+    
+    The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.
 
 # User Stories
 - As an observer, I want the name of the game to start front and center so that the name of the game stands out.
