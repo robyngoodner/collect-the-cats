@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 10px;
 }
 
 .cards {
@@ -39,6 +40,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 60px;
 }
 
 .pawprints {
