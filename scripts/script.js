@@ -470,6 +470,25 @@ const setUpGame = () => {
     $("#computerGrey").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.grey}`);
     $("#computerWhite").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.white}`);
     $("#computerBrown").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.brown}`);
+//reset board visual
+pawPrintPaths.$one.$img.html(`<img src="images/one.png"></img>`);
+pawPrintPaths.$onea.$img.html(`<img src="images/onea.png"></img>`);
+pawPrintPaths.$two.$img.html(`<img src="images/two.png"></img>`);
+pawPrintPaths.$three.$img.html(`<img src="images/three.png"></img>`);
+pawPrintPaths.$threea.$img.html(`<img src="images/threea.png"></img>`);
+pawPrintPaths.$four.$img.html(`<img src="images/four.png"></img>`);
+pawPrintPaths.$five.$img.html(`<img src="images/five.png"></img>`);
+pawPrintPaths.$six.$img.html(`<img src="images/six.png"></img>`);
+pawPrintPaths.$seven.$img.html(`<img src="images/seven.png"></img>`);
+pawPrintPaths.$eight.$img.html(`<img src="images/eight.png"></img>`);
+pawPrintPaths.$nine.$img.html(`<img src="images/nine.png"></img>`);
+pawPrintPaths.$ten.$img.html(`<img src="images/ten.png"></img>`);
+pawPrintPaths.$eleven.$img.html(`<img src="images/eleven.png"></img>`);
+pawPrintPaths.$thirteen.$img.html(`<img src="images/thirteen.png"></img>`);
+pawPrintPaths.$fifteen.$img.html(`<img src="images/fifteen.png"></img>`);
+pawPrintPaths.$sixteen.$img.html(`<img src="images/sixteen.png"></img>`);
+pawPrintPaths.$seventeen.$img.html(`<img src="images/seventeen.png"></img>`);
+
 //set 'clicked' status for game board back to false
     for(let key in pawPrintPaths) {
         if(pawPrintPaths.hasOwnProperty(key)) {
@@ -553,7 +572,7 @@ const addPawPrint =  (player) => {
                 break;
             case 3: 
                 player.white ++;
-                player.whiteID.html(`${player["greyImg"]}${player.white}`);
+                player.whiteID.html(`${player["whiteImg"]}${player.white}`);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -590,6 +609,7 @@ const selectCatPath = () => {
             currentCatPath = availableCatPaths[i];
             //removed catpath card from cat path array
             availableCatPaths.splice(i,1);
+            console.log(availableCatPaths);
             break;
         }
     }
@@ -891,7 +911,7 @@ const logPlayerWinningCatPaths = () => {
 const logComputerWinningCatPaths = () => {
     //empty out computerPathOptions
     computerPathOptions.length = 0;
-    console.log(computerPathOptions);
+    // console.log(computerPathOptions);
     //run winning combos function with computer's path's arrays
     collateWinningCatPaths(computerCatPaths);
     //sort computer potential winning paths from shortest to longest
@@ -906,7 +926,7 @@ const logComputerWinningCatPaths = () => {
     for(i=0; i<computerPathOptions[0].length; i++){
         computerPathOptions[0][i].shift();
         computerPathOptions[0][i].pop();
-        console.log(computerPathOptions);
+        // console.log(computerPathOptions);
         // computerPathOptions.length = 0;
         // console.log(computerPathOptions.length);
         // console.log(computerPathOptions[0].length)
@@ -922,61 +942,111 @@ const logComputerWinningCatPaths = () => {
 // check cards
 // etc
 // computerCatPaths = []
+/*    logComputerWinningCatPaths();
+    let hasAllElems = true;
+    for(i=0; i<computerPathOptions[0].length; i++){
+        if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+            computerScore = computerScore + 20;
+            $('#computerScore').html(`${computerScore}`);
+            hasAllElems = true;
+            break;
+        }
+        else {
+            hasAllElems = false;
+        }
+    }
+    if (hasAllElems === false){*/
+
+// const checkNodes = () => {
+//     if (computerCheckNodes[j] === computerPathOptions[0][i][k]){
+//         console.log("this is the path option pre splice" + computerPathOptions[0][i]);
+//         console.log("computernode pre splice" + computerCheckNodes);
+//         console.log("this node matches" + computerCheckNodes[j]);
+//         //slice it from the path options
+//         computerPathOptions[0][i].splice(k,1);
+//         //slice it from the computerNodes
+//         computerCheckNodes.splice(j,1)
+//         console.log("computerNodes post splice" + computerCheckNodes)
+//         console.log("path options post splice" + computerPathOptions[0][i]);
+// }
+// }
+
+
 //computerPathOptions[0]
 //compare computerPathOptions[0] nodes to pawPrintPaths nodes. If a pawPrint path has two of the nodes from that array, 
 //and the computer has the correct number of the correct color of pawprint cards, claim that path.
 const computerPlay = () => {
     //load computer's potential winning arrays
     logComputerWinningCatPaths();
-    //eliminate potential doubles from computer nodes
+
     let hasAllElems = true;
-    for(i=0; i<computerPathOptions[0].length; i++){
-        // console.log(computerNodesUnique);
-        // console.log(computerPathOptions[0][i]);
-        if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
-            console.log(computerPathOptions[0][i]);
-            console.log(computerNodes)
-            computerCatPaths.shift(); 
-            selectCatPath();
-            //pushes selected cat path to computer's cat path array
-            computerCatPaths.push(currentCatPath);
-        // console.log(`computer catpath ${computerCatPaths}`);
-        //appends appropriate cat path image to game board
-            $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
-            hasAllElems = true;
-            return;
-        }
-        else {
-            hasAllElems = false;
-        }
-
-
-    // let computerNodesUnique = [...new Set(computerNodes)];
-    // let hasAllElems = true;
-    // //check if current cat paths are completed
     // for(i=0; i<computerPathOptions[0].length; i++){
-    //     //if the current cat paths are completed, select a new cat path
-    //     if(computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))){
-    //         //computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))
-    //         //if(playerPathOptions[0][i].every(elem => playerNodesUnique.includes(elem)))
-    //        selectCatPath();
-    //        console.log(computerPathOptions[0][i]);
-    //        console.log(computerNodesUnique);
-    //    //pushes selected cat path to computer's cat path array
-    //        computerCatPaths.push(currentCatPath);
-    //    // console.log(`computer catpath ${computerCatPaths}`);
-    //    //appends appropriate cat path image to game board
-    //        $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
+    //     // console.log(computerNodesUnique);
+    //     // console.log(computerPathOptions[0][i]);
+    //     if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+    //         console.log("comptuer path optoins" + computerPathOptions[0][i]);
+    //         console.log("computer paths owned" + computerNodes)
+    //         computerCatPaths.shift(); 
+    //         selectCatPath();
+    //         console.log(computerCatPaths);
+    //         //pushes selected cat path to computer's cat path array
+    //         computerCatPaths.push(currentCatPath);
+    //     // console.log(`computer catpath ${computerCatPaths}`);
+    //     //appends appropriate cat path image to game board
+    //         $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
     //         hasAllElems = true;
-    //         break;
+    //         return;
     //     }
-    //     else {
-    //         hasAllElems = false;
-    //     }
+    let computerCheckNodes = computerNodes;
+    console.log(computerCheckNodes);
+    let computerPathOptionsFiltered=[];
+    //check if computer node matches potential path; delete from computer node if so
+    //for the computer path options
+    for(i=0; i<computerPathOptions[0].length; i++){
 
+        // console.log(computerNodes)
+        // console.log(computerCheckNodes);
 
+        //and for the computer nodes
+        for(j=0; j<computerCheckNodes[j]; j++){
+            //limiting the computer path options to the first three possibilities
+            for(k=0; k<2; k++){
+            //if computerNodes value is the same as catPathOptions value
+                if (computerCheckNodes[j] === computerPathOptions[0][i][k]){
 
+                    console.log("this is the path option pre splice" + computerPathOptions[0][i]);
+                    // console.log("computernode pre splice" + computerCheckNodes);
+                    // console.log("this node matches" + computerCheckNodes[j]);
+        
+                    //slice it from the path options
+                    computerPathOptions[0][i].splice(k,1);
+                    //slice it from the computerNodes
+                    computerCheckNodes.splice(j,1)
+                    // console.log("computerNodes post splice" + computerCheckNodes)
+                    // console.log("path options post splice" + computerPathOptions[0][i]);
+                }
+            }
+        }
+    
+    // console.log(computerPathOptions[0])    
+        //if the computer path options array is empty because they've all been matched
+    if(computerPathOptions[0][i].length === 0){
+        //remove that catpath from the computer's list
+        computerCatPaths.shift();
+        //and select a new cat path 
+        selectCatPath();
+        //append new cat path to computer's list
+        computerCatPaths.push(currentCatPath)
+        //append appropriate cat path image to game board
+        $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
+        hasAllElems = true;
+        return;
     }
+    else {
+        hasAllElems = false;
+        }
+    }
+       
     if (hasAllElems === false){
     // if(computerPawPrints)
     let computerPotentialPaths = [];
@@ -984,95 +1054,114 @@ const computerPlay = () => {
     //delete it from the computer's potential winning array
     //if the computer has already acquired pawPrintPaths...
     if(computerNodes.length > 0){
-        // console.log(computerNodes);
+        console.log("computerNodes" + computerNodes);
         //loop over the potential winning computer paths
         for(i=0; i<computerPathOptions[0].length; i++){
             //loop over the already acquired computer pawprint paths
             for(j=0; j<computerNodes.length; j++){
                 //if the computer path option does not include the existing computer nodes...
-                if (!computerPathOptions[0][i].includes(computerNodes[j])){
+                if (computerPathOptions[0][i].every(elem => computerNodes.includes)){
+                    console.log(computerPathOptions[0][i])
+                    computerPathOptionsFiltered.push(computerPathOptions[0][i])
+                }
                     //remove that path option
-                    computerPathOptions[0][i].slice(i, 1)
+                    //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
+                    // computerPathOptions[0][i].slice(i, 1)
+                
+            }
+        }
+        for(let key in pawPrintPaths){
+            //loop over the first three computer potential winning options
+            for(i=0; i<2; i++){
+                console.log(computerPathOptionsFiltered[0][i])
+                //if the required node to collect a pawPrintPath matches a node of the computer path options...
+                for(k=0; k<computerPathOptionsFiltered[0][i].length; k++){
+                    console.log(computerPathOptionsFiltered[0][i])
+                    //if node1 for the pawPrintPath equals the computer path option
+                    if(pawPrintPaths[key].node1 === computerPathOptionsFiltered[0][i][k]){
+                        console.log("pawPrints node1: " + pawPrintPaths[key].node1)
+                        console.log("pawPrintsPath node2: " + pawPrintPaths[key].node2);
+                        //loop again over the computer path options
+                        for(j=0; j<computerPathOptionsFiltered[0][i].length; j++){
+                            console.log("computerpathoptionsFiltered" + computerPathOptionsFiltered[0][i]);
+                            //if the second required node to collect a pawPrintPath matches a node of the computer path options
+                            if (pawPrintPaths[key].node2 === computerPathOptionsFiltered[0][i][j]){
+                                //if the computer has enough pawPrints of the right color to claim that path...
+                                // for(l=0; l<computerPathOptionsFiltered[0][i].length; l++) {
+                                    console.log("node2: " + pawPrintPaths[key].node2)
+                                    if(pawPrintPaths[key]["clicked"] === false){
+                                        console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
+                                        console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
+                                        if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+                                        console.log(pawPrintPaths[key])
+                                        checkComputerPawPrints(pawPrintPaths[key])
+                                        return;
+                                    // }
+                                }
+                            }
+                        }
+                        
+                    }
                 }
             }
         }
     }
+    }
+   
     //loop over pawPrintPaths
     console.log('at least computerPLay function is working');
     for(let key in pawPrintPaths){
-        //loop over computer potential winning options
-        for(i=0; i<computerPathOptions[0].length; i++){
+        //loop over the first three computer potential winning options
+        for(i=0; i<2; i++){
+            console.log(computerPathOptions[0][i])
             //if the required node to collect a pawPrintPath matches a node of the computer path options...
             for(k=0; k<computerPathOptions[0][i].length; k++){
+                console.log(computerPathOptions[0][i])
+                //if node1 for the pawPrintPath equals the computer path option
                 if(pawPrintPaths[key].node1 === computerPathOptions[0][i][k]){
+                    console.log("pawPrints node1: " + pawPrintPaths[key].node1)
+                    console.log("pawPrintsPath node2: " + pawPrintPaths[key].node2);
                     //loop again over the computer path options
                     for(j=0; j<computerPathOptions[0][i].length; j++){
+                        console.log("computerpathoptions" + computerPathOptions[0][i]);
                         //if the second required node to collect a pawPrintPath matches a node of the computer path options
                         if (pawPrintPaths[key].node2 === computerPathOptions[0][i][j]){
                             //if the computer has enough pawPrints of the right color to claim that path...
-                            for(l=0; l<computerPathOptions[0][i].length; l++) {
+                            // for(l=0; l<computerPathOptions[0][i].length; l++) {
+                                console.log("node2: " + pawPrintPaths[key].node2)
                                 if(pawPrintPaths[key]["clicked"] === false){
+                                    console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
+                                    console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
                                     if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
-                                    // console.log(pawPrintPaths[key])
+                                    console.log(pawPrintPaths[key])
                                     checkComputerPawPrints(pawPrintPaths[key])
                                     return;
-                                }
+                                // }
                             }
                         }
                     }
+                    
                 }
             }
         }
     }
 }
     //if computer did not claim a cat path, computer draws three pawPrint cards
-    
-    addPawPrint(computerPawPrints);
-    addPawPrint(computerPawPrints);
-    addPawPrint(computerPawPrints);
+    // else{
+        addPawPrint(computerPawPrints);
+        addPawPrint(computerPawPrints);
+        addPawPrint(computerPawPrints);
+        // return;
+    // }
+
+
+}  
+//check if someone has won
+winTheGame();
 }
-}
 
 
 
-
-    //  let computerNodesUnique = [...new Set(computerNodes)];
-    //  let hasAllElems = true;
-    //  for(i=0; i<computerPathOptions[0].length; i++){
-    //      if(computerPathOptions[0][i].every(elem => computerNodesUnique.includes(elem))){
-    //         selectCatPath();
-    //     //pushes selected cat path to computer's cat path array
-    //         computerCatPaths.push(currentCatPath);
-    //     // console.log(`computer catpath ${computerCatPaths}`);
-    //     //appends appropriate cat path image to game board
-    //         $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
-    //          hasAllElems = true;
-    //          break;
-    //      }
-    //      else {
-    //          hasAllElems = false;
-    //      }
-    //  }
-    //  if (hasAllElems === false){
-//         computerScore = computerScore - 20;
-//         $('#computerScore').html(`Computer score: <br>${computerScore}`);
-//     }
-// }
-
-// const selectCatPath = () => {
-//     let randomNumber = Math.floor(Math.random() * (availableCatPaths.length));
-//     for(i=0; i<availableCatPaths.length; i++) {
-//         //selects random number
-//         // console.log(randomNumber);
-//         //assigned catpath card to random number
-//         if (i === randomNumber){
-//             currentCatPath = availableCatPaths[i];
-//             //removed catpath card from cat path array
-//             availableCatPaths.splice(i,1);
-//             break;
-//         }
-//     }
-// }
 
 
 $("#feedback").on('click', () => {announceWinner()});
@@ -1083,7 +1172,6 @@ $("#feedback").on('click', () => {announceWinner()});
 const checkPlayerWinningPaths = () => {
     //collate winning cat paths, put in array for use
     logPlayerWinningCatPaths();
-    //remove duplicates
     let hasAllElems = true;
     //compare player array to potential winning arrays
     for(i=0; i<playerPathOptions[0].length; i++){
@@ -1129,10 +1217,13 @@ const checkComputerWinningPaths = () => {
         $('#computerScore').html(`Computer score: <br>${computerScore}`);
     }
 }
-
+//winner announcement
 const announceWinner = () => {
+    //check if player got all cat paths
     checkPlayerWinningPaths();
+    //check if computer got all cat paths
     checkComputerWinningPaths();
+    //decide winners and announce
     if (playerScore > computerScore) {
         alert("Congratulations! You've collected all your cats and beaten the computer!")
     }
@@ -1141,3 +1232,11 @@ const announceWinner = () => {
     }
     else alert("You and the computer tied!");
 }
+//determine who won the game if all of the pawprint paths are claimed
+const winTheGame = () => { 
+    for(let key in pawPrintPaths){
+        if(pawPrintPaths[key]["clicked"] === false) {
+            return;}
+}
+    announceWinner();
+};
