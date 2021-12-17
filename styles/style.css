@@ -95,6 +95,32 @@ ul {
     background: #92CC41;
 }
 
+.playerPawPrints {
+    color: black
+}
+
+#playerScore {
+    display: flex;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    justify-self: center;
+}
+
+#computerScore {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    justify-self: center;
+}
+
+/* .score {
+    /* display: flex;
+    width: 5vw;
+    justify-content: left; */
+    /* margin-top: 10vh; */
+/* } */ */
+
 h1 {
     font-weight: 800;
     display: flex;

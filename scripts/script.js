@@ -100,54 +100,64 @@ let pawPrintCards = 200;
 //catPath objects that contain starting and ending nodes and images of cards
 let $catPath1 = {node1: 9,
                 node2: 3,
-                img: `<img class="catPathCards" src="images/catpath1.png"></img>`,
+                img: `<img class="catPathCards" src="images/catpath1.png"></img>&nbsp`,
                 arrInd : 0};
 let $catPath2 = {node1: 5,
     node2: 9,
-    img: `<img class="catPathCards" src="images/catpath2.png"></img>`,
+    img: `<img class="catPathCards" src="images/catpath2.png"></img>&nbsp`,
     arrInd : 1};
 let $catPath3 = {node1: 1,
     node2: 6,
-    img: `<img class="catPathCards" src="images/catpath3.png"></img>`,
+    img: `<img class="catPathCards" src="images/catpath3.png"></img>&nbsp`,
     arrInd : 2};
 let $catPath4 = {node1: 2,
     node2: 7,
-    img: `<img class="catPathCards" src="images/catpath4.png"></img>`,
+    img: `<img class="catPathCards" src="images/catpath4.png"></img>&nbsp`,
     arrInd: 3}
 let $catPath5 = {node1: 4,
     node2: 2,
-    img: `<img class="catPathCards" src="images/catpath5.png"></img>`,
+    img: `<img class="catPathCards" src="images/catpath5.png"></img>&nbsp`,
     arrInd: 4};
 let $catPath6 = {node1: 1,
     node2: 8,
-    img: `<img class="catPathCards" src="images/catpath6.png"></img>`,
+    img: `<img class="catPathCards" src="images/catpath6.png"></img>&nbsp`,
     arrInd: 5};
 
     //player collected pawPrint cards, number and image
 let playerPawPrints = {
     orange: 0,
     orangeID: $("#playerOrange"),
+    orangeImg: `<img class="pawPrintCards" src='images/orangepaw.png'> : `,
     brown: 0,
     brownID: $("#playerBrown"),
+    brownImg: `<img class="pawPrintCards" src='images/brownpaw.png'> : `,
     black: 0,
     blackID: $("#playerBlack"),
+    blackImg: `<img class="pawPrintCards" src='images/blackpaw.png'> : `,
     grey: 0,
     greyID: $("#playerGrey"),
+    greyImg: `<img class="pawPrintCards" src='images/greypaw.png'> : `,
     white: 0,
-    whiteID: $("#playerWhite")
+    whiteID: $("#playerWhite"),
+    whiteImg: `<img class="pawPrintCards" src='images/whitepaw.png'> : `,
 };
 //computer collected pawPrint cards, number and image
 let computerPawPrints = {
     orange: 0,
     orangeID: $("#computerOrange"),
+    orangeImg: `<img class="pawPrintCards" src='images/computerpaw.png'> : `,
     brown: 0,
     brownID: $("#computerBrown"),
+    brownImg: `<img class="pawPrintCards" src='images/computerpaw.png'> : `,
     black: 0,
     blackID: $("#computerBlack"),
+    blackImg: `<img class="pawPrintCards" src='images/computerpaw.png'> : `,
     grey: 0,
     greyID: $("#computerGrey"),
+    greyImg: `<img class="pawPrintCards" src='images/computerpaw.png'> : `,
     white: 0,
-    whiteID: $("#computerWhite")
+    whiteID: $("#computerWhite"),
+    whiteImg: `<img class="pawPrintCards" src='images/computerpaw.png'> : `,
 };
 
 //object representing all info about pawPrint pathways: 
@@ -391,11 +401,11 @@ const setUpGame = () => {
     $("#playerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${playerPawPrints.white}`);
     $("#playerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${playerPawPrints.brown}`);
 //load resetted numbers for computer cat paths
-    $("#computerOrange").html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${computerPawPrints.orange}`);
-    $("#computerBlack").html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${computerPawPrints.black}`);
-    $("#computerGrey").html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${computerPawPrints.grey}`);
-    $("#computerWhite").html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${computerPawPrints.white}`);
-    $("#computerBrown").html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${computerPawPrints.brown}`);
+    $("#computerOrange").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.orange}`);
+    $("#computerBlack").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.black}`);
+    $("#computerGrey").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.grey}`);
+    $("#computerWhite").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.white}`);
+    $("#computerBrown").html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints.brown}`);
 //set 'clicked' status for game board back to false
     for(let key in pawPrintPaths) {
         if(pawPrintPaths.hasOwnProperty(key)) {
@@ -455,7 +465,7 @@ const addPawPrint =  (player) => {
                 //adds paw card to player's pawPrints object
                 player.orange ++;
                 //adjust player's HTML to reflect accurate number
-                player.orangeID.html(`<img class="pawPrintCards" src='images/orangepaw.png'> : ${player.orange}`);
+                player.orangeID.html(`${player["orangeImg"]}${player.orange}`);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -463,7 +473,7 @@ const addPawPrint =  (player) => {
                 break;
             case 1: 
                 player.black ++;
-                player.blackID.html(`<img class="pawPrintCards" src='images/blackpaw.png'> : ${player.black}`);
+                player.blackID.html(`${player["blackImg"]}${player.black}`);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -471,7 +481,7 @@ const addPawPrint =  (player) => {
                 break;
             case 2: 
                 player.grey ++;
-                player.greyID.html(`<img class="pawPrintCards" src='images/greypaw.png'> : ${player.grey}`);
+                player.greyID.html(`${player["greyImg"]}${player.grey}`);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -479,7 +489,7 @@ const addPawPrint =  (player) => {
                 break;
             case 3: 
                 player.white ++;
-                player.whiteID.html(`<img class="pawPrintCards" src='images/whitepaw.png'> : ${player.white}`);
+                player.whiteID.html(`${player["greyImg"]}${player.white}`);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -487,7 +497,7 @@ const addPawPrint =  (player) => {
                 break;
             case 4: 
                 player.brown ++;
-                player.brownID.html(`<img class="pawPrintCards" src='images/brownpaw.png'> : ${player.brown}`);
+                player.brownID.html(`${player["brownImg"]}${player.brown}`);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -549,7 +559,7 @@ $('#catpath').on('click', () => {
         computerCatPaths.push(currentCatPath);
         // console.log(`computer catpath ${computerCatPaths}`);
         //appends appropriate cat path image to game board
-        $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
+        $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
     }
     else {
         //runs computer AI
