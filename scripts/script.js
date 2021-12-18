@@ -235,7 +235,8 @@ $one : {
     color: "brown",
     clicked: false,
     player: 'onePlayer',
-    computer:'oneComputer'
+    computer:'oneComputer',
+    id: "one"
 },
 $onea : {
     $img: $(".onea"),
@@ -243,9 +244,10 @@ $onea : {
     node2: 2,
     pawsNeeded: 7,
     color: "brown",
-    clicked: true,
+    clicked: false,
     player: 'oneaPlayer',
-    computer:'oneaComputer'
+    computer:'oneaComputer',
+    id: "one"
 },
 $two : {
     $img: $(".two"),
@@ -265,7 +267,8 @@ $three : {
     color: "white",
     clicked: false,
     player: 'threePlayer',
-    computer:'threeComputer'
+    computer:'threeComputer',
+    id: "three"
 },
 $threea : {
     $img: $(".threea"),
@@ -273,9 +276,10 @@ $threea : {
     node2: 4,
     pawsNeeded: 9,
     color: "white",
-    clicked: true,
+    clicked: false,
     player: 'threeaPlayer',
-    computer:'threeaComputer'
+    computer:'threeaComputer',
+    id: "three"
 },
 // $threeb : {
 //     $img: $(".threeb"),
@@ -452,7 +456,7 @@ const setUpGame = () => {
     playerCatPaths = [];
     computerCatPaths = [];
 //set up available catPaths
-    catPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
+    availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6]
 //set up new board
 //clear computer's catPath cards
     $(".computerCatPaths").empty();
@@ -492,7 +496,7 @@ pawPrintPaths.$seventeen.$img.html(`<img src="images/seventeen.png"></img>`);
 //set 'clicked' status for game board back to false
     for(let key in pawPrintPaths) {
         if(pawPrintPaths.hasOwnProperty(key)) {
-            pawPrintPaths[key]["clicked"]= false;
+                pawPrintPaths[key]["clicked"]= false;
         }
     };
     validPaths.length=0;
@@ -508,25 +512,6 @@ $('#restart').on('click', () => {
         return;
     }
 })
-// instructionsPopUP {
-//     Pops up insructions in alert window
-//     Play game button
-// }
-//instructions popup
-// $('#needHelp').on('click', () => {
-//     alert(`Player will choose 1 card out of the cat-path collection. This card will establish the first set of cats that the player must collect. 
-
-//     On each subsequent turn, player may do one of the following:
-//     - draw three pawprint cards
-//     - deploy pawprint cards from the player's hand in order to claim pathways between cats
-//     - draw new cat cards to collect more cats
-    
-//     A winner is determined once one of the following conditions has been met:
-//     - all of the cats have been claimed
-//     - all of the pawprint cards have been claimed and each player has played one final round
-    
-//     The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.`)
-// })
 
 
 
@@ -541,7 +526,7 @@ const $computerPawPrints = $('.computerPawPrints');
 //adds Paw Print cards to player or computer stash
 const addPawPrint =  (player) => {
     //while there are pawprint cards left
-    if(pawPrintCards >=0 ){
+    if(pawPrintCards > 2 ){
     //random switch case to select a random pawprint card
         switch (Math.floor(Math.random() * 5)){
             case 0: 
@@ -588,7 +573,6 @@ const addPawPrint =  (player) => {
                 break;
         }
     }
-    else(alert(`There are no more pawprint cards left! You can select one more cat-path before a winner is determined.`))
 };
 
 // collectCatPaths() {
@@ -617,48 +601,52 @@ const selectCatPath = () => {
 //upon click of catpath card, adds player catpath. Adds computer catpath if computer has no cat paths
 $('#catpath').on('click', () => {
     if (availableCatPaths.length != 0){
-    //runs random cat path selection function
-    // console.log(`availableCatPaths before ${availableCatPaths}`);
-    selectCatPath();
-    // console.log(`availableCatPaths after ${availableCatPaths}`);
-    //pushes selected cat path to player's cat path array
-    playerCatPaths.push(currentCatPath);
-    // console.log(`playerCatPaths ${playerCatPaths}`)
-
-    //appends appropriate cat path image to game board
-    $('.playerCatPaths').append(`<li>${currentCatPath.img}</li>`);
-    //runs if computer cat path array is empty (if computer has no cat paths yet)
-    function isEmpty(o){
-        for (let i in o) {
-            if(o.hasOwnProperty(i)){
-                return false;
-            }
-        }
-        return true;
-    }
-    if (isEmpty(computerCatPaths)){
         //runs random cat path selection function
+        // console.log(`availableCatPaths before ${availableCatPaths}`);
         selectCatPath();
-        //pushes selected cat path to computer's cat path array
-        computerCatPaths.push(currentCatPath);
-        // console.log(`computer catpath ${computerCatPaths}`);
+        // console.log(`availableCatPaths after ${availableCatPaths}`);
+        //pushes selected cat path to player's cat path array
+        playerCatPaths.push(currentCatPath);
+        // console.log(`playerCatPaths ${playerCatPaths}`)
+
         //appends appropriate cat path image to game board
-        $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
+        $('.playerCatPaths').append(`<li>${currentCatPath.img}</li>`);
+        //runs if computer cat path array is empty (if computer has no cat paths yet)
+        function isEmpty(o){
+            for (let i in o) {
+                if(o.hasOwnProperty(i)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        if (isEmpty(computerCatPaths)){
+            //runs random cat path selection function
+            selectCatPath();
+            //pushes selected cat path to computer's cat path array
+            computerCatPaths.push(currentCatPath);
+            // console.log(`computer catpath ${computerCatPaths}`);
+            //appends appropriate cat path image to game board
+            $('.computerCatPaths').append(`<li><img id="computerCatPath" class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
+        }
+        else {
+            //runs computer AI
+            computerPlay();
+        }
     }
     else {
-        //runs computer AI
-        computerPlay();
+        alert("There are no more cat path cards to draw! Get as many paths as you can before the game ends!")
     }
-}
+
 })
 //click that gives player pawprint cards
 //adds computer cards right after player cards if computer has fewer than four cards of each color
 $(".pawprints").on('click', () => {
     //add three pawprint cards to player array and status box
     // console.log(playerCatPaths)
-    function isEmpty(o){
-        for (let i in o) {
-            if(o.hasOwnProperty(i)){
+    function isEmpty(object){
+        for (let i in object) {
+            if(object.hasOwnProperty(i)){
                 return false;
             }
         }
@@ -683,7 +671,11 @@ $(".pawprints").on('click', () => {
             //runs computer AI
             computerPlay()};
     }
-    else (alert(`There are not enough pawprint cards for you to draw! You can select one more cat-path before a winner is determined.`))
+    
+    else if (pawPrintCards <= 2){
+        alert(`There are not enough pawprint cards for you to draw! You can select one more cat-path before a winner is determined.`);
+        pawPrintCards = 0;
+    }
 })
 
 
@@ -694,82 +686,219 @@ $(".pawprints").on('click', () => {
 
 //Checks if player has enough pawprint cards to claim a pathway--collects the pathway if so
 const checkPawPrints = (clickedObject) => {
-    let clickedColor = clickedObject.color;
-    let pawsRequired = clickedObject.pawsNeeded;
-    if(playerPawPrints[clickedColor] >= pawsRequired) {
-        if(clickedObject["clicked"] === false){
-        //add pawsRequired score value to player's score
-        playerScore = playerScore + pawsRequired;
-        //send pawPrintPath's first node to player's collected Nodes
-        playerNodes.push(clickedObject.node1);
-        //send pawPrintPath's second node to player's collected Nodes
-        playerNodes.push(clickedObject.node2);
-        //update player score display
-        $('#playerScore').html(`${playerScore}`);
-        //remove cards used from player's collection
-        playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
-        //update player card collection display
-        playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
-        //indicate path has been claimed and cannot be claimed again
-        clickedObject["clicked"] = true;
-        console.log(clickedObject.$img)
-        console.log(clickedObject.player)
-        clickedObject.$img.html(`<img src="images/${clickedObject.player}.png"></img>`)
-        //runs computer AI
-        computerPlay();
-    }
-    else {alert("That cat path has already been claimed!")}
-    }
-    else {
-        alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
-    }
+         //color of the clicked path
+         let clickedColor = clickedObject.color;
+         //number of pawprints needed for the clicked path
+         let pawsRequired = clickedObject.pawsNeeded;
+         //if the player has enough pawprint cards to claim the path
+         if(playerPawPrints[clickedColor] >= pawsRequired) {
+             //if the path has not been claimed
+             console.log("l;ine 704 clicked object: " + clickedObject["id"]);
+             if(clickedObject["clicked"] === false){
+                 if(clickedObject["id"] === "one" || clickedObject["id"] === "onea") {
+                     //add pawsRequired score value to player's score
+                     playerScore = playerScore + pawsRequired;
+                     //send pawPrintPath's first node to player's collected Nodes
+                     playerNodes.push(clickedObject.node1);
+                     //send pawPrintPath's second node to player's collected Nodes
+                     playerNodes.push(clickedObject.node2);
+                     //update player score display
+                     $('#playerScore').html(`${playerScore}`);
+                     //remove cards used from player's collection
+                     playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
+                     //update player card collection display
+                     playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
+                     //indicate path has been claimed and cannot be claimed again
+                     pawPrintPaths["$one"]["clicked"] = true;
+                     pawPrintPaths["$onea"]["clicked"] = true;
+                     console.log(clickedObject.$img)
+                     console.log(clickedObject.player)
+                     pawPrintPaths["$one"]["$img"].html(`<img src="images/onePlayer.png"></img>`);
+                     pawPrintPaths["$onea"]["$img"].html(`<img src="images/oneaPlayer.png"></img>`)
+                     //runs computer AI
+                     computerPlay();
+                 }
+                 else if(clickedObject["id"] === "three" || clickedObject["id"] === "threea") {
+                     //add pawsRequired score value to player's score
+                     playerScore = playerScore + pawsRequired;
+                     //send pawPrintPath's first node to player's collected Nodes
+                     playerNodes.push(clickedObject.node1);
+                     //send pawPrintPath's second node to player's collected Nodes
+                     playerNodes.push(clickedObject.node2);
+                     //update player score display
+                     $('#playerScore').html(`${playerScore}`);
+                     //remove cards used from player's collection
+                     playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
+                     //update player card collection display
+                     playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
+                     //indicate path has been claimed and cannot be claimed again
+                     pawPrintPaths["$three"]["clicked"] = true;
+                     pawPrintPaths["$threea"]["clicked"] = true;
+                     console.log(clickedObject.$img)
+                     console.log(clickedObject.player)
+                     pawPrintPaths["$three"]["$img"].html(`<img src="images/threePlayer.png"></img>`);
+                     pawPrintPaths["$threea"]["$img"].html(`<img src="images/threeaPlayer.png"></img>`)
+                     //runs computer AI
+                     computerPlay();
+                 }
+                 else{
+                     //add pawsRequired score value to player's score
+                     playerScore = playerScore + pawsRequired;
+                     //send pawPrintPath's first node to player's collected Nodes
+                     playerNodes.push(clickedObject.node1);
+                     //send pawPrintPath's second node to player's collected Nodes
+                     playerNodes.push(clickedObject.node2);
+                     //update player score display
+                     $('#playerScore').html(`${playerScore}`);
+                     //remove cards used from player's collection
+                     playerPawPrints[clickedColor] =playerPawPrints[clickedColor]- pawsRequired;
+                     //update player card collection display
+                     playerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${playerPawPrints[clickedColor]}`);
+                     //indicate path has been claimed and cannot be claimed again
+                     clickedObject["clicked"] = true;
+                     console.log(clickedObject.$img)
+                     console.log(clickedObject.player)
+                     clickedObject.$img.html(`<img src="images/${clickedObject.player}.png"></img>`)
+                     //runs computer AI
+                     computerPlay();
+                 }
+         }
+         else {alert("That cat path has already been claimed!")}
+         }
+         else {
+             alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
+         }
+    // }
 };
 
 const checkComputerPawPrints = (clickedObject) => {
     let clickedColor = clickedObject.color;
     let pawsRequired = clickedObject.pawsNeeded;
     if(computerPawPrints[clickedColor] >= pawsRequired) {
-        //add pawsRequired score value to computer's score
-        computerScore = computerScore + pawsRequired;
-        //send pawPrintPath's first node to computer's collected Nodes
-        computerNodes.push(clickedObject.node1);
-        //send pawPrintPath's second node to computer's collected Nodes
-        computerNodes.push(clickedObject.node2);
-        console.log("computer Nodes line 738" + computerNodes);
-        //update computer score display
-        $('#computerScore').html(`${computerScore}`);
-        //remove cards used from computer's collection
-        computerPawPrints[clickedColor] =computerPawPrints[clickedColor]- pawsRequired;
-        //update computer card collection display
-        computerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints[clickedColor]}`);
-        //indicate path has been claimed and cannot be claimed again
-        clickedObject["clicked"] = true;
-        //changes pawpath image to computer claimed
-        clickedObject.$img.html(`<img src="images/${clickedObject.computer}.png"></img>`)
+        if(clickedObject["id"] === "one" || clickedObject["id"] === "onea") {
+            //add pawsRequired score value to computer's score
+            computerScore = computerScore + pawsRequired;
+            //send pawPrintPath's first node to computer's collected Nodes
+            computerNodes.push(clickedObject.node1);
+            //send pawPrintPath's second node to computer's collected Nodes
+            computerNodes.push(clickedObject.node2);
+            //update computer score display
+            $('#computerScore').html(`${computerScore}`);
+            //remove cards used from computer's collection
+            computerPawPrints[clickedColor] =computerPawPrints[clickedColor]- pawsRequired;
+            //update computer card collection display
+            computerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${computerPawPrints[clickedColor]}`);
+            //indicate path has been claimed and cannot be claimed again
+            pawPrintPaths["$one"]["clicked"] = true;
+            pawPrintPaths["$onea"]["clicked"] = true;
+            console.log(clickedObject.$img)
+            console.log(clickedObject.computer)
+            pawPrintPaths["$one"]["$img"].html(`<img src="images/oneComputer.png"></img>`);
+            pawPrintPaths["$onea"]["$img"].html(`<img src="images/oneaComputer.png"></img>`)
+        }
+        else if(clickedObject["id"] === "three" || clickedObject["id"] === "threea") {
+            //add pawsRequired score value to computer's score
+            computerScore = computerScore + pawsRequired;
+            //send pawPrintPath's first node to computer's collected Nodes
+            computerNodes.push(clickedObject.node1);
+            //send pawPrintPath's second node to computer's collected Nodes
+            computerNodes.push(clickedObject.node2);
+            //update computer score display
+            $('#computerScore').html(`${computerScore}`);
+            //remove cards used from computer's collection
+            computerPawPrints[clickedColor] =computerPawPrints[clickedColor]- pawsRequired;
+            //update computer card collection display
+            computerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/${clickedColor}paw.png'> : ${computerPawPrints[clickedColor]}`);
+            //indicate path has been claimed and cannot be claimed again
+            pawPrintPaths["$three"]["clicked"] = true;
+            pawPrintPaths["$threea"]["clicked"] = true;
+            console.log(clickedObject.$img)
+            console.log(clickedObject.computer)
+            pawPrintPaths["$three"]["$img"].html(`<img src="images/threeComputer.png"></img>`);
+            pawPrintPaths["$threea"]["$img"].html(`<img src="images/threeaComputer.png"></img>`)
+        }
+        else{
+            //add pawsRequired score value to computer's score
+            computerScore = computerScore + pawsRequired;
+            //send pawPrintPath's first node to computer's collected Nodes
+            computerNodes.push(clickedObject.node1);
+            //send pawPrintPath's second node to computer's collected Nodes
+            computerNodes.push(clickedObject.node2);
+            console.log("computer Nodes line 738" + computerNodes);
+            //update computer score display
+            $('#computerScore').html(`${computerScore}`);
+            //remove cards used from computer's collection
+            computerPawPrints[clickedColor] =computerPawPrints[clickedColor]- pawsRequired;
+            //update computer card collection display
+            computerPawPrints[`${clickedColor}ID`].html(`<img class="pawPrintCards" src='images/computerpaw.png'> : ${computerPawPrints[clickedColor]}`);
+            //indicate path has been claimed and cannot be claimed again
+            clickedObject["clicked"] = true;
+            //changes pawpath image to computer claimed
+            clickedObject.$img.html(`<img src="images/${clickedObject.computer}.png"></img>`)
+        }
     }
 };
 
-//click events for all paths
-// pawPrintPaths.$one.$img.on("click", () => {
-//     //checks if it has previously been clicked
-//     if(pawPrintPaths.$one.clicked === false) {
-//         //runs path claiming function
-//         checkPawPrints(pawPrintPaths.$one);
-//         //changes status to clicked
-//         pawPrintPaths.$one.clicked = true;
+// for(let key2 in pawPrintPaths){
+//     if([pawPrintPaths[key2]["clicked"]] === false) {
+//         break;
 //     }
-//      else{
-//         alert("This path has already been claimed! Please pick a different path");
-//     }});
-//click event for all pathways
-// let claimCatPath = () => {
+//     else {
+//         //click event for all pawprint paths
+//         for(let key in pawPrintPaths) {
+//             //upon clicking the pathway image
+//             pawPrintPaths[key]["$img"].on("click", () => {
+//                 //check if pathway has already been claimed
+//                 if(pawPrintPaths[key]["clicked"] === false) {
+//                     //if there are pawprint cards left
+//                     if(pawPrintCards > 2){
+//                     //runs function to trade cards for pathway
+//                     checkPawPrints(pawPrintPaths[key]);
+//                     }
+//                     //if there aren't pawPrint cards left
+//                     else{
+//                         //announce the winner
+//                         checkPawPrints(pawPrintPaths[key]);
+//                         announceWinner();
+//                     }
+
+//                 }
+//                 //if pathway has already been claimed
+//                 else{
+//                     //alert that pathway has already been claimed
+//                     alert("This path has already been claimed! Please pick a different path");
+//                 }
+//             })
+//         };
+//     }
+// }
+const confirmAllPathClicks = () => {
+    for(let key in pawPrintPaths){
+        if (pawPrintPaths[key]["clicked"] === false){
+            return;
+        }
+    }
+    announceWinner();
+};
+
+//click event for all pawprint paths
 for(let key in pawPrintPaths) {
+    confirmAllPathClicks();
     //upon clicking the pathway image
     pawPrintPaths[key]["$img"].on("click", () => {
         //check if pathway has already been claimed
         if(pawPrintPaths[key]["clicked"] === false) {
+            //if there are pawprint cards left
+            if(pawPrintCards > 2){
             //runs function to trade cards for pathway
             checkPawPrints(pawPrintPaths[key]);
+            }
+            //if there aren't pawPrint cards left
+            else{
+                //announce the winner
+                checkPawPrints(pawPrintPaths[key]);
+                announceWinner();
+            }
 
         }
         //if pathway has already been claimed
@@ -779,7 +908,7 @@ for(let key in pawPrintPaths) {
         }
     })
 };
-// }
+
 
 //node-child function setup for graphic
 function Node(val){

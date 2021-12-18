@@ -157,6 +157,9 @@ body {
     height: 22vh;
     width: 300vh;
 }
+/* #computerCatPath{
+    display: none
+} */
 
 .catPathCards {
     height: 10vh;
