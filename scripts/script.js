@@ -243,7 +243,7 @@ $onea : {
     node2: 2,
     pawsNeeded: 7,
     color: "brown",
-    clicked: false,
+    clicked: true,
     player: 'oneaPlayer',
     computer:'oneaComputer'
 },
@@ -273,7 +273,7 @@ $threea : {
     node2: 4,
     pawsNeeded: 9,
     color: "white",
-    clicked: false,
+    clicked: true,
     player: 'threeaPlayer',
     computer:'threeaComputer'
 },
@@ -327,7 +327,7 @@ $seven : {
 },
 $eight : {
     $img: $(".eight"),
-    node1: 3,
+    node1: 6,
     node2: 4,
     pawsNeeded: 6,
     color: 'grey',
@@ -1002,44 +1002,68 @@ const computerPlay = () => {
     console.log("computerNodes line 1001:" + computerNodes)
     for(i=0; i<2; i++){
         console.log("computerNodes line 1002: " + computerNodes)
-        if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
-            console.log("computerNodes line 1004:" + computerNodes)
-            //remove that catpath from the computer's list
-            computerCatPaths.shift();
-            //if there are cat paths available, select a new cat path
-            if(availableCatPaths.length > 0){
-            //select a new cat path 
-                selectCatPath();
-            //append new cat path to computer's list
-                computerCatPaths.push(currentCatPath)
-            //append appropriate cat path image to game board
-                $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
-                hasAllElems = true;
-                return;
-            }
-            else{
-                let randomNumber = Math.floor(Math.random()*2);
-                switch(randomNumber){
-                    case 0:
-                        addPawPrint(computerPawPrints);
-                        addPawPrint(computerPawPrints);
-                        addPawPrint(computerPawPrints);
-                        break;
-                    case 1:
-                        for (let key in pawPrintPaths){
-                            if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
-                                checkComputerPawPrints(pawPrintPaths[key]["$img"])
-                            }
+        if(computerPathOptions[0][i] != undefined){
+            if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+                console.log("computerNodes line 1004:" + computerNodes)
+                console.log("computerPathOptions line 1004: " + computerPathOptions[0][i])
+                //remove that catpath from the computer's list
+                computerCatPaths.shift();
+                //if there are cat paths available, select a new cat path
+                if(availableCatPaths.length > 0){
+                //select a new cat path 
+                    console.log("computer thinks it has completed its paths 1013: path options" + computerPathOptions[0][i])
+                    console.log("1013 computerNodes" + computerNodes)
+                    selectCatPath();
+                //append new cat path to computer's list
+                    computerCatPaths.push(currentCatPath)
+                //append appropriate cat path image to game board
+                    $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
+                    hasAllElems = true;
+                    return;
+                }
+                else{
+                    let randomNumber = Math.floor(Math.random()*2);
+                    switch(randomNumber){
+                        case 0:
+                            addPawPrint(computerPawPrints);
+                            addPawPrint(computerPawPrints);
+                            addPawPrint(computerPawPrints);
+                            break;
+                        case 1:
+                            for (let key in pawPrintPaths){
+                                if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
+                                    checkComputerPawPrints(pawPrintPaths[key]["$img"])
+                                }
 
-                        }
-                        break;
+                            }
+                            break;
+                    }
                 }
             }
+            else {
+                hasAllElems = false;
+            }
         }
-        else {
-            hasAllElems = false;
+        else{
+            console.log("if/else statement on line 1045 is running")
+            for (let key in pawPrintPaths){
+                console.log("for statement on line 1047 is running");
+                console.log("1048 clicked" + pawPrintPaths[key]["clicked"])
+                console.log("1048 computer pawprints number" + computerPawPrints[pawPrintPaths[key]["color"]]);
+                console.log("1048 pawPrints required" + pawPrintPaths[key]["pawsNeeded"])
+                if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
+                    console.log("computer should have claimed a new cat path line 1049")
+                    checkComputerPawPrints(pawPrintPaths[key]["$img"]);
+                    return;
+                }
+            }
+            addPawPrint(computerPawPrints);
+            addPawPrint(computerPawPrints);
+            addPawPrint(computerPawPrints);
+            return;
+            }
         }
-    }
+    // }
     console.log("computer nodes line 1021" + computerNodes)
     computerCheckNodes.push(computerNodes);
     console.log("computer check nodes line 1023" + computerCheckNodes);
