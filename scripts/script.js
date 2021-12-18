@@ -1006,15 +1006,36 @@ const computerPlay = () => {
             console.log("computerNodes line 1004:" + computerNodes)
             //remove that catpath from the computer's list
             computerCatPaths.shift();
-            //and select a new cat path 
-            selectCatPath();
+            //if there are cat paths available, select a new cat path
+            if(availableCatPaths.length > 0){
+            //select a new cat path 
+                selectCatPath();
             //append new cat path to computer's list
-            computerCatPaths.push(currentCatPath)
+                computerCatPaths.push(currentCatPath)
             //append appropriate cat path image to game board
-            $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
-            hasAllElems = true;
-            return;
+                $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png">&nbsp</li>`);
+                hasAllElems = true;
+                return;
             }
+            else{
+                let randomNumber = Math.floor(Math.random()*2);
+                switch(randomNumber){
+                    case 0:
+                        addPawPrint(computerPawPrints);
+                        addPawPrint(computerPawPrints);
+                        addPawPrint(computerPawPrints);
+                        break;
+                    case 1:
+                        for (let key in pawPrintPaths){
+                            if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
+                                checkComputerPawPrints(pawPrintPaths[key]["$img"])
+                            }
+
+                        }
+                        break;
+                }
+            }
+        }
         else {
             hasAllElems = false;
         }
@@ -1077,9 +1098,11 @@ const computerPlay = () => {
     //delete it from the computer's potential winning array
     //if the computer has already acquired pawPrintPaths...
     if(computerNodes.length > 0){
+        // computerPathOptionsFiltered.length=0;
+        console.log("1081 computer path options filtered should be 0" + computerPathOptionsFiltered)
         console.log("computerNodes 1079: " + computerNodes);
-        //loop over the potential winning computer paths
-        for(i=0; i<computerPathOptions[0].length; i++){
+        //loop over the first three potential winning computer paths
+        for(i=0; i<2; i++){
             console.log("computerNodes 1082: " + computerNodes)
             //loop over the already acquired computer pawprint paths
             for(j=0; j<computerNodes.length; j++){
@@ -1089,6 +1112,7 @@ const computerPlay = () => {
                     console.log("computerNodesd 1088: " + computerNodes)
                     console.log(computerPathOptions[0][i])
                     computerPathOptionsFiltered.push(computerPathOptions[0][i])
+                    console.log("computerPathOptionsFiltered 1092: " + computerPathOptionsFiltered)
                 }
                     //remove that path option
                     //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
@@ -1099,10 +1123,10 @@ const computerPlay = () => {
         for(let key in pawPrintPaths){
             //loop over the first three computer potential winning options
             for(i=0; i<2; i++){
-                console.log(computerPathOptionsFiltered[0][i])
+                console.log("1105 computer path options filtered: " + computerPathOptionsFiltered[0][i])
                 //if the required node to collect a pawPrintPath matches a node of the computer path options...
                 for(k=0; k<computerPathOptionsFiltered[0][i].length; k++){
-                    console.log(computerPathOptionsFiltered[0][i])
+                    console.log("1108 computer path options filtered: " + computerPathOptionsFiltered[0][i])
                     //if node1 for the pawPrintPath equals the computer path option
                     if(pawPrintPaths[key].node1 === computerPathOptionsFiltered[0][i][k]){
                         console.log("pawPrints node1: " + pawPrintPaths[key].node1)
