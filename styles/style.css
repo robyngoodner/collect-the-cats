@@ -197,7 +197,7 @@ ul {
 .playerPawPrints {
     color: black;
     display: grid;
-    grid-template-columns: repeat(2, 100px);
+    grid-template-columns: repeat(2, 90px);
     grid-auto-rows: minmax(60px, auto);
 }
 #playerOrange {
@@ -222,7 +222,7 @@ ul {
     }
 .computerPawPrints {
     display: grid;
-    grid-template-columns: repeat(2, 100px);
+    grid-template-columns: repeat(2, 90px);
     grid-auto-rows: minmax(60px, auto);
 }
 #computerOrange {
