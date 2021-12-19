@@ -977,15 +977,13 @@ function generateGraph() {
     N[1].add(N[7]);
     N[2].add(N[1]);
     N[2].add(N[3]);
-    N[2].add(N[4]);
+    N[2].add(N[5]);
     N[2].add(N[6]);
     N[3].add(N[2]);
     N[3].add(N[4]);
-    N[3].add(N[4]);
     N[3].add(N[6]);
     N[4].add(N[3]);
-    N[4].add(N[3]);
-    N[4].add(N[7]);
+    N[4].add(N[6]);
     N[4].add(N[9]);
     N[5].add(N[1]);
     N[5].add(N[2]);
@@ -1144,8 +1142,30 @@ const logComputerWinningCatPaths = () => {
 //         console.log("path options post splice" + computerPathOptions[0][i]);
 // }
 // }
+ 
+function containsAll(target, toTest) {
+    const dictionary = {}
+
+    target.forEach(element => {
+        if (dictionary[element] === undefined) {
+            dictionary[element] = 1;
+            return;
+        }
+        dictionary[element]++;
+    });
 
 
+    toTest.forEach(element => {
+        if (dictionary[element] !== undefined)
+            dictionary[element]--;
+    })
+
+    for (let key in dictionary) {
+        if (dictionary[key] > 0) return false;
+    }
+
+    return true;
+}
 //computerPathOptions[0]
 //compare computerPathOptions[0] nodes to pawPrintPaths nodes. If a pawPrint path has two of the nodes from that array, 
 //and the computer has the correct number of the correct color of pawprint cards, claim that path.
@@ -1185,7 +1205,8 @@ const computerPlay = () => {
     for(i=0; i<2; i++){
         console.log("computerNodes line 1002: " + computerNodes)
         if(computerPathOptions[0][i] != undefined){
-            if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+            //if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+            if(containsAll(computerPathOptions[0][i], computerNodes)){
                 console.log("computerNodes line 1004:" + computerNodes)
                 console.log("computerPathOptions line 1004: " + computerPathOptions[0][i])
                 //remove that catpath from the computer's list
@@ -1434,7 +1455,8 @@ const checkPlayerWinningPaths = () => {
     //compare player array to potential winning arrays
     for(i=0; i<playerPathOptions[0].length; i++){
         //if player array includes all the values in one of potential winning arrays...
-        if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
+        //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
+        if(containsAll(playerPathOptions[0][i], playerNodes)){
             //add 20 points to player score
             playerScore = playerScore + 20;
             //update player score on gameboard
@@ -1460,7 +1482,8 @@ const checkComputerWinningPaths = () => {
     logComputerWinningCatPaths();
     let hasAllElems = true;
     for(i=0; i<computerPathOptions[0].length; i++){
-        if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+        //if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+        if(containsAll(computerPathOptions[0][i], computerNodes)){
             computerScore = computerScore + 20;
             $('#computerScore').html(`${computerScore}`);
             hasAllElems = true;
