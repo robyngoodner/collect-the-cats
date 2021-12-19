@@ -584,7 +584,7 @@ const addAnimatedPawPrint =  (player) => {
                 //adds paw card to player's pawPrints object
                 player.orange ++;
                 //adjust player's HTML to reflect accurate number
-                player.orangeID.html(`${player["orangeImg"]}${player.orange}`).animate({height:'toggle'}, 500).animate({height:'toggle'}, 500);
+                player.orangeID.html(`${player["orangeImg"]}${player.orange}`).hide().animate({height:'toggle'}, 1000);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -592,7 +592,7 @@ const addAnimatedPawPrint =  (player) => {
                 break;
             case 1: 
                 player.black ++;
-                player.blackID.html(`${player["blackImg"]}${player.black}`).animate({height:'toggle'}, 500).animate({height:'toggle'}, 500);
+                player.blackID.html(`${player["blackImg"]}${player.black}`).hide().animate({height:'toggle'}, 1000);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -600,7 +600,7 @@ const addAnimatedPawPrint =  (player) => {
                 break;
             case 2: 
                 player.grey ++;
-                player.greyID.html(`${player["greyImg"]}${player.grey}`).animate({height:'toggle'}, 500).animate({height:'toggle'}, 500);
+                player.greyID.html(`${player["greyImg"]}${player.grey}`).hide().animate({height:'toggle'}, 1000);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -608,7 +608,7 @@ const addAnimatedPawPrint =  (player) => {
                 break;
             case 3: 
                 player.white ++;
-                player.whiteID.html(`${player["whiteImg"]}${player.white}`).animate({height:'toggle'}, 500).animate({height:'toggle'}, 500);
+                player.whiteID.html(`${player["whiteImg"]}${player.white}`).hide().animate({height:'toggle'}, 1000);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -616,7 +616,7 @@ const addAnimatedPawPrint =  (player) => {
                 break;
             case 4: 
                 player.brown ++;
-                player.brownID.html(`${player["brownImg"]}${player.brown}`).animate({height:'toggle'}, 500).animate({height:'toggle'}, 500);
+                player.brownID.html(`${player["brownImg"]}${player.brown}`).hide().animate({height:'toggle'}, 1000);
                 pawPrintCards--;
                 $('.pawprints').html(`<h2>Pawprint<br>cards:</h2>
                 <button><img id="pawprint" src="images/pawprint.png"></button>
@@ -711,15 +711,7 @@ $(".pawprints").on('click', () => {
         addPawPrint(playerPawPrints);
         addPawPrint(playerPawPrints);
         addPawPrint(playerPawPrints);
-//         if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
-//         //add three pawprint cards to computer array and status box, if computer doesn't have enough pawprints to pick a path
-//         addPawPrint(computerPawPrints);
-//         addPawPrint(computerPawPrints);
-//         addPawPrint(computerPawPrints);
-//         // alert("Your turn!");
-// //add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
-//         }
-//         else {
+
             //runs computer AI
         computerPlay();
     }
@@ -1480,7 +1472,7 @@ const checkComputerWinningPaths = () => {
     }
     if (hasAllElems === false){
         computerScore = computerScore - 20;
-        $('#computerScore').html(`Computer score: <br>${computerScore}`);
+        $('#computerScore').html(`${computerScore}`);
     }
 }
 //winner announcement
