@@ -1181,41 +1181,49 @@ const computerPlay = () => {
         }
         else {
     logComputerWinningCatPaths();
-
     let hasAllElems = true;
     let computerCheckNodes = [];
-    /*logComputerWinningCatPaths();
-    let hasAllElems = true;
-    for(i=0; i<computerPathOptions[0].length; i++){
-        if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
-            computerScore = computerScore + 20;
-            $('#computerScore').html(`${computerScore}`);
-            hasAllElems = true;
-            break;
-        }
-        else {
-            hasAllElems = false;
-        }
-    }
-    if (hasAllElems === false){
-        computerScore = computerScore - 20;
-        $('#computerScore').html(`Computer score: <br>${computerScore}`);
-    } */
-    console.log("computerNodes line 1001:" + computerNodes)
     for(i=0; i<2; i++){
-        console.log("computerNodes line 1002: " + computerNodes)
+        //as long as the computer has catPaths
         if(computerPathOptions[0][i] != undefined){
-            //if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+            //if the computer has achieved its cat path
             if(containsAll(computerPathOptions[0][i], computerNodes)){
-                console.log("computerNodes line 1004:" + computerNodes)
-                console.log("computerPathOptions line 1004: " + computerPathOptions[0][i])
                 //remove that catpath from the computer's list
                 computerCatPaths.shift();
                 //if there are cat paths available, select a new cat path
-                if(availableCatPaths.length > 0){
+                    if(availableCatPaths.length > 0){
+                    //select a new cat path 
+                        selectCatPath();
+                    //append new cat path to computer's list
+                        computerCatPaths.push(currentCatPath)
+                    //append appropriate cat path image to game board
+                        $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1000);
+                        hasAllElems = true;
+                        return;
+                    }
+                //if there aren't catPaths available, computer selects the first pawPrint path that it can
+                    else{                  
+                        for (let key in pawPrintPaths){
+                            if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
+                                checkComputerPawPrints(pawPrintPaths[key]["$img"]);
+                                break;
+                            }
+                        }
+                        //if the computer can't select a pawPrint path, it acquires pawPrint cards
+                        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+                        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+                        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                    }
+            }
+            else {
+                hasAllElems = false;
+            }
+        }
+        //if the computer does not have a cat path
+        else{
+            //if there are cat paths available
+            if(availableCatPaths.length > 0){
                 //select a new cat path 
-                    console.log("computer thinks it has completed its paths 1013: path options" + computerPathOptions[0][i])
-                    console.log("1013 computerNodes" + computerNodes)
                     selectCatPath();
                 //append new cat path to computer's list
                     computerCatPaths.push(currentCatPath)
@@ -1224,47 +1232,21 @@ const computerPlay = () => {
                     hasAllElems = true;
                     return;
                 }
-                else{
-                    let randomNumber = Math.floor(Math.random()*2);
-                    switch(randomNumber){
-                        case 0:
-                            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
-                            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
-                            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                            break;
-                        case 1:
-                            for (let key in pawPrintPaths){
-                                if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
-                                    checkComputerPawPrints(pawPrintPaths[key]["$img"])
-                                }
-
-                            }
-                            break;
+            else {
+                //if there are not cat paths availablecomputer selects the first pawPrint path
+                for (let key in pawPrintPaths){
+                    if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
+                        checkComputerPawPrints(pawPrintPaths[key]["$img"]);
+                        return;
                     }
                 }
-            }
-            else {
-                hasAllElems = false;
+                //if the computer cannot select a pawprint path, it draws cards
+                setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+                setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+                setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                return;
             }
         }
-        else{
-            console.log("if/else statement on line 1045 is running")
-            for (let key in pawPrintPaths){
-                console.log("for statement on line 1047 is running");
-                console.log("1048 clicked" + pawPrintPaths[key]["clicked"])
-                console.log("1048 computer pawprints number" + computerPawPrints[pawPrintPaths[key]["color"]]);
-                console.log("1048 pawPrints required" + pawPrintPaths[key]["pawsNeeded"])
-                if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
-                    console.log("computer should have claimed a new cat path line 1049")
-                    checkComputerPawPrints(pawPrintPaths[key]["$img"]);
-                    return;
-                }
-            }
-            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
-            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
-            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-            return;
-            }
         }
     // }
     console.log("computer nodes line 1021" + computerNodes)
@@ -1458,7 +1440,7 @@ const checkPlayerWinningPaths = () => {
         //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
         if(containsAll(playerPathOptions[0][i], playerNodes)){
             //add 20 points to player score
-            playerScore = playerScore + 20;
+            playerScore = playerScore + 10;
             //update player score on gameboard
             $('#playerScore').html(`${playerScore}`);
             //prevent score reduction
@@ -1472,7 +1454,7 @@ const checkPlayerWinningPaths = () => {
     //if player did not succeed at all cat paths...
     if (hasAllElems === false){
         //reduce score by 20 points
-        playerScore = playerScore - 20;
+        playerScore = playerScore - 10;
         //update player score on gameboard
         $('#playerScore').html(`${playerScore}`);
     }
@@ -1484,7 +1466,7 @@ const checkComputerWinningPaths = () => {
     for(i=0; i<computerPathOptions[0].length; i++){
         //if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
         if(containsAll(computerPathOptions[0][i], computerNodes)){
-            computerScore = computerScore + 20;
+            computerScore = computerScore + 10;
             $('#computerScore').html(`${computerScore}`);
             hasAllElems = true;
             break;
@@ -1494,7 +1476,7 @@ const checkComputerWinningPaths = () => {
         }
     }
     if (hasAllElems === false){
-        computerScore = computerScore - 20;
+        computerScore = computerScore - 10;
         $('#computerScore').html(`${computerScore}`);
     }
 }
