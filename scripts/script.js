@@ -1233,7 +1233,7 @@ const computerPlay = () => {
                     return;
                 }
             else {
-                //if there are not cat paths availablecomputer selects the first pawPrint path
+                //if there are not cat paths available computer selects the first pawPrint path
                 for (let key in pawPrintPaths){
                     if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
                         checkComputerPawPrints(pawPrintPaths[key]["$img"]);
@@ -1249,55 +1249,26 @@ const computerPlay = () => {
         }
         }
     // }
-    console.log("computer nodes line 1021" + computerNodes)
+    // console.log("computer nodes line 1021" + computerNodes)
     computerCheckNodes.push(computerNodes);
-    console.log("computer check nodes line 1023" + computerCheckNodes);
+    // console.log("computer check nodes line 1023" + computerCheckNodes);
     let computerPathOptionsFiltered=[];
     //check if computer node matches potential path; delete from computer node if so
     //for the computer path options
     for(i=0; i<computerPathOptions[0].length; i++){
-
-        // console.log(computerNodes)
-        // console.log(computerCheckNodes);
-
         //and for the computer nodes
         for(j=0; j<computerCheckNodes[j]; j++){
             //limiting the computer path options to the first three possibilities
             for(k=0; k<2; k++){
             //if computerNodes value is the same as catPathOptions value
                 if (computerCheckNodes[j] === computerPathOptions[0][i][k]){
-
-                    console.log("this is the path option pre splice" + computerPathOptions[0][i]);
-                    // console.log("computernode pre splice" + computerCheckNodes);
-                    // console.log("this node matches" + computerCheckNodes[j]);
-        
                     //slice it from the path options
                     computerPathOptions[0][i].splice(k,1);
                     //slice it from the computerNodes
                     computerCheckNodes.splice(j,1)
-                    // console.log("computerNodes post splice" + computerCheckNodes)
-                    // console.log("path options post splice" + computerPathOptions[0][i]);
                 }
             }
         }
-    
-    // console.log(computerPathOptions[0])    
-        //if the computer path options array is empty because they've all been matched
-    // if(computerPathOptions[0][i].length === 0){
-    //     //remove that catpath from the computer's list
-    //     computerCatPaths.shift();
-    //     //and select a new cat path 
-    //     selectCatPath();
-    //     //append new cat path to computer's list
-    //     computerCatPaths.push(currentCatPath)
-    //     //append appropriate cat path image to game board
-    //     $('.computerCatPaths').append(`<li>${currentCatPath.img}</li>`);
-    //     hasAllElems = true;
-    //     return;
-    // }
-    // else {
-    //     hasAllElems = false;
-    //     }
     }
        
     if (hasAllElems === false){
@@ -1307,10 +1278,6 @@ const computerPlay = () => {
     //delete it from the computer's potential winning array
     //if the computer has already acquired pawPrintPaths...
     if(computerNodes.length > 0){
-        // computerPathOptionsFiltered.length=0;
-        console.log("1081 computer path options filtered should be 0" + computerPathOptionsFiltered)
-        console.log("computerNodes 1079: " + computerNodes);
-        //loop over the first three potential winning computer paths
         for(i=0; i<2; i++){
             console.log("computerNodes 1082: " + computerNodes)
             //loop over the already acquired computer pawprint paths
@@ -1318,15 +1285,10 @@ const computerPlay = () => {
                 console.log("computerNodes 1085: " + computerNodes)
                 //if the computer path option does not include the existing computer nodes...
                 if (computerPathOptions[0][i].every(elem => computerNodes.includes)){
-                    console.log("computerNodesd 1088: " + computerNodes)
-                    console.log(computerPathOptions[0][i])
+                    //push that path options to the filtered path list
                     computerPathOptionsFiltered.push(computerPathOptions[0][i])
-                    console.log("computerPathOptionsFiltered 1092: " + computerPathOptionsFiltered)
-                }
-                    //remove that path option
-                    //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
-                    // computerPathOptions[0][i].slice(i, 1)
-                
+                    // console.log("computerPathOptionsFiltered 1092: " + computerPathOptionsFiltered)
+                } 
             }
         }
         for(let key in pawPrintPaths){
@@ -1335,40 +1297,74 @@ const computerPlay = () => {
                 console.log("1105 computer path options filtered: " + computerPathOptionsFiltered[0][i])
                 //if the required node to collect a pawPrintPath matches a node of the computer path options...
                 for(k=0; k<computerPathOptionsFiltered[0][i].length; k++){
-                    console.log("1108 computer path options filtered: " + computerPathOptionsFiltered[0][i])
+                    // console.log("1108 computer path options filtered: " + computerPathOptionsFiltered[0][i])
                     //if node1 for the pawPrintPath equals the computer path option
                     if(pawPrintPaths[key].node1 === computerPathOptionsFiltered[0][i][k]){
-                        console.log("pawPrints node1: " + pawPrintPaths[key].node1)
-                        console.log("pawPrintsPath node2: " + pawPrintPaths[key].node2);
+                        // console.log("pawPrints node1: " + pawPrintPaths[key].node1)
+                        // console.log("pawPrintsPath node2: " + pawPrintPaths[key].node2);
                         //loop again over the computer path options
                         for(j=0; j<computerPathOptionsFiltered[0][i].length; j++){
-                            console.log("computerpathoptionsFiltered" + computerPathOptionsFiltered[0][i]);
+                            // console.log("computerpathoptionsFiltered" + computerPathOptionsFiltered[0][i]);
                             //if the second required node to collect a pawPrintPath matches a node of the computer path options
                             if (pawPrintPaths[key].node2 === computerPathOptionsFiltered[0][i][j]){
                                 //if the computer has enough pawPrints of the right color to claim that path...
                                 // for(l=0; l<computerPathOptionsFiltered[0][i].length; l++) {
-                                    console.log("node2: " + pawPrintPaths[key].node2)
+                                    // console.log("node2: " + pawPrintPaths[key].node2)
                                     if(pawPrintPaths[key]["clicked"] === false){
-                                        console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
-                                        console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
+                                        // console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
+                                        // console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
                                         if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
-                                        console.log(pawPrintPaths[key])
-                                        checkComputerPawPrints(pawPrintPaths[key])
-                                        return;
-                                    // }
-                                }
+                                        // console.log(pawPrintPaths[key])
+                                            checkComputerPawPrints(pawPrintPaths[key])
+                                            return;
+                                        }
+                                        else {
+                                            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+                                            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+                                            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                                            return;
+                                        }
+                                    }
+                                    else if(pawPrintPaths[key]["clicked"] === true){
+                                        for(k=0; k<computerPathOptions[0][i].length; k++){
+                                            //if node1 for the pawPrintPath equals the computer path option
+                                            if(pawPrintPaths[key].node1 === computerPathOptions[0][i][k]){
+                                                //loop again over the computer path options
+                                                for(j=0; j<computerPathOptions[0][i].length; j++){
+                                                    //if the second required node to collect a pawPrintPath matches a node of the computer path options
+                                                    if (pawPrintPaths[key].node2 === computerPathOptions[0][i][j]){
+                                                        //if the computer has enough pawPrints of the right color to claim that path...
+                                                            if(pawPrintPaths[key]["clicked"] === false){
+                                                                // console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
+                                                                // console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
+                                                                if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+                                                                // console.log(pawPrintPaths[key])
+                                                                    checkComputerPawPrints(pawPrintPaths[key])
+                                                                    return;
+                                                                }
+                                                            }
+                                                            else {
+                                                                setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+                                                                setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+                                                                setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                                                                return;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                        
                             }
                         }
-                        
                     }
                 }
             }
-        }
-    }
-    }
+        }   
    
     //loop over pawPrintPaths
-    console.log('at least computerPLay function is working');
+    // console.log('at least computerPLay function is working');
     for(let key in pawPrintPaths){
         //loop over the first three computer potential winning options
         for(i=0; i<2; i++){
@@ -1378,41 +1374,55 @@ const computerPlay = () => {
                 console.log(computerPathOptions[0][i])
                 //if node1 for the pawPrintPath equals the computer path option
                 if(pawPrintPaths[key].node1 === computerPathOptions[0][i][k]){
-                    console.log("pawPrints node1: " + pawPrintPaths[key].node1)
-                    console.log("pawPrintsPath node2: " + pawPrintPaths[key].node2);
+                    // console.log("pawPrints node1: " + pawPrintPaths[key].node1)
+                    // console.log("pawPrintsPath node2: " + pawPrintPaths[key].node2);
                     //loop again over the computer path options
                     for(j=0; j<computerPathOptions[0][i].length; j++){
-                        console.log("computerpathoptions" + computerPathOptions[0][i]);
-                        console.log("current computer Nodes" + computerNodes)
+                        // console.log("computerpathoptions" + computerPathOptions[0][i]);
+                        // console.log("current computer Nodes" + computerNodes)
                         //if the second required node to collect a pawPrintPath matches a node of the computer path options
                         if (pawPrintPaths[key].node2 === computerPathOptions[0][i][j]){
                             //if the computer has enough pawPrints of the right color to claim that path...
                             // for(l=0; l<computerPathOptions[0][i].length; l++) {
-                                console.log("node2: " + pawPrintPaths[key].node2)
-                                if(pawPrintPaths[key]["clicked"] === false){
-                                    console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
-                                    console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
-                                    if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+                            // console.log("node2: " + pawPrintPaths[key].node2)
+                            if(pawPrintPaths[key]["clicked"] === false){
+                                // console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
+                                // console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
+                                if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                                     console.log(pawPrintPaths[key])
                                     checkComputerPawPrints(pawPrintPaths[key])
                                     return;
-                                // }
+                                }
+                                else {
+                                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+                                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+                                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                                    return;
+                                }
                             }
                         }
                     }
-                    
                 }
             }
         }
     }
-}
-    //if computer did not claim a cat path, computer draws three pawPrint cards
-    // else{
-        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
-        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
-        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        // return;
-    // }
+// //if computer does not perform any of the previous functions, it will claim a random cat path if it has enough cards
+//     for (let key in pawPrintPaths) {
+//         if(pawPrintPaths[key]["clicked"] === false){
+//             // console.log("paws available" + computerPawPrints[pawPrintPaths[key]["color"]])
+//             // console.log("paws needed" + pawPrintPaths[key]["pawsNeeded"])
+//             if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+//             console.log(pawPrintPaths[key])
+//             checkComputerPawPrints(pawPrintPaths[key])
+//             return;
+//             }
+//         }
+//     }
+// //or it will draw pawprint cards
+//     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+//     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+//     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+
 
 
 }  
