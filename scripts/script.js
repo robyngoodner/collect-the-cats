@@ -1179,10 +1179,11 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+        return;
         // alert("Your turn!");
 //add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
         }
-        else {
+    else {
     // logComputerWinningCatPaths();
     let hasAllElems = true;
     let computerCheckNodes = [];
@@ -1216,6 +1217,7 @@ const computerPlay = () => {
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                        return;
                     }
             }
             else {
@@ -1276,7 +1278,7 @@ const computerPlay = () => {
        
     if (hasAllElems === false){
     // if(computerPawPrints)
-    let computerPotentialPaths = [];
+    // let computerPotentialPaths = [];
     //if a potential winning array does not contain the nodes the computer has already acquired, 
     //delete it from the computer's potential winning array
     //if the computer has already acquired pawPrintPaths...
@@ -1335,13 +1337,15 @@ const computerPlay = () => {
                                                                     checkComputerPawPrints(pawPrintPaths[key])
                                                                     return;
                                                                 }
-                                                            }
+                                                            
                                                             else {
+                                                                // console.log("moved bracket from line 1340 to line 1348 experiment")
                                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
                                                                 return;
                                                             }
+                                                        }
                                                         }
                                                     }
                                                 }
@@ -1353,6 +1357,20 @@ const computerPlay = () => {
                         }
                     }
                 }
+            console.log("trying line 1358")
+            if(pawPrintPaths[key]["clicked"] === false && computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+                    checkComputerPawPrints(pawPrintPaths[key])
+                    return;
+                }
+            // else {
+            //     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+            //     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+            //     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+            //     return;
+            // }
+                
+                
+
             }
         }   
    
@@ -1377,12 +1395,13 @@ const computerPlay = () => {
                                     checkComputerPawPrints(pawPrintPaths[key])
                                     return;
                                 }
-                                // else {
-                                //     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
-                                //     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
-                                //     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                                //     return;
-                                // }
+                                else {
+                                    console.log("line 1383 is giving out cards yay")
+                                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+                                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+                                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+                                    return;
+                                }
                             }
                         }
                     }
@@ -1395,9 +1414,34 @@ const computerPlay = () => {
     }
  
 
+
+
+    console.log("line 1399 is giving out cards")
+//     if(availableCatPaths.length > 0) {
+//         selectCatPath();
+//         //append new cat path to computer's list
+//         computerCatPaths.push(currentCatPath)
+//         //append appropriate cat path image to game board
+//         $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1000);
+//         hasAllElems = true;
+//         return;
+//     }
+//     else{
+//     for(let key in pawPrintPaths){
+//         if(pawPrintPaths[key]["clicked"] === false){
+//             if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+//                 console.log(pawPrintPaths[key])
+//                 checkComputerPawPrints(pawPrintPaths[key])
+//                 return;
+//             }
+//         }
+//     }
+// }
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+    winTheGame();
+    return;
 // //if computer does not perform any of the previous functions, it will claim a random cat path if it has enough cards
 //     for (let key in pawPrintPaths) {
 //         if(pawPrintPaths[key]["clicked"] === false){
@@ -1466,7 +1510,22 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
         winTheGame();
+        return;
     }
+    // for(let key in pawPrintPaths){
+    //     if(pawPrintPaths[key]["clicked"] === false){
+    //         if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+    //             console.log(pawPrintPaths[key])
+    //             checkComputerPawPrints(pawPrintPaths[key])
+    //             return;
+    //         }
+    //     }
+    // }
+    // setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+    // setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+    // setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+    // winTheGame();
+    
 
 }
 
