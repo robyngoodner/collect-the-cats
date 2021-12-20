@@ -437,6 +437,8 @@ const setUpGame = () => {
     $('#computerScore').html(`${computerScore}`)
     playerScore = 0;
     $('#playerScore').html(`${playerScore}`);
+    computerNodes.length=0;
+    playerNodes.length=0;
 //empty player pawPrints
     playerPawPrints.orange = 0;
     playerPawPrints.brown = 0;
