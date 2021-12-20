@@ -120,31 +120,59 @@ $(".yes").on("click", function () {
     })
 
 
-    $("#needHelp").on("click", function () {
-        (function instructionsBox(msg, gfg) {
-            var confirmBox = $("#container");
-            $game.hide();
-            /* Trace message to display */
-            confirmBox.find(".message").text(msg);
-             
-            /* Calling function */
-            confirmBox.find(".yes").unbind().click(function()
-            {
-                //hide message box
-               confirmBox.hide();
-            });
-            confirmBox.find(".yes").click(gfg);
-            confirmBox.show();
-         })()
-        // $("container").show();
-        $(".message").html(`<p>Player draws 1 card from the cat-path collection. This card will establish the first set of cats that the player must collect.</p><p>On each subsequent turn, player may do one of the following:</p><p><ul><li>- draw three pawprint cards</li><li>- deploy pawprint cards from the player's hand in order to claim pathways between cats</li><li>- draw new cat-path cards to collect more cats</li></ul></p><p>A winner is determined once one of the following conditions has been met:</p><ul><li>- all of the cats have been claimed</li><li>- all of the pawprint cards have been claimed and each player has played one final round</li></ul><p>The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.</p><br><button class="no">I've got this</button>`); 
-        $("#container").find(".no").unbind().click(function()
+$("#needHelp").on("click", function () {
+    (function instructionsBox(msg, gfg) {
+        var confirmBox = $("#container");
+        $game.hide();
+        /* Trace message to display */
+        confirmBox.find(".message").text(msg);
+            
+        /* Calling function */
+        confirmBox.find(".yes").unbind().click(function()
         {
-            $("#container").hide();
-            $game.show()
+            //hide message box
+            confirmBox.hide();
         });
-        })
+        confirmBox.find(".yes").click(gfg);
+        confirmBox.show();
+        })()
+    // $("container").show();
+    $(".message").html(`<p>Player draws 1 card from the cat-path collection. This card will establish the first set of cats that the player must collect.</p><p>On each subsequent turn, player may do one of the following:</p><p><ul><li>- draw three pawprint cards</li><li>- deploy pawprint cards from the player's hand in order to claim pathways between cats</li><li>- draw new cat-path cards to collect more cats</li></ul></p><p>A winner is determined once one of the following conditions has been met:</p><ul><li>- all of the cats have been claimed</li><li>- all of the pawprint cards have been claimed and each player has played one final round</li></ul><p>The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.</p><br><button class="no">I've got this</button>`); 
+    $("#container").find(".no").unbind().click(function()
+    {
+        $("#container").hide();
+        $game.show()
+    });
+    })
 
+
+        // {
+        //     (function noMoreCatPaths(msg, gfg) {
+        //             var confirmBox = $("#noMoreCatPaths");
+        //             $game.hide();
+        //             /* Trace message to display */
+        //             confirmBox.find(".noMoreCatPaths").text(msg);
+                        
+        //             /* Calling function */
+        //             confirmBox.find(".ok").unbind().click(function()
+        //             {
+        //                 //hide message box
+        //                 confirmBox.hide();
+        //             });
+        //             confirmBox.find(".ok").click(gfg);
+        //             confirmBox.show();
+        //         })();
+        //     // $(".noMoreCatPaths").show();
+        //     $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="no">Ok!</button>`); 
+        //     $("#noMoreCatPaths").find(".no").unbind().click(function()
+        //     {
+        //         $("#noMoreCatPaths").hide();
+        //         $game.show()
+        //      });
+        //     // alert("There are no more cat path cards to draw! Get as many paths as you can before the game ends!")
+        // }
+
+    
 
 
 //initializing variables
@@ -689,10 +717,41 @@ $('#catpath').on('click', () => {
         }
     }
     else {
-        alert("There are no more cat path cards to draw! Get as many paths as you can before the game ends!")
+        (function () {
+            $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="no">Ok!</button>`); 
+            $("#noMoreCatPaths").find(".noCatPaths").unbind().click(function()
+            {
+                $("#noMoreCatPaths").hide();
+                $game.show()
+            });
+            })();
+        (function noMoreCatPaths(msg, gfg) {
+            console.log("is this stupid function even running")
+                var confirmBox = $("#noMoreCatPaths");
+                $game.hide();
+                /* Trace message to display */
+                confirmBox.find(".noMoreCatPaths").html(msg);
+                    
+                /* Calling function */
+                confirmBox.find(".ok").unbind().click(function()
+                {
+                    //hide message box
+                    confirmBox.hide();
+                });
+                confirmBox.find(".ok").click(gfg);
+                confirmBox.show();
+            })();
+        $("#noMoreCatPaths").show();
+                $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="noCatPaths">Ok!</button>`); 
+                $("#noMoreCatPaths").find(".noCatPaths").unbind().click(function()
+                {
+                    $("#noMoreCatPaths").hide();
+                    $game.show()
+                });
+        // alert("There are no more cat path cards to draw! Get as many paths as you can before the game ends!")
     }
-
 })
+
 //click that gives player pawprint cards
 //adds computer cards right after player cards if computer has fewer than four cards of each color
 $(".pawprints").on('click', () => {
@@ -707,7 +766,38 @@ $(".pawprints").on('click', () => {
         return true;
     }
     if (isEmpty(playerCatPaths)){
-        alert(`Begin by picking a cat-path card!`)
+        // alert(`Begin by picking a cat-path card!`)
+        (function () {
+            // $(".drawACatPath").html(`<h3>Begin by picking a cat-path card!</h3><br><button class="drawCatPath">Ok!</button>`); 
+            $("#drawACatPath").find(".noCatPaths").unbind().click(function()
+            {
+                $("#drawACatPath").hide();
+                $game.show()
+            });
+            })();
+        (function noMoreCatPaths(msg, gfg) {
+            console.log("is this stupid function even running")
+                var confirmBox = $("#drawACatPath");
+                $game.hide();
+                /* Trace message to display */
+                confirmBox.find(".drawACatPath").html(msg);
+                    
+                /* Calling function */
+                confirmBox.find(".drawCatPath").unbind().click(function()
+                {
+                    //hide message box
+                    confirmBox.hide();
+                });
+                confirmBox.find(".drawCatPath").click(gfg);
+                confirmBox.show();
+            })();
+        $("#drawACatPath").show();
+                $(".drawACatPath").html(`<p>Begin by picking a cat-path card!</p><br><button class="drawCatPath">Ok!</button>`); 
+                $("#drawACatPath").find(".drawACatPath").unbind().click(function()
+                {
+                    $("#drawACatPath").hide();
+                    $game.show()
+                });
     }
     else if (pawPrintCards> 3){
         addPawPrint(playerPawPrints);
