@@ -1445,7 +1445,7 @@ const computerPlay = () => {
     //         }
     //     }
     // }
-    logComputerWinningCatPaths();
+    // logComputerWinningCatPaths();
     for(i=0; i<2; i++){
     if(computerNodes.length > 0 && computerPathOptions[0][i]=== undefined){
         console.log("1450 loop is running")
@@ -1499,7 +1499,7 @@ const checkPlayerWinningPaths = () => {
     //if player did not succeed at all cat paths...
     if (hasAllElems === false){
         //reduce score by 20 points
-        playerScore = playerScore - 10;
+        playerScore = playerScore - 20;
         //update player score on gameboard
         $('#playerScore').html(`${playerScore}`);
     }
@@ -1521,7 +1521,7 @@ const checkComputerWinningPaths = () => {
         }
     }
     if (hasAllElems === false){
-        computerScore = computerScore - 10;
+        computerScore = computerScore - 20;
         $('#computerScore').html(`${computerScore}`);
     }
 }
