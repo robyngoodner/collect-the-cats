@@ -1390,6 +1390,11 @@ const computerPlay = () => {
             }
         }
     }
+    const isClicked = (element) => {
+        element["clicked"] === true
+    }
+ 
+
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
@@ -1445,10 +1450,9 @@ const computerPlay = () => {
     //         }
     //     }
     // }
-    // logComputerWinningCatPaths();
-    for(i=0; i<2; i++){
-    if(computerNodes.length > 0 && computerPathOptions[0][i]=== undefined){
-        console.log("1450 loop is running")
+    //logComputerWinningCatPaths();
+    if(computerCatPaths.length === 0 && availableCatPaths.length === 0){
+        console.log("1455 conditional is running")
         for(let key in pawPrintPaths){
             if(pawPrintPaths[key]["clicked"] === false){
                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
@@ -1463,7 +1467,7 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
         winTheGame();
     }
-}
+
 }
 
 
