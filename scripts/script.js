@@ -1172,6 +1172,7 @@ function containsAll(target, toTest) {
 //compare computerPathOptions[0] nodes to pawPrintPaths nodes. If a pawPrint path has two of the nodes from that array, 
 //and the computer has the correct number of the correct color of pawprint cards, claim that path.
 const computerPlay = () => {
+    logComputerWinningCatPaths();
     //load computer's potential winning arrays
     if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
         //add three pawprint cards to computer array and status box, if computer doesn't have enough pawprints to pick a path
@@ -1182,7 +1183,7 @@ const computerPlay = () => {
 //add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
         }
         else {
-    logComputerWinningCatPaths();
+    // logComputerWinningCatPaths();
     let hasAllElems = true;
     let computerCheckNodes = [];
     for(i=0; i<2; i++){
@@ -1234,7 +1235,7 @@ const computerPlay = () => {
                     hasAllElems = true;
                     return;
                 }
-            else {
+            else if(availableCatPaths.length<0) {
                 //if there are not cat paths available computer selects the first pawPrint path
                 for (let key in pawPrintPaths){
                     if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
@@ -1287,6 +1288,8 @@ const computerPlay = () => {
                 console.log("computerNodes 1085: " + computerNodes)
                 //if the computer path option does not include the existing computer nodes...
                 if (computerPathOptions[0][i].every(elem => computerNodes.includes)){
+                // if(containsAll(computerPathOptions[0][i], computerNodes)){
+
                     //push that path options to the filtered path list
                     computerPathOptionsFiltered.push(computerPathOptions[0][i])
                     // console.log("computerPathOptionsFiltered 1092: " + computerPathOptionsFiltered)
@@ -1409,9 +1412,57 @@ const computerPlay = () => {
 
 
 
-}  
-//check if someone has won
-winTheGame();
+    }  
+    //check if someone has won
+    winTheGame();
+    }
+    //looping through the first three cat path winning options
+    // for(i=0; i<2; i++){
+    //     //if the computer has completed all of its cat paths
+    //     if(computerPathOptions[0][i] === 0){
+    //     //     //if the computer has achieved its cat paths
+    //         if(containsAll(computerPathOptions[0][i], computerNodes)){
+    //             for(let key in pawPrintPaths){
+    //                 if(pawPrintPaths[key]["clicked"] === false){
+    //                     if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+    //                         console.log(pawPrintPaths[key])
+    //                         checkComputerPawPrints(pawPrintPaths[key])
+    //                         return;
+    //                     }
+    //                 }
+    //             }
+    //          }
+    //     }
+    //     else {
+    //         for(let key in pawPrintPaths){
+    //             if(pawPrintPaths[key]["clicked"] === false){
+    //                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+    //                     console.log(pawPrintPaths[key])
+    //                     checkComputerPawPrints(pawPrintPaths[key])
+    //                     return;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    logComputerWinningCatPaths();
+    for(i=0; i<2; i++){
+    if(computerNodes.length > 0 && computerPathOptions[0][i]=== undefined){
+        console.log("1450 loop is running")
+        for(let key in pawPrintPaths){
+            if(pawPrintPaths[key]["clicked"] === false){
+                if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+                    console.log(pawPrintPaths[key])
+                    checkComputerPawPrints(pawPrintPaths[key])
+                    return;
+                }
+            }
+        }
+        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+        setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+        winTheGame();
+    }
 }
 }
 
