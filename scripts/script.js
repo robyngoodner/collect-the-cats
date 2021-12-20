@@ -1358,8 +1358,6 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
         return;
-        // alert("Your turn!");
-//add an alert that indicates it's the player's turn? Or just a status bar of whose turn it is?
         }
     else {
     // logComputerWinningCatPaths();
@@ -1774,12 +1772,105 @@ const announceWinner = () => {
     checkComputerWinningPaths();
     //decide winners and announce
     if (playerScore > computerScore) {
-        alert("Congratulations! You've collected all your cats and beaten the computer!")
+        (function declareWinner (msg, gfg) {
+            const confirmBox = $("#declarePlayerWinner");
+        
+            //trace message to container
+            confirmBox.find(".declareWinner").html(msg);
+            //call function
+            confirmBox.find(".yesDeclareWinner").unbind().click(function() {
+                //show opening alert window
+                confirmBox.hide();
+                setUpGame();
+                $game.show();
+            });
+            confirmBox.find(".yesDeclareWinner").click(gfg);
+            confirmBox.show();
+        
+            confirmBox.find(".noDeclareWinner").unbind().click(function()
+            {
+                confirmBox.hide();
+                $game.show()
+            });
+            confirmBox.find(".noDeclareWinner").click(gfg);
+            confirmBox.show();
+        })();
+        // alert("Congratulations! You've collected all your cats and beaten the computer!")
     }
     else if (computerScore > playerScore) {
-        alert("Oh no! The computer won!")
+        (function declareWinner (msg, gfg) {
+            const confirmBox = $("#declareComputerWinner");
+        
+            //trace message to container
+            confirmBox.find(".declareWinner").html(msg);
+            //call function
+            confirmBox.find(".yesDeclareWinner").unbind().click(function() {
+                //show opening alert window
+                confirmBox.hide();
+                setUpGame();
+                $game.show();
+            });
+            confirmBox.find(".yesDeclareWinner").click(gfg);
+            confirmBox.show();
+        
+            confirmBox.find(".noDeclareWinner").unbind().click(function()
+            {
+                confirmBox.hide();
+                $game.show()
+            });
+            confirmBox.find(".noDeclareWinner").click(gfg);
+            confirmBox.show();
+        })();
+        //change declareWinner to instructions
+        
+        // $(".yesDeclareWinner").on("click", function () {
+        //     $(".declareWinner").html(`<p>Oh no! The computer won!</p><br><button class="yesDeclareWinner">Play again</button><button class="noDeclareWinner">View my gameboard</button>`); 
+        //     $("#declareComputerWinner").find(".noDeclareWinner").unbind().click(function()
+        //     {
+        //         $("#declareWinner").hide();
+        //         setUpGame();
+        //         $game.show()
+        //     });
+        //     })
+        // alert("Oh no! The computer won!")
     }
-    else alert("You and the computer tied!");
+    else {
+        (function declareWinner (msg, gfg) {
+            const confirmBox = $("#declareTie");
+        
+            //trace message to container
+            confirmBox.find(".declareWinner").html(msg);
+            //call function
+            confirmBox.find(".yesDeclareWinner").unbind().click(function() {
+                //show opening alert window
+                confirmBox.hide();
+                setUpGame();
+                $game.show();
+            });
+            confirmBox.find(".yesDeclareWinner").click(gfg);
+            confirmBox.show();
+        
+            confirmBox.find(".noDeclareWinner").unbind().click(function()
+            {
+                confirmBox.hide();
+                $game.show()
+            });
+            confirmBox.find(".noDeclareWinner").click(gfg);
+            confirmBox.show();
+        })();
+        //change declareWinner to instructions
+        
+        // $(".yesDeclareWinner").on("click", function () {
+        //     $(".declareWinner").html(`<p>You and the computer tied!</p><br><button class="yesDeclareWinner">Play again</button><button class="noDeclareWinner">View my gameboard</button>`); 
+        //     $("#declareWinner").find(".noDeclareWinner").unbind().click(function()
+        //     {
+        //         $("#declareWinner").hide();
+        //         setUpGame();
+        //         $game.show()
+        //     });
+        //     })
+        }
+    // } alert("You and the computer tied!");
 }
 //determine who won the game if all of the pawprint paths are claimed
 const winTheGame = () => { 
@@ -1787,5 +1878,6 @@ const winTheGame = () => {
         if(pawPrintPaths[key]["clicked"] === false) {
             return;}
 }
-    announceWinner();
+$("#restart").text("Play again");
+announceWinner();
 };

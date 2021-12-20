@@ -269,6 +269,184 @@ body {
     padding: 10px 30px;
 }
 
+
+#declareComputerWinner{
+    display: none;
+    background-image: linear-gradient(to right, #66a80f, #c0eb75);
+    background-size:cover;
+    color: white;
+    /* position: absolute; */
+    width: 900px;
+    /* border-radius: 5px; */
+    border: black solid 7px;
+    left: 40vw;
+    margin: 15vh auto;
+    margin-top: 15vh;
+    padding: 16px 8px 8px;
+    box-sizing: border-box;
+    margin-bottom: 100vh;
+}
+/* Designing dialog box's okay button */
+#declareComputerWinner .yesDeclareWinner{
+    background-color: #5c940d;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-left: 170px;
+    text-align: center;
+    width: 220px;
+    float: none;
+}
+ 
+#declareComputerWinner .noDeclareWinner{
+    background-color: #22b8cf;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-right: 170px;
+    text-align: center;
+    width: 220px;
+    float: right;
+}
+ 
+#declareComputerWinner .yesDeclareWinner:hover {
+    background-color: #82c91e;
+
+}
+ 
+#declareComputerWinner .noDeclareWinner:hover {
+    background-color: #99e9f2;
+
+}
+ 
+/* Dialog box message decorating */
+#declareComputerWinner .declareWinner{
+    text-align: left;
+    padding: 10px 30px;
+}
+#declarePlayerWinner{
+    display: none;
+    background-image: linear-gradient(to right, #66a80f, #c0eb75);
+    background-size:cover;
+    color: white;
+    /* position: absolute; */
+    width: 900px;
+    /* border-radius: 5px; */
+    border: black solid 7px;
+    left: 40vw;
+    margin: 15vh auto;
+    margin-top: 15vh;
+    padding: 16px 8px 8px;
+    box-sizing: border-box;
+    margin-bottom: 100vh;
+}
+/* Designing dialog box's okay button */
+#declarePlayerWinner .yesDeclareWinner{
+    background-color: #5c940d;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-left: 170px;
+    text-align: center;
+    width: 220px;
+    float: none;
+}
+ 
+#declarePlayerWinner .noDeclareWinner{
+    background-color: #22b8cf;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-right: 170px;
+    text-align: center;
+    width: 220px;
+    float: right;
+}
+ 
+#declarePlayerWinner .yesDeclareWinner:hover {
+    background-color: #82c91e;
+
+}
+ 
+#declarePlayerWinner .noDeclareWinner:hover {
+    background-color: #99e9f2;
+
+}
+ 
+/* Dialog box message decorating */
+#declarePlayerWinner .declareWinner{
+    text-align: left;
+    padding: 10px 30px;
+}
+
+#declareTie{
+    display: none;
+    background-image: linear-gradient(to right, #66a80f, #c0eb75);
+    background-size:cover;
+    color: white;
+    /* position: absolute; */
+    width: 900px;
+    /* border-radius: 5px; */
+    border: black solid 7px;
+    left: 40vw;
+    margin: 15vh auto;
+    margin-top: 15vh;
+    padding: 16px 8px 8px;
+    box-sizing: border-box;
+    margin-bottom: 100vh;
+}
+/* Designing dialog box's okay button */
+#declareTie .yesDeclareWinner{
+    background-color: #5c940d;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-left: 170px;
+    text-align: center;
+    width: 220px;
+    float: none;
+}
+ 
+#declareTie .noDeclareWinner{
+    background-color: #22b8cf;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-right: 170px;
+    text-align: center;
+    width: 220px;
+    float: right;
+}
+ 
+#declareTie .yesDeclareWinner:hover {
+    background-color: #82c91e;
+
+}
+ 
+#declareTie .noDeclareWinner:hover {
+    background-color: #99e9f2;
+
+}
+ 
+/* Dialog box message decorating */
+#declareTie .declareWinner{
+    text-align: left;
+    padding: 10px 30px;
+}
+
+
 /*buttons*/
 .buttons {
     display: flex;
