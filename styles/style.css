@@ -554,31 +554,44 @@ ul {
     padding: 0;
 }
 
-.computerInfo {
+.playerInfo {
     display: flex;
     justify-content: space-between;
     margin-right: 20px;
-    border: 4px solid black;
+    border: 5px solid black;
     padding: 5px;
     background: #92CC41;
     min-width: 30vw;
 }
 
-.playerInfo {
+.computerInfo {
     display: flex;
     justify-content: space-between;
     margin-left: 20px;
-    border: 4px solid black;
+    border: 5px solid white;
     padding: 5px;
     background: #92CC41;
-    color: black;
+    color: white;
     min-width: 30vw;
+}
+
+#computerBlack #computerGrey #computerWhite #computerOrange #computerBrown {
+    color: white
+}
+.turn {
+    color: black;
+    border: 3px solid black;
+    background:   #92CC41;  
+    /* box-sizing: border-box; */
+    margin-top: 100px;
+    height:65px;
+    padding: 10px;
 }
 
 .playerPawPrints {
     color: black;
     display: grid;
-    grid-template-columns: repeat(2, 90px);
+    grid-template-columns: repeat(2, 100px);
     grid-auto-rows: minmax(60px, auto);
 }
 #playerOrange {
@@ -603,7 +616,7 @@ ul {
     }
 .computerPawPrints {
     display: grid;
-    grid-template-columns: repeat(2, 90px);
+    grid-template-columns: repeat(2, 100px);
     grid-auto-rows: minmax(60px, auto);
 }
 #computerOrange {
@@ -692,7 +705,7 @@ p {
     grid-auto-rows: minmax(135px, auto);
     max-width: 1225px;
     margin-bottom: 30px;
-    background: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, .7);
     border-radius: 30px;
     /* padding-right: 10px; */
 
