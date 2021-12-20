@@ -718,7 +718,6 @@ $('#catpath').on('click', () => {
     }
     else {
         (function () {
-            $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="no">Ok!</button>`); 
             $("#noMoreCatPaths").find(".noCatPaths").unbind().click(function()
             {
                 $("#noMoreCatPaths").hide();
@@ -748,7 +747,6 @@ $('#catpath').on('click', () => {
                     $("#noMoreCatPaths").hide();
                     $game.show()
                 });
-        // alert("There are no more cat path cards to draw! Get as many paths as you can before the game ends!")
     }
 })
 
@@ -768,7 +766,6 @@ $(".pawprints").on('click', () => {
     if (isEmpty(playerCatPaths)){
         // alert(`Begin by picking a cat-path card!`)
         (function () {
-            // $(".drawACatPath").html(`<h3>Begin by picking a cat-path card!</h3><br><button class="drawCatPath">Ok!</button>`); 
             $("#drawACatPath").find(".noCatPaths").unbind().click(function()
             {
                 $("#drawACatPath").hide();
@@ -809,7 +806,37 @@ $(".pawprints").on('click', () => {
     }
     // }
         else if (pawPrintCards <= 2){
-            alert(`There are not enough pawprint cards for you to draw! You can select one more cat-path before a winner is determined.`);
+            (function () {
+                $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
+                {
+                    $("#noMorePawPrints").hide();
+                    $game.show()
+                });
+                })();
+            (function noMorePawPrints(msg, gfg) {
+                console.log("is this stupid function even running")
+                    var confirmBox = $("#noMorePawPrints");
+                    $game.hide();
+                    /* Trace message to display */
+                    confirmBox.find(".noMorePawPrints").html(msg);
+                        
+                    /* Calling function */
+                    confirmBox.find(".ok").unbind().click(function()
+                    {
+                        //hide message box
+                        confirmBox.hide();
+                    });
+                    confirmBox.find(".ok").click(gfg);
+                    confirmBox.show();
+                })();
+            $("#noMorePawPrints").show();
+                    $(".noMorePawPrints").html(`<p>There are not enough pawprint cards for you to draw. You can select one more cat-path before a winner is determined.</p><br><button class="noPawPrints">Ok!</button>`); 
+                    $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
+                    {
+                        $("#noMorePawPrints").hide();
+                        $game.show()
+                    });
+
             pawPrintCards = 0;
         }
 })
@@ -899,8 +926,41 @@ const checkPawPrints = (clickedObject) => {
                      computerPlay();
                  }
          }
-         else {alert("That cat path has already been claimed!")}
+         else if (clickedObject["clicked"] === true) {
+            (function () {
+                $("#claimedPawPath").find(".okPawPath").unbind().click(function()
+                {
+                    $("#claimedPawPath").hide();
+                    $game.show()
+                });
+                })();
+            (function claimedPawPath(msg, gfg) {
+                console.log("is this stupid function even running")
+                    var confirmBox = $("#claimedPawPath");
+                    $game.hide();
+                    /* Trace message to display */
+                    confirmBox.find(".claimedPawPath").html(msg);
+                        
+                    /* Calling function */
+                    confirmBox.find(".ok").unbind().click(function()
+                    {
+                        //hide message box
+                        confirmBox.hide();
+                    });
+                    confirmBox.find(".ok").click(gfg);
+                    confirmBox.show();
+                })();
+            $("#claimedPawPath").show();
+                    $(".claimedPawPath").html(`<p>That path has already been claimed. Please select a different path or draw paw print cards.</p><br><button class="okPawPath">Ok!</button>`); 
+                    $("#claimedPawPath").find(".okPawPath").unbind().click(function()
+                    {
+                        $("#claimedPawPath").hide();
+                        $game.show()
+                    });
+
+            // alert("That cat path has already been claimed!")}
          }
+        }
          else {
              alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
          }
@@ -1039,8 +1099,36 @@ for(let key in pawPrintPaths) {
         }
         //if pathway has already been claimed
         else{
-            //alert that pathway has already been claimed
-            alert("This path has already been claimed! Please pick a different path");
+            (function () {
+                $("#claimedPawPath").find(".okPawPath").unbind().click(function()
+                {
+                    $("#claimedPawPath").hide();
+                    $game.show()
+                });
+                })();
+            (function claimedPawPath(msg, gfg) {
+                console.log("is this stupid function even running")
+                    var confirmBox = $("#claimedPawPath");
+                    $game.hide();
+                    /* Trace message to display */
+                    confirmBox.find(".claimedPawPath").html(msg);
+                        
+                    /* Calling function */
+                    confirmBox.find(".ok").unbind().click(function()
+                    {
+                        //hide message box
+                        confirmBox.hide();
+                    });
+                    confirmBox.find(".ok").click(gfg);
+                    confirmBox.show();
+                })();
+            $("#claimedPawPath").show();
+                    $(".claimedPawPath").html(`<p>That path has already been claimed. Please select a different path or draw paw print cards.</p><br><button class="okPawPath">Ok!</button>`); 
+                    $("#claimedPawPath").find(".okPawPath").unbind().click(function()
+                    {
+                        $("#claimedPawPath").hide();
+                        $game.show()
+                    });
         }
     })
 };
