@@ -1185,7 +1185,7 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        winTheGame();
+        // winTheGame();
         return;
         }
     else {
@@ -1208,7 +1208,7 @@ const computerPlay = () => {
                     //append appropriate cat path image to game board
                         $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1000);
                         hasAllElems = true;
-                        winTheGame();
+                        // winTheGame();
                         return;
                     }
                 //if there aren't catPaths available, computer selects the first pawPrint path that it can
@@ -1216,7 +1216,7 @@ const computerPlay = () => {
                         for (let key in pawPrintPaths){
                             if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
                                 checkComputerPawPrints(pawPrintPaths[key]["$img"]);
-                                winTheGame();
+                                // winTheGame();
                                 break;
                             }
                         }
@@ -1224,7 +1224,7 @@ const computerPlay = () => {
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                        winTheGame();
+                        // winTheGame();
                         return;
                     }
             }
@@ -1243,7 +1243,7 @@ const computerPlay = () => {
                 //append appropriate cat path image to game board
                     $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1000);
                     hasAllElems = true;
-                    winTheGame();
+                    // winTheGame();
                     return;
                 }
             else if(availableCatPaths.length<0) {
@@ -1251,7 +1251,7 @@ const computerPlay = () => {
                 for (let key in pawPrintPaths){
                     if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
                         checkComputerPawPrints(pawPrintPaths[key]["$img"]);
-                        winTheGame();
+                        // winTheGame();
                         return;
                     }
                 }
@@ -1259,7 +1259,7 @@ const computerPlay = () => {
                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                winTheGame();
+                // winTheGame();
                 return;
             }
         }
@@ -1318,7 +1318,7 @@ const computerPlay = () => {
                                     if(pawPrintPaths[key]["clicked"] === false){
                                         if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                                             checkComputerPawPrints(pawPrintPaths[key])
-                                            winTheGame();
+                                            // winTheGame();
                                             return;
                                         }
                                     }
@@ -1346,7 +1346,7 @@ const computerPlay = () => {
                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                                                winTheGame();
+                                                // winTheGame();
                                                 return;
                                             }
                                         }
@@ -1361,14 +1361,14 @@ const computerPlay = () => {
             for(let key in pawPrintPaths){
                 if(pawPrintPaths[key]["clicked"] === false && computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                         checkComputerPawPrints(pawPrintPaths[key])
-                        winTheGame();
+                        // winTheGame();
                         return;
                     }
             }
             setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
             setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
             setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-            winTheGame();
+            // winTheGame();
             return;
         }
     }   
@@ -1389,7 +1389,7 @@ const computerPlay = () => {
                             if(pawPrintPaths[key]["clicked"] === false){
                                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                                     checkComputerPawPrints(pawPrintPaths[key])
-                                    winTheGame();
+                                    // winTheGame();
                                     return;
                                 }
                                 
@@ -1417,7 +1417,7 @@ const computerPlay = () => {
                                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                                        winTheGame();
+                                        // winTheGame();
                                         return;
                                     }
                                     }
@@ -1431,7 +1431,7 @@ const computerPlay = () => {
             if(pawPrintPaths[key]["clicked"] === false){
                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                     checkComputerPawPrints(pawPrintPaths[key]);
-                    winTheGame();
+                    // winTheGame();
                     return;
                 }
             }
@@ -1440,7 +1440,7 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        winTheGame();
+        // winTheGame();
         return;
     }
     const isClicked = (element) => {
@@ -1449,18 +1449,18 @@ const computerPlay = () => {
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-    winTheGame();
+    // winTheGame();
     return;
     }  
     //check if someone has won
-    winTheGame();
+    // winTheGame();
     }
     if(computerCatPaths.length === 0 && availableCatPaths.length === 0){
         for(let key in pawPrintPaths){
             if(pawPrintPaths[key]["clicked"] === false){
                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                     checkComputerPawPrints(pawPrintPaths[key])
-                    winTheGame();
+                    // winTheGame();
                     return;
                 }
             }
@@ -1468,9 +1468,10 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        winTheGame();
+        // winTheGame();
         return;
-    }   
+    }  
+    winTheGame(); 
 }
 
 
@@ -1500,7 +1501,7 @@ const computerPlay = () => {
  });
 
 const checkPlayerWinningPaths = () => {
-    let hasAllElems = true;
+    let hasAllElems;
     for(let key in pawPrintPaths) {
         if (pawPrintPaths[key]["clicked"] === false){
             break;
