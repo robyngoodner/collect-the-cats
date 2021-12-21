@@ -814,13 +814,13 @@ $(".pawprints").on('click', () => {
         addPawPrint(playerPawPrints);
         addPawPrint(playerPawPrints);
         addPawPrint(playerPawPrints);
-        winTheGame();
+        // winTheGame();
 
             //runs computer AI
         computerPlay();
     }
     // }
-        else if (pawPrintCards <= 2){
+        else if (pawPrintCards <= 2 && pawPrintCards > 0){
             (function () {
                 $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
                 {
@@ -941,15 +941,16 @@ const checkPawPrints = (clickedObject) => {
                      console.log(clickedObject.$img)
                      console.log(clickedObject.player)
                      clickedObject.$img.html(`<img src="images/${clickedObject.player}.png"></img>`).hide().slideDown(2500);
-                     winTheGame();
+                    //  winTheGame();
+                    //  return;
             
                      //runs computer AI
                      computerPlay();
                  }
          }
          else if (clickedObject["clicked"] === true) {
+            winTheGame();
             (function () {
-                winTheGame();
                 $("#claimedPawPath").find(".okPawPath").unbind().click(function()
                 {
                     $("#claimedPawPath").hide();
@@ -1105,7 +1106,7 @@ const confirmAllPathClicks = () => {
 
 //click event for all pawprint paths
 for(let key in pawPrintPaths) {
-    confirmAllPathClicks();
+    // confirmAllPathClicks();
     //upon clicking the pathway image
     pawPrintPaths[key]["$img"].on("click", () => {
         //check if pathway has already been claimed
@@ -1376,7 +1377,6 @@ function containsAll(target, toTest) {
 //compare computerPathOptions[0] nodes to pawPrintPaths nodes. If a pawPrint path has two of the nodes from that array, 
 //and the computer has the correct number of the correct color of pawprint cards, claim that path.
 const computerPlay = () => {
-    winTheGame();
     logComputerWinningCatPaths();
     //load computer's potential winning arrays
     if (computerPawPrints.orange < 4 && computerPawPrints.black < 4 && computerPawPrints.grey < 4 && computerPawPrints.white < 4 && computerPawPrints.brown < 4){
@@ -1472,7 +1472,7 @@ const computerPlay = () => {
     let computerPathOptionsFiltered=[];
     //check if computer node matches potential path; delete from computer node if so
     //for the computer path options
-    for(i=0; i<2; i++){
+    for(i=0; i<3; i++){
         //and for the computer nodes
         for(j=0; j<computerCheckNodes[j]; j++){
             //limiting the computer path options to the first three possibilities
@@ -1495,7 +1495,7 @@ const computerPlay = () => {
     //delete it from the computer's potential winning array
     //if the computer has already acquired pawPrintPaths...
     if(computerNodes.length > 0){
-        for(i=0; i<2; i++){
+        for(i=0; i<3; i++){
             console.log("computerNodes 1082: " + computerNodes)
             //loop over the already acquired computer pawprint paths
             for(j=0; j<computerNodes.length; j++){
@@ -1512,8 +1512,8 @@ const computerPlay = () => {
         }
         if(computerPathOptionsFiltered[0] != undefined){
         for(let key in pawPrintPaths){
-            //loop over the first three computer potential winning options
-            for(i=0; i<2; i++){
+            //loop over the two three computer potential winning options
+            for(i=0; i<3; i++){
                 console.log("1105 computer path options filtered: " + computerPathOptionsFiltered[0][i])
                 //if the required node to collect a pawPrintPath matches a node of the computer path options...
                 for(k=0; k<computerPathOptionsFiltered[0][i].length; k++){
@@ -1548,7 +1548,7 @@ const computerPlay = () => {
             }
             for(let key in pawPrintPaths){
                 //loop over the first three computer potential winning options
-                for(i=0; i<2; i++){
+                for(i=0; i<3; i++){
                     console.log("1105 computer path options filtered: " + computerPathOptionsFiltered[0][i])
                     //if the required node to collect a pawPrintPath matches a node of the computer path options...
                     for(k=0; k<computerPathOptionsFiltered[0][i].length; k++){
@@ -1587,26 +1587,27 @@ const computerPlay = () => {
             console.log("trying line 1358")
             for(let key in pawPrintPaths){
                 if(pawPrintPaths[key]["clicked"] === false && computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
+                    // console.log(pawPrintPaths[key]["clicked"]);
+                    // console.log(computerPawPrints[pawPrintPaths][key]["color"])
+                    // console.log(pawPrintPaths[key]["pawsNeeded"])
                         checkComputerPawPrints(pawPrintPaths[key])
                         console.log("line 1560 is grabbing pawprint paths");
                         winTheGame();
                         return;
                     }
-                else {
-                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
-                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
-                    setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                    winTheGame();
-                    return;
-                }
             }
+            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
+            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
+            setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
+            winTheGame();
+            return;
         }
     }   
    
     //loop over pawPrintPaths
     for(let key in pawPrintPaths){
         //loop over the first three computer potential winning options
-        for(i=0; i<2; i++){
+        for(i=0; i<3; i++){
             console.log(computerPathOptions[0][i])
             //if the required node to collect a pawPrintPath matches a node of the computer path options...
             for(k=0; k<computerPathOptions[0][i].length; k++){
@@ -1636,7 +1637,7 @@ const computerPlay = () => {
         }
         for(let key in pawPrintPaths){
             //loop over the first three computer potential winning options
-            for(i=0; i<2; i++){
+            for(i=0; i<3; i++){
                 console.log(computerPathOptions[0][i])
                 //if the required node to collect a pawPrintPath matches a node of the computer path options...
                 for(k=0; k<computerPathOptions[0][i].length; k++){
@@ -1812,44 +1813,94 @@ $("#feedback").on('click', () => {announceWinner()});
 
 
 //compare playerPaths to player potential winning paths, assign points based on whether player achieved all paths picked
+// const checkPlayerWinningPaths = () => {
+//     //collate winning cat paths, put in array for use
+//     logPlayerWinningCatPaths();
+//     let hasAllElems = true;
+//     //compare player array to potential winning arrays
+//     for(i=0; i<playerPathOptions[0].length; i++){
+//         //if player array includes all the values in one of potential winning arrays...
+//         //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
+//         if(containsAll(playerPathOptions[0][i], playerNodes)){
+//             console.log("player got all its paths line 1824: " + playerScore)
+//             //add 20 points to player score
+//             playerScore = playerScore + 10;
+//             console.log("player after score adjustment line 1827: " + playerScore)
+//             //update player score on gameboard
+//             $('#playerScore').html(`${playerScore}`);
+//             //prevent score reduction
+//             hasAllElems = true;
+//             break;
+//         }
+//         else {
+//             hasAllElems = false;
+//         }
+//     }
+//     //if player did not succeed at all cat paths...
+//     if (hasAllElems === false){
+//         console.log("player did not get all its paths line 1840: " + playerScore)
+//         //reduce score by 20 points
+//         playerScore = playerScore - 10;
+//         console.log("player score after adjustment line 1843: " + playerScore)
+//         //update player score on gameboard
+//         $('#playerScore').html(`${playerScore}`);
+//         return;
+//     }
+// }
 const checkPlayerWinningPaths = () => {
-    //collate winning cat paths, put in array for use
-    logPlayerWinningCatPaths();
     let hasAllElems = true;
-    //compare player array to potential winning arrays
-    for(i=0; i<playerPathOptions[0].length; i++){
-        //if player array includes all the values in one of potential winning arrays...
-        //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
-        if(containsAll(playerPathOptions[0][i], playerNodes)){
-            //add 20 points to player score
-            playerScore = playerScore + 10;
-            //update player score on gameboard
-            $('#playerScore').html(`${playerScore}`);
-            //prevent score reduction
-            hasAllElems = true;
+    for(let key in pawPrintPaths) {
+        if (pawPrintPaths[key]["clicked"] === false){
             break;
         }
-        else {
-            hasAllElems = false;
-        }
+        else{
+        console.log("is checkPlayerWinningPaths running more than once")
+        //collate winning cat paths, put in array for use
+        logPlayerWinningCatPaths();
+        
+        //compare player array to potential winning arrays
+        for(i=0; i<playerPathOptions[0].length; i++){
+            //if player array includes all the values in one of potential winning arrays...
+            //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
+            if(containsAll(playerPathOptions[0][i], playerNodes)){
+                console.log("player got all its paths line 1824: " + playerScore)
+                hasAllElems = true;
+                break;
+            }
+            else {
+                hasAllElems = false;
+            }
+        }}
     }
-    //if player did not succeed at all cat paths...
-    if (hasAllElems === false){
-        //reduce score by 20 points
-        playerScore = playerScore - 20;
+    
+    if(hasAllElems === true) {
+        playerScore = playerScore + 10;
+        console.log("player after score adjustment line 1827: " + playerScore)
         //update player score on gameboard
         $('#playerScore').html(`${playerScore}`);
+        return;
+    }
+    else if (hasAllElems === false) {
+        //reduce score by 20 points
+        playerScore = playerScore - 10;
+        console.log("player score after adjustment line 1843: " + playerScore)
+//update player score on gameboard
+        $('#playerScore').html(`${playerScore}`);
+        return;
     }
 }
-//same as playerWinningPaths
+
 const checkComputerWinningPaths = () => {
+    console.log("is checkComputerWinningPaths running more than once")
+    //collate winning cat paths, put in array for use
     logComputerWinningCatPaths();
-    let hasAllElems = true;
+    let hasAllElems;
+    //compare player array to potential winning arrays
     for(i=0; i<computerPathOptions[0].length; i++){
-        //if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+        //if player array includes all the values in one of potential winning arrays...
+        //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
         if(containsAll(computerPathOptions[0][i], computerNodes)){
-            computerScore = computerScore + 10;
-            $('#computerScore').html(`${computerScore}`);
+            console.log("computer got all its paths line 1824: " + computerScore)
             hasAllElems = true;
             break;
         }
@@ -1857,19 +1908,63 @@ const checkComputerWinningPaths = () => {
             hasAllElems = false;
         }
     }
-    if (hasAllElems === false){
-        computerScore = computerScore - 20;
+    if(hasAllElems === true) {
+        console.log("computer score before adjustment 1904: " + computerScore)
+        computerScore = computerScore + 10;
+        console.log("computer after score adjustment line 1827: " + computerScore)
+        //update computer score on gameboard
         $('#computerScore').html(`${computerScore}`);
+        return;
+    }
+    else if (hasAllElems === false) {
+        //reduce score by 20 points
+        console.log("computer score before adjustment 1912: " + computerScore)
+        computerScore = computerScore - 10;
+        console.log("computer score after adjustment line 1843: " + computerScore)
+//update computer score on gameboard
+        $('#computerScore').html(`${computerScore}`);
+        return;
     }
 }
+
+// //same as playerWinningPaths
+// const checkComputerWinningPaths = () => {
+//     logComputerWinningCatPaths();
+//     let hasAllElems = true;
+//     for(i=0; i<computerPathOptions[0].length; i++){
+//         console.log("computer points line 1849: " + computerScore)
+//         //if(computerPathOptions[0][i].every(elem => computerNodes.includes(elem))){
+//         if(containsAll(computerPathOptions[0][i], computerNodes)){
+//             console.log("computer points computer got all it's paths line 1853: " + computerScore)
+//             computerScore = computerScore + 10;
+//             console.log("computer points after score adjustment line 1855: " + computerScore)
+//             $('#computerScore').html(`${computerScore}`);
+//             hasAllElems = true;
+//             break;
+//         }
+//         else {
+//             hasAllElems = false;
+//         }
+//     }
+//     if (hasAllElems === false){
+//         console.log("computer did not get all its paths line 1865: " +  computerScore)
+//         computerScore = computerScore - 10;
+//         console.log("computer score after score adjustment line 1867: " + computerScore)
+//         $('#computerScore').html(`${computerScore}`);
+//         return;
+//     }
+// }
 //winner announcement
 const announceWinner = () => {
+    console.log("is announceWinner running more than once")
     //check if player got all cat paths
     checkPlayerWinningPaths();
     //check if computer got all cat paths
     checkComputerWinningPaths();
     //decide winners and announce
+    setTimeout(() => {
     if (playerScore > computerScore) {
+        $game.hide();
         (function declareWinner (msg, gfg) {
             const confirmBox = $("#declarePlayerWinner");
         
@@ -1893,9 +1988,11 @@ const announceWinner = () => {
             confirmBox.find(".noDeclareWinner").click(gfg);
             confirmBox.show();
         })();
+        return;
         // alert("Congratulations! You've collected all your cats and beaten the computer!")
     }
     else if (computerScore > playerScore) {
+        $game.hide();
         (function declareWinner (msg, gfg) {
             const confirmBox = $("#declareComputerWinner");
         
@@ -1919,6 +2016,7 @@ const announceWinner = () => {
             confirmBox.find(".noDeclareWinner").click(gfg);
             confirmBox.show();
         })();
+        return;
         //change declareWinner to instructions
         
         // $(".yesDeclareWinner").on("click", function () {
@@ -1933,6 +2031,7 @@ const announceWinner = () => {
         // alert("Oh no! The computer won!")
     }
     else {
+        $game.hide();
         (function declareWinner (msg, gfg) {
             const confirmBox = $("#declareTie");
         
@@ -1968,6 +2067,8 @@ const announceWinner = () => {
         //     });
         //     })
         }
+    }, 2000)
+    return;
     // } alert("You and the computer tied!");
 }
 //determine who won the game if all of the pawprint paths are claimed
@@ -1977,5 +2078,7 @@ const winTheGame = () => {
             return;}
 }
 $("#restart").text("Play again");
+console.log("is winTheGame running more than once");
 announceWinner();
+return;
 };
