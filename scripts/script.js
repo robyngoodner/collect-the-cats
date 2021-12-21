@@ -146,32 +146,6 @@ $("#needHelp").on("click", function () {
     })
 
 
-        // {
-        //     (function noMoreCatPaths(msg, gfg) {
-        //             var confirmBox = $("#noMoreCatPaths");
-        //             $game.hide();
-        //             /* Trace message to display */
-        //             confirmBox.find(".noMoreCatPaths").text(msg);
-                        
-        //             /* Calling function */
-        //             confirmBox.find(".ok").unbind().click(function()
-        //             {
-        //                 //hide message box
-        //                 confirmBox.hide();
-        //             });
-        //             confirmBox.find(".ok").click(gfg);
-        //             confirmBox.show();
-        //         })();
-        //     // $(".noMoreCatPaths").show();
-        //     $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="no">Ok!</button>`); 
-        //     $("#noMoreCatPaths").find(".no").unbind().click(function()
-        //     {
-        //         $("#noMoreCatPaths").hide();
-        //         $game.show()
-        //      });
-        //     // alert("There are no more cat path cards to draw! Get as many paths as you can before the game ends!")
-        // }
-
     
 
 
@@ -534,13 +508,30 @@ pawPrintPaths.$seventeen.$img.html(`<img src="images/seventeen.png"></img>`);
 
 //reset game button
 $('#restart').on('click', () => {
-    // window.confirm("Are you sure you'd like to restart?")
-    if(confirm("Are you sure you'd like to restart your game?")) {
-    setUpGame();
-    }
-    else {
-        return;
-    }
+    $game.hide();
+    (function openingMessage (msg, gfg) {
+        const confirmBox = $("#reset");
+    
+        //trace message to reset
+        confirmBox.find(".reset").html(msg);
+        //call function
+        confirmBox.find(".yesReset").unbind().click(function() {
+            //show opening alert window
+            confirmBox.hide();
+            setUpGame();
+            $game.show();
+        });
+        confirmBox.find(".yesReset").click(gfg);
+        confirmBox.show();
+    
+        confirmBox.find(".noReset").unbind().click(function()
+        {
+            confirmBox.hide();
+            $game.show()
+        });
+        confirmBox.find(".noReset").click(gfg);
+        confirmBox.show();
+    })();
 })
 
 
@@ -768,7 +759,6 @@ $(".pawprints").on('click', () => {
         return true;
     }
     if (isEmpty(playerCatPaths)){
-        // alert(`Begin by picking a cat-path card!`)
         (function () {
             $("#drawACatPath").find(".noCatPaths").unbind().click(function()
             {

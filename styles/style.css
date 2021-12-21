@@ -70,9 +70,66 @@ body {
     padding: 10px 30px;
 }
 
-/* #noMoreCatPaths {
-    display: none
-} */
+
+
+
+/* dialogue box*/
+#reset{
+    display: none;
+    background-image: linear-gradient(to right, #66a80f, #c0eb75);
+    background-size:cover;
+    color: white;
+    /* position: absolute; */
+    width: 900px;
+    /* border-radius: 5px; */
+    border: black solid 7px;
+    left: 40vw;
+    margin: 15vh auto;
+    margin-top: 15vh;
+    padding: 16px 8px 8px;
+    box-sizing: border-box;
+    margin-bottom: 100vh;
+}
+/* Designing dialog box's okay button */
+#reset .yesReset{
+    background-color: #5c940d;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-left: 170px;
+    text-align: center;
+    width: 220px;
+    float: none;
+}
+ 
+#reset .noReset{
+    background-color: #22b8cf;
+    display: inline-block;
+    /* border-radius: 5px; */
+    border: 4px solid black;
+    padding: 5px;
+    /* margin: 15vh auto; */
+    margin-right: 170px;
+    text-align: center;
+    width: 220px;
+    float: right;
+}
+#reset .yesReset:hover {
+    background-color: #82c91e;
+
+}
+#reset .noReset:hover {
+    background-color: #99e9f2;
+
+}
+/* Dialog box message decorating */
+#reset .reset {
+    text-align: left;
+    padding: 10px 30px;
+}
+
 
 #noMoreCatPaths{
     display: none;
