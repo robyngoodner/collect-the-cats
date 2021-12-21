@@ -26,10 +26,16 @@ Player draws 1 card out of the cat-path collection. This card will establish the
 - As a player, I want to be able to claim a pawprint path if I have enough pawprint cards.
 - As a player, I want to gain points as I collect pawprint paths.
 - As a player, I want to gain points as I collect cat-paths.
-- As an observer, I want to be able to see which cat-paths have been claimed by whom.
-- As an observer, I want to be able to see when the computer claims pawprint paths.
-- As an observer, I want to be able to see the player's score and the computer's score at all times, so I know who is winning.
 - As a player, I want a warning when there are only 9 pawprint cards left, so that I have a chance to make a play.
 - As a player, I want to know when I have one last chance to claim a final pawprint path.
 - As a player, I want to know who won.
 - As a player, I want to be able to reset the board to zero.
+- As an observer, I want to be able to see which cat-paths have been claimed by whom.
+- As an observer, I want to be able to see when the computer claims pawprint paths.
+- As an observer, I want to be able to see the player's score and the computer's score at all times, so I know who is winning.
+
+# Wire-frames
+![Title frame](https://share.balsamiq.com/c/qRMpftaLgh4BRRPZobGWQc.png)
+![Game Board](https://share.balsamiq.com/c/mXqFcJDMwXMGKLimrCUgaR.png)
+![Pick your paw print cards](https://share.balsamiq.com/c/oMryKrEJaYPJ94EjeL11dh.png)
+![Mid game](https://share.balsamiq.com/c/5D6jYpuDC6RhwcGpfike6k.png)

@@ -111,7 +111,7 @@ $game.hide();
 //change message to instructions
 
 $(".yes").on("click", function () {
-    $(".message").html(`<p>Player draws 1 card from the cat-path collection. This card will establish the first set of cats that the player must collect.</p><p>On each subsequent turn, player may do one of the following:</p><p><ul><li>- draw three pawprint cards</li><li>- deploy pawprint cards from the player's hand in order to claim pathways between cats</li><li>- draw new cat-path cards to collect more cats</li></ul></p><p>A winner is determined once one of the following conditions has been met:</p><ul><li>- all of the cats have been claimed</li><li>- all of the pawprint cards have been claimed and each player has played one final round</li></ul><p>The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.</p><br><button class="no">I've got this</button>`); 
+    $(".message").html(`<p>Player draws 1 card from the cat-path collection. This card will establish the first set of cats that the player must collect.</p><p>On each subsequent turn, player may do one of the following:</p><p><ul><li>- draw three pawprint cards</li><li>- deploy pawprint cards from the player's hand in order to claim pathways between cats</li><li>- draw new cat-path cards to collect more cats</li></ul></p><p>A winner is determined once one of the following conditions has been met:</p><ul><li>- all of the cats have been claimed</li><li>- all of the pawprint cards have been claimed and each player has played one final round</li></ul><p>The winner is determined based on a points system according to the distance between cats that the players are claiming. Cats that are further away from each other are worth more points. Players will gain additional points for completed cat-paths, and lose points for having cat-paths that are not completed by the end of the game.</p><br><button class="no nes-btn is-success">I've got this</button>`); 
     $("#container").find(".no").unbind().click(function()
     {
         $("#container").hide();
@@ -781,7 +781,7 @@ $(".pawprints").on('click', () => {
                 confirmBox.show();
             })();
         $("#drawACatPath").show();
-                $(".drawACatPath").html(`<p>Begin by picking a cat-path card!</p><br><button class="drawCatPath">Ok!</button>`); 
+                $(".drawACatPath").html(`<p>Begin by picking a cat-path card!</p><br><button class="drawCatPath nes-btn is-primary">Ok!</button>`); 
                 $("#drawACatPath").find(".drawACatPath").unbind().click(function()
                 {
                     $("#drawACatPath").hide();
@@ -821,7 +821,7 @@ $(".pawprints").on('click', () => {
                     confirmBox.show();
                 })();
             $("#noMorePawPrints").show();
-                    $(".noMorePawPrints").html(`<p>There are not enough pawprint cards for you to draw. You can select one more cat-path before a winner is determined.</p><br><button class="noPawPrints">Ok!</button>`); 
+                    $(".noMorePawPrints").html(`<p>There are not enough pawprint cards for you to draw. You can select one more cat-path before a winner is determined.</p><br><button class="noPawPrints nes-btn is-primary">Ok!</button>`); 
                     $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
                     {
                         $("#noMorePawPrints").hide();
@@ -963,7 +963,7 @@ const checkPawPrints = (clickedObject) => {
                     confirmBox.show();
                 })();
             $("#notEnoughPaws").show();
-                    $(".notEnoughPaws").html(`<p>You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.</p><br><button class="okNotEnoughPaws">Ok!</button>`); 
+                    $(".notEnoughPaws").html(`<p>You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.</p><br><button class="okNotEnoughPaws nes-btn is-primary">Ok!</button>`); 
                     $("#notEnoughPaws").find(".okNotEnoughPaws").unbind().click(function()
                     {
                         $("#notEnoughPaws").hide();
