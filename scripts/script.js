@@ -985,8 +985,37 @@ const checkPawPrints = (clickedObject) => {
          }
         }
          else {
-            winTheGame();
-             alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
+            // winTheGame();
+            (function () {
+                $("#notEnoughPaws").find(".okNotEnoughPaws").unbind().click(function()
+                {
+                    $("#notEnoughPaws").hide();
+                    $game.show()
+                });
+                })();
+            (function notEnoughPaws(msg, gfg) {
+                    var confirmBox = $("#notEnoughPaws");
+                    $game.hide();
+                    /* Trace message to display */
+                    confirmBox.find(".notEnoughPaws").html(msg);
+                        
+                    /* Calling function */
+                    confirmBox.find(".ok").unbind().click(function()
+                    {
+                        //hide message box
+                        confirmBox.hide();
+                    });
+                    confirmBox.find(".ok").click(gfg);
+                    confirmBox.show();
+                })();
+            $("#notEnoughPaws").show();
+                    $(".notEnoughPaws").html(`<p>You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.</p><br><button class="okNotEnoughPaws">Ok!</button>`); 
+                    $("#notEnoughPaws").find(".okNotEnoughPaws").unbind().click(function()
+                    {
+                        $("#notEnoughPaws").hide();
+                        $game.show()
+                    });
+            //  alert(`You do not have enough ${clickedColor} pawprint cards to collect that path! Keep collecting.`)
          }
     // }
 };
