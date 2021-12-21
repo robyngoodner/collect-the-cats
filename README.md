@@ -1,5 +1,5 @@
 # collect-the-cats
-A board game that requires you to collect cards in order to collect a chosen assortment of cats
+A board game that requires you to collect cards in order to collect a chosen assortment of cats.
 
 # Play instruction:
 Player draws 1 card out of the cat-path collection. This card will establish the first set of cats that the player must collect. 
