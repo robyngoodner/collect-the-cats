@@ -208,14 +208,6 @@ $threea: {
     computer:'threeaComputer',
     id: "three"
 },
-// $threeb: {
-//     $img: $(".threeb"),
-//     node1: 3,
-//     node2: 4,
-//     pawsNeeded: 7,
-//     color: "white",
-//     clicked: false
-// },
 $four: {
     $img: $(".four"),
     node1: 1,
@@ -296,14 +288,6 @@ $eleven: {
     player: 'elevenPlayer',
     computer:'elevenComputer'
 },
-// $twelve: {
-//     $img: $(".twelve"),
-//     node1: 6,
-//     node2: 4,
-//     pawsNeeded: 6,
-//     color: 'grey',
-//     clicked: false
-// },
 $thirteen: {
     $img: $(".thirteen"),
     node1: 7,
@@ -314,10 +298,6 @@ $thirteen: {
     player: 'thirteenPlayer',
     computer: 'thirteenComputer'
 },
-// $fourteen: {
-//     $img: $(".fourteen"),
-//     node1: 2,
-//     node2: 3},
 $fifteen: {
     $img: $(".fifteen"),
     node1: 5,
@@ -351,12 +331,7 @@ $seventeen: {
 }
 };
 
-// $setUpGame {
-//     sets up game board
-//     sets scores to zero
-//     Puts all cards in places
-//     put
-// }
+
 //reset game function
 const setUpGame = () => {
 //set scores to 0
@@ -404,23 +379,23 @@ const setUpGame = () => {
     $("#computerWhite").html(`<img class="pawPrintCards" src='images/computerpaw.png'>:${computerPawPrints.white}`);
     $("#computerBrown").html(`<img class="pawPrintCards" src='images/computerpaw.png'>:${computerPawPrints.brown}`);
 //reset board visual
-pawPrintPaths.$one.$img.html(`<img src="images/one.png"></img>`);
-pawPrintPaths.$onea.$img.html(`<img src="images/onea.png"></img>`);
-pawPrintPaths.$two.$img.html(`<img src="images/two.png"></img>`);
-pawPrintPaths.$three.$img.html(`<img src="images/three.png"></img>`);
-pawPrintPaths.$threea.$img.html(`<img src="images/threea.png"></img>`);
-pawPrintPaths.$four.$img.html(`<img src="images/four.png"></img>`);
-pawPrintPaths.$five.$img.html(`<img src="images/five.png"></img>`);
-pawPrintPaths.$six.$img.html(`<img src="images/six.png"></img>`);
-pawPrintPaths.$seven.$img.html(`<img src="images/seven.png"></img>`);
-pawPrintPaths.$eight.$img.html(`<img src="images/eight.png"></img>`);
-pawPrintPaths.$nine.$img.html(`<img src="images/nine.png"></img>`);
-pawPrintPaths.$ten.$img.html(`<img src="images/ten.png"></img>`);
-pawPrintPaths.$eleven.$img.html(`<img src="images/eleven.png"></img>`);
-pawPrintPaths.$thirteen.$img.html(`<img src="images/thirteen.png"></img>`);
-pawPrintPaths.$fifteen.$img.html(`<img src="images/fifteen.png"></img>`);
-pawPrintPaths.$sixteen.$img.html(`<img src="images/sixteen.png"></img>`);
-pawPrintPaths.$seventeen.$img.html(`<img src="images/seventeen.png"></img>`);
+    pawPrintPaths.$one.$img.html(`<img src="images/one.png"></img>`);
+    pawPrintPaths.$onea.$img.html(`<img src="images/onea.png"></img>`);
+    pawPrintPaths.$two.$img.html(`<img src="images/two.png"></img>`);
+    pawPrintPaths.$three.$img.html(`<img src="images/three.png"></img>`);
+    pawPrintPaths.$threea.$img.html(`<img src="images/threea.png"></img>`);
+    pawPrintPaths.$four.$img.html(`<img src="images/four.png"></img>`);
+    pawPrintPaths.$five.$img.html(`<img src="images/five.png"></img>`);
+    pawPrintPaths.$six.$img.html(`<img src="images/six.png"></img>`);
+    pawPrintPaths.$seven.$img.html(`<img src="images/seven.png"></img>`);
+    pawPrintPaths.$eight.$img.html(`<img src="images/eight.png"></img>`);
+    pawPrintPaths.$nine.$img.html(`<img src="images/nine.png"></img>`);
+    pawPrintPaths.$ten.$img.html(`<img src="images/ten.png"></img>`);
+    pawPrintPaths.$eleven.$img.html(`<img src="images/eleven.png"></img>`);
+    pawPrintPaths.$thirteen.$img.html(`<img src="images/thirteen.png"></img>`);
+    pawPrintPaths.$fifteen.$img.html(`<img src="images/fifteen.png"></img>`);
+    pawPrintPaths.$sixteen.$img.html(`<img src="images/sixteen.png"></img>`);
+    pawPrintPaths.$seventeen.$img.html(`<img src="images/seventeen.png"></img>`);
 
 //set 'clicked' status for game board back to false
     for(let key in pawPrintPaths) {
@@ -460,11 +435,6 @@ $('#restart').on('click', () => {
 })
 
 
-
-// addPawPrints {
-//     adds pawprints to appropriate pawprints object
-//         if computer has pawprints already. only display the back of one
-// }
 //declare paw variables as list items with images (to be appended to player/computer uls)
 const $playerPawPrints = $('.playerPawPrints');
 const $computerPawPrints = $('.computerPawPrints');
@@ -577,13 +547,7 @@ const addAnimatedPawPrint =  (player) => {
     }
 };
 
-// collectCatPaths() {
-//     switch case
-//     adds catPaths to appropriate player's catPaths object
-// }
-// let $catPath1 = {node1: 9,
-//     node2: 3,
-//     img: `<img class="catPathCards" src="images/catpath1.png"></img>`};
+
 let availableCatPaths = [$catPath1, $catPath2, $catPath3, $catPath4, $catPath5, $catPath6];
 const selectCatPath = () => {
     let randomNumber = Math.floor(Math.random() * (availableCatPaths.length));
@@ -607,16 +571,13 @@ $('#catpath').on('click', () => {
         playerCatPaths.push(currentCatPath);
         //appends appropriate cat path image to game board
         $('.playerCatPaths').append(`<li>${currentCatPath.img}</li>`);
-        winTheGame();
         //runs if computer cat path array is empty (if computer has no cat paths yet)
         function isEmpty(o){
             for (let i in o) {
                 if(o.hasOwnProperty(i)){
-                    winTheGame();
                     return false;
                 }
             }
-            winTheGame();
             return true;
         }
         if (isEmpty(computerCatPaths)){
@@ -627,7 +588,6 @@ $('#catpath').on('click', () => {
             computerCatPaths.push(currentCatPath);
             //appends appropriate cat path image to game board
             $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1500);
-            winTheGame();
  
 
         }
@@ -637,7 +597,6 @@ $('#catpath').on('click', () => {
         }
     }
     else {
-        winTheGame();
         (function () {
             $("#noMoreCatPaths").find(".noCatPaths").unbind().click(function()
             {
@@ -676,11 +635,9 @@ $(".pawprints").on('click', () => {
     function isEmpty(object){
         for (let i in object) {
             if(object.hasOwnProperty(i)){
-                winTheGame();
                 return false;
             }
         }
-        winTheGame();
         return true;
     }
     if (isEmpty(playerCatPaths)){
@@ -717,44 +674,44 @@ $(".pawprints").on('click', () => {
         addPawPrint(playerPawPrints);
         addPawPrint(playerPawPrints);
         addPawPrint(playerPawPrints);
-        // winTheGame();
             //runs computer AI
         computerPlay();
     }
     // }
-        else if (pawPrintCards <= 2 && pawPrintCards > 0){
-            (function () {
+    else if (pawPrintCards <= 2 && pawPrintCards > 0){
+        (function () {
+            $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
+            {
+                $("#noMorePawPrints").hide();
+                $game.show()
+            });
+            })();
+        (function noMorePawPrints(msg, gfg) {
+                var confirmBox = $("#noMorePawPrints");
+                $game.hide();
+                /* Trace message to display */
+                confirmBox.find(".noMorePawPrints").html(msg);
+                    
+                /* Calling function */
+                confirmBox.find(".ok").unbind().click(function()
+                {
+                    //hide message box
+                    confirmBox.hide();
+                });
+                confirmBox.find(".ok").click(gfg);
+                confirmBox.show();
+            })();
+        $("#noMorePawPrints").show();
+                $(".noMorePawPrints").html(`<p>There are not enough pawprint cards for you to draw. You can select one more cat-path before a winner is determined.</p><br><button class="noPawPrints nes-btn is-primary">Ok!</button>`); 
                 $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
                 {
                     $("#noMorePawPrints").hide();
                     $game.show()
                 });
-                })();
-            (function noMorePawPrints(msg, gfg) {
-                    var confirmBox = $("#noMorePawPrints");
-                    $game.hide();
-                    /* Trace message to display */
-                    confirmBox.find(".noMorePawPrints").html(msg);
-                        
-                    /* Calling function */
-                    confirmBox.find(".ok").unbind().click(function()
-                    {
-                        //hide message box
-                        confirmBox.hide();
-                    });
-                    confirmBox.find(".ok").click(gfg);
-                    confirmBox.show();
-                })();
-            $("#noMorePawPrints").show();
-                    $(".noMorePawPrints").html(`<p>There are not enough pawprint cards for you to draw. You can select one more cat-path before a winner is determined.</p><br><button class="noPawPrints nes-btn is-primary">Ok!</button>`); 
-                    $("#noMorePawPrints").find(".noPawPrints").unbind().click(function()
-                    {
-                        $("#noMorePawPrints").hide();
-                        $game.show()
-                    });
 
-            pawPrintCards = 0;
-        }
+        pawPrintCards = 0;
+    }
+    winTheGame();
 })
 
 
@@ -786,7 +743,6 @@ const checkPawPrints = (clickedObject) => {
                      pawPrintPaths["$onea"]["clicked"] = true;
                      pawPrintPaths["$one"]["$img"].html(`<img src="images/onePlayer.png"></img>`).hide().slideDown(2500);
                      pawPrintPaths["$onea"]["$img"].html(`<img src="images/oneaPlayer.png"></img>`).hide().slideDown(2500);
-                     winTheGame();
                      //runs computer AI
                      computerPlay();
                  }
@@ -808,7 +764,6 @@ const checkPawPrints = (clickedObject) => {
                      pawPrintPaths["$threea"]["clicked"] = true;
                      pawPrintPaths["$three"]["$img"].html(`<img src="images/threePlayer.png"></img>`).hide().slideDown(2500);
                      pawPrintPaths["$threea"]["$img"].html(`<img src="images/threeaPlayer.png"></img>`).hide().slideDown(2500);
-                     winTheGame();
                      //runs computer AI
                      computerPlay();
                  }
@@ -833,7 +788,6 @@ const checkPawPrints = (clickedObject) => {
                  }
          }
          else if (clickedObject["clicked"] === true) {
-            winTheGame();
             (function () {
                 $("#claimedPawPath").find(".okPawPath").unbind().click(function()
                 {
@@ -895,6 +849,7 @@ const checkPawPrints = (clickedObject) => {
                         $game.show()
                     });
          }
+    winTheGame();
 };
 
 const checkComputerPawPrints = (clickedObject) => {
@@ -919,7 +874,6 @@ const checkComputerPawPrints = (clickedObject) => {
             pawPrintPaths["$onea"]["clicked"] = true;
             pawPrintPaths["$one"]["$img"].html(`<img src="images/oneComputer.png"></img>`).hide().slideDown(2500);
             pawPrintPaths["$onea"]["$img"].html(`<img src="images/oneaComputer.png"></img>`).hide().slideDown(2500)
-            winTheGame();
         }
         else if(clickedObject["id"] === "three" || clickedObject["id"] === "threea") {
             //add pawsRequired score value to computer's score
@@ -939,7 +893,6 @@ const checkComputerPawPrints = (clickedObject) => {
             pawPrintPaths["$threea"]["clicked"] = true;
             pawPrintPaths["$three"]["$img"].html(`<img src="images/threeComputer.png"></img>`).hide().slideDown(2500);
             pawPrintPaths["$threea"]["$img"].html(`<img src="images/threeaComputer.png"></img>`).hide().slideDown(2500)
-            winTheGame();
         }
         else{
             //add pawsRequired score value to computer's score
@@ -958,7 +911,6 @@ const checkComputerPawPrints = (clickedObject) => {
             clickedObject["clicked"] = true;
             //changes pawpath image to computer claimed
             clickedObject.$img.html(`<img src="images/${clickedObject.computer}.png"></img>`).hide().slideDown(2500)
-            winTheGame();
         }
     }
 };
@@ -1185,7 +1137,6 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        // winTheGame();
         return;
         }
     else {
@@ -1208,7 +1159,6 @@ const computerPlay = () => {
                     //append appropriate cat path image to game board
                         $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1000);
                         hasAllElems = true;
-                        // winTheGame();
                         return;
                     }
                 //if there aren't catPaths available, computer selects the first pawPrint path that it can
@@ -1216,7 +1166,6 @@ const computerPlay = () => {
                         for (let key in pawPrintPaths){
                             if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsRequired"])) {
                                 checkComputerPawPrints(pawPrintPaths[key]["$img"]);
-                                // winTheGame();
                                 break;
                             }
                         }
@@ -1224,7 +1173,6 @@ const computerPlay = () => {
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                        // winTheGame();
                         return;
                     }
             }
@@ -1243,7 +1191,6 @@ const computerPlay = () => {
                 //append appropriate cat path image to game board
                     $('.computerCatPaths').append(`<li><img class="catPathCards" src="images/computerCatPathCard.png"></li>`).hide().animate({height:'toggle'}, 1000);
                     hasAllElems = true;
-                    // winTheGame();
                     return;
                 }
             else if(availableCatPaths.length<0) {
@@ -1251,7 +1198,6 @@ const computerPlay = () => {
                 for (let key in pawPrintPaths){
                     if((pawPrintPaths[key]["clicked"] === false && (computerPawPrints[pawPrintPaths[key]["color"]]) > pawPrintPaths[key]["pawsNeeded"])) {
                         checkComputerPawPrints(pawPrintPaths[key]["$img"]);
-                        // winTheGame();
                         return;
                     }
                 }
@@ -1259,7 +1205,6 @@ const computerPlay = () => {
                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                // winTheGame();
                 return;
             }
         }
@@ -1318,7 +1263,6 @@ const computerPlay = () => {
                                     if(pawPrintPaths[key]["clicked"] === false){
                                         if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                                             checkComputerPawPrints(pawPrintPaths[key])
-                                            // winTheGame();
                                             return;
                                         }
                                     }
@@ -1346,7 +1290,6 @@ const computerPlay = () => {
                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                                                 setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                                                // winTheGame();
                                                 return;
                                             }
                                         }
@@ -1361,14 +1304,12 @@ const computerPlay = () => {
             for(let key in pawPrintPaths){
                 if(pawPrintPaths[key]["clicked"] === false && computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                         checkComputerPawPrints(pawPrintPaths[key])
-                        // winTheGame();
                         return;
                     }
             }
             setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
             setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
             setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-            // winTheGame();
             return;
         }
     }   
@@ -1389,7 +1330,6 @@ const computerPlay = () => {
                             if(pawPrintPaths[key]["clicked"] === false){
                                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                                     checkComputerPawPrints(pawPrintPaths[key])
-                                    // winTheGame();
                                     return;
                                 }
                                 
@@ -1417,7 +1357,6 @@ const computerPlay = () => {
                                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
                                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
                                         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-                                        // winTheGame();
                                         return;
                                     }
                                     }
@@ -1431,7 +1370,6 @@ const computerPlay = () => {
             if(pawPrintPaths[key]["clicked"] === false){
                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                     checkComputerPawPrints(pawPrintPaths[key]);
-                    // winTheGame();
                     return;
                 }
             }
@@ -1440,7 +1378,6 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        // winTheGame();
         return;
     }
     const isClicked = (element) => {
@@ -1449,18 +1386,15 @@ const computerPlay = () => {
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
     setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-    // winTheGame();
     return;
     }  
     //check if someone has won
-    // winTheGame();
     }
     if(computerCatPaths.length === 0 && availableCatPaths.length === 0){
         for(let key in pawPrintPaths){
             if(pawPrintPaths[key]["clicked"] === false){
                 if(computerPawPrints[pawPrintPaths[key]["color"]] >= pawPrintPaths[key]["pawsNeeded"]) {
                     checkComputerPawPrints(pawPrintPaths[key])
-                    // winTheGame();
                     return;
                 }
             }
@@ -1468,14 +1402,11 @@ const computerPlay = () => {
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 500);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1000);
         setTimeout(() => {addAnimatedPawPrint(computerPawPrints);}, 1500);
-        // winTheGame();
         return;
     }  
     winTheGame(); 
+    return;
 }
-
-
-
 
 
  $("#feedback").on('click', () => {
@@ -1512,7 +1443,6 @@ const checkPlayerWinningPaths = () => {
         //compare player array to potential winning arrays
         for(i=0; i<playerPathOptions[0].length; i++){
             //if player array includes all the values in one of potential winning arrays...
-            //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
             if(containsAll(playerPathOptions[0][i], playerNodes)){
                 hasAllElems = true;
                 break;
@@ -1545,7 +1475,6 @@ const checkComputerWinningPaths = () => {
     //compare player array to potential winning arrays
     for(i=0; i<computerPathOptions[0].length; i++){
         //if player array includes all the values in one of potential winning arrays...
-        //if(playerPathOptions[0][i].every(elem => playerNodes.includes(elem))){
         if(containsAll(computerPathOptions[0][i], computerNodes)){
             hasAllElems = true;
             break;
