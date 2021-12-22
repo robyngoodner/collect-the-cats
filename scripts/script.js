@@ -619,7 +619,7 @@ $('#catpath').on('click', () => {
                 confirmBox.show();
             })();
         $("#noMoreCatPaths").show();
-                $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="noCatPaths">Ok!</button>`); 
+                $(".noMoreCatPaths").html(`<p>There are no more cat path cards to draw! Get as many paths as you can before the game ends!</p><br><button class="noCatPaths nes-btn is-primary">Ok!</button>`); 
                 $("#noMoreCatPaths").find(".noCatPaths").unbind().click(function()
                 {
                     $("#noMoreCatPaths").hide();
@@ -811,7 +811,7 @@ const checkPawPrints = (clickedObject) => {
                     confirmBox.show();
                 })();
             $("#claimedPawPath").show();
-                    $(".claimedPawPath").html(`<p>That path has already been claimed. Please select a different path or draw paw print cards.</p><br><button class="okPawPath">Ok!</button>`); 
+                    $(".claimedPawPath").html(`<p>That path has already been claimed. Please select a different path or draw paw print cards.</p><br><button class="okPawPath nes-btn is-primary">Ok!</button>`); 
                     $("#claimedPawPath").find(".okPawPath").unbind().click(function()
                     {
                         $("#claimedPawPath").hide();
